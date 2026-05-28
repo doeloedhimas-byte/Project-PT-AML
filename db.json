@@ -1,0 +1,121 @@
+{
+  "documents": [
+    {
+      "id": "pib-001",
+      "noPengajuan": "20260515-001254-883901-000412",
+      "importer": "PT INDO MEGAPLAST INDONESIA",
+      "blNumber": "MSK883019481",
+      "blDate": "2026-05-10",
+      "containers": ["MSKU1849204", "MSKU9930283"],
+      "uraianBarang": [
+        "POLYETHYLENE COMPOUND GRADE A",
+        "PLASTIC RAW MATERIAL GRANULES",
+        "SILICA DRY GEL DESICCANT"
+      ],
+      "status": "SPPB",
+      "billingPaid": true,
+      "sptnpPaid": false,
+      "createdAt": "2026-05-15T08:30:00Z",
+      "deliveryPlanned": true,
+      "deliveryInfo": {
+        "driverName": "Budi Santoso",
+        "driverPhone": "0812-3456-7890",
+        "plateNumber": "B 9482 UTX",
+        "warehouseTarget": "Gudang Utama PT Indo Megaplast, Kawasan Industri Jababeka Block C3",
+        "scheduledDate": "2026-05-22",
+        "status": "Dalam Perjalanan",
+        "deliveryNoteNumber": "SJ/AML/2026/0001"
+      }
+    },
+    {
+      "id": "pib-002",
+      "noPengajuan": "20260516-773012-990348-112034",
+      "importer": "PT AGUNG SEJAHTERA ABADI",
+      "blNumber": "COSU228493019",
+      "blDate": "2026-05-12",
+      "containers": ["TGBU4482013"],
+      "uraianBarang": [
+        "AUTOMOTIVE SPARE PARTS (GEAR BOX)",
+        "STEERING BALL JOINTS",
+        "WHEEL BEARINGS STEEL"
+      ],
+      "status": "Draft PIB",
+      "billingPaid": false,
+      "sptnpPaid": false,
+      "createdAt": "2026-05-16T11:00:00Z",
+      "deliveryPlanned": false
+    },
+    {
+      "id": "pib-003",
+      "noPengajuan": "20260517-334910-884021-998311",
+      "importer": "PT PRIMA ELEKTRONIK INDONESIA",
+      "blNumber": "ONE7749201948",
+      "blDate": "2026-05-14",
+      "containers": ["ONEU8830194", "ONEU4450291", "ONEU1190382"],
+      "uraianBarang": [
+        "LED TELEVISION PARTS UNSYNCED",
+        "MICROCONTROLLER INTEGRATED CIRCUITS",
+        "COPPER WIRING HARNESS",
+        "ALUMINUM HEAT SINKS"
+      ],
+      "status": "Billing DJBC",
+      "billingPaid": false,
+      "sptnpPaid": false,
+      "createdAt": "2026-05-17T09:15:00Z",
+      "deliveryPlanned": false
+    },
+    {
+      "id": "pib-004",
+      "noPengajuan": "20260518-882014-993014-001254",
+      "importer": "PT MAJU BERSAMA COLD CHAIN",
+      "blNumber": "OOLU9940294812",
+      "blDate": "2026-05-15",
+      "containers": ["OOLU4459203"],
+      "uraianBarang": [
+        "FROZEN CHICKEN FEET S-GRADE"
+      ],
+      "status": "SPJM",
+      "billingPaid": true,
+      "sptnpPaid": false,
+      "createdAt": "2026-05-18T14:20:00Z",
+      "deliveryPlanned": false
+    },
+    {
+      "id": "pib-005",
+      "noPengajuan": "20260519-112034-774029-994012",
+      "importer": "PT CHEMICAL NUSANTARA",
+      "blNumber": "EGLV4401948194",
+      "blDate": "2026-05-16",
+      "containers": ["EMCU8840291"],
+      "uraianBarang": [
+        "SULPHURIC ACID 98% REAGENT GRADE",
+        "SODIUM HYDROXIDE PELLETS"
+      ],
+      "status": "NHI",
+      "billingPaid": true,
+      "sptnpPaid": false,
+      "createdAt": "2026-05-19T10:05:00Z",
+      "deliveryPlanned": false
+    },
+    {
+      "id": "pib-006",
+      "noPengajuan": "20260515-445839-223940-883012",
+      "importer": "PT GLOBAL TEKSTIL INDONESIA",
+      "blNumber": "SUDU8830193812",
+      "blDate": "2026-05-09",
+      "containers": ["SUDU7730194", "SUDU2284910"],
+      "uraianBarang": [
+        "POLYESTER FABRIC ROLL PRINTED",
+        "NYLON SEWING THREDS 100D",
+        "COTTON SPUN YARN NE 30",
+        "METALLIC ZIPPER COILS",
+        "PLASTIC SEWING BUTTONS"
+      ],
+      "status": "SPPB",
+      "billingPaid": true,
+      "sptnpPaid": false,
+      "createdAt": "2026-05-15T04:10:00Z",
+      "deliveryPlanned": false
+    }
+  ]
+}

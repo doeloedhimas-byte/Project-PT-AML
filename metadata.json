@@ -1,0 +1,6 @@
+{
+  "name": "Portal Rekap PIB & Pengiriman PT AML",
+  "description": "Sistem monitoring status PIB, pemrosesan dokumen otomatis dengan Gemini AI, dan perencanaan pengiriman PT Agung Makmur Logistik.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
