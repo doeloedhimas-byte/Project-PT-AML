@@ -1,0 +1,57 @@
+{
+  "entities": {
+    "PIBDocument": {
+      "title": "PIBDocument",
+      "description": "Indonesian Customs PIB/PEB document and status tracking.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "noPengajuan": {
+          "type": "string"
+        },
+        "importer": {
+          "type": "string"
+        },
+        "blNumber": {
+          "type": "string"
+        },
+        "blDate": {
+          "type": "string"
+        },
+        "containers": {
+          "type": "array"
+        },
+        "uraianBarang": {
+          "type": "array"
+        },
+        "status": {
+          "type": "string"
+        },
+        "billingPaid": {
+          "type": "boolean"
+        },
+        "sptnpPaid": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "deliveryPlanned": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "noPengajuan"
+      ]
+    }
+  },
+  "firestore": {
+    "documents/{documentId}": {
+      "schema": "PIBDocument",
+      "description": "Collection of PIB/PEB customs documents."
+    }
+  }
+}

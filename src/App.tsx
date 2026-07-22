@@ -6,7 +6,7 @@ import UploadTab from './components/UploadTab';
 import MonitoringTab from './components/MonitoringTab';
 import GenerateTab from './components/GenerateTab';
 import PreviewTab from './components/PreviewTab';
-import amlLogo from './assets/images/aml_logo_1779260489801.png';
+import amlLogo from './assets/images/aml_logo_solid_white_1784613581619.jpg';
 import { 
   ClipboardCheck, LogOut, Shield, 
   Truck, LayoutDashboard, FileText, Settings, Database, Server, RefreshCw, FileSpreadsheet
@@ -113,20 +113,20 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-teal-500 selection:text-slate-950">
+    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-teal-500 selection:text-white">
       {/* Top Navigation Bar */}
-      <header className="sticky top-0 z-40 bg-slate-900 border-b border-slate-800 px-6 py-3 flex items-center justify-between shadow-md">
+      <header className="sticky top-0 z-40 bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-4">
           <img 
             src={amlLogo} 
             alt="PT Agung Makmur Logistik Logo" 
-            className="h-11 sm:h-14 w-auto object-contain transition-all hover:brightness-110 duration-200"
+            className="h-11 sm:h-14 w-auto object-contain mix-blend-multiply transition-all hover:brightness-110 duration-200"
             referrerPolicy="no-referrer"
           />
-          <div className="hidden xs:block h-6 w-[1px] bg-slate-800"></div>
+          <div className="hidden xs:block h-6 w-[1px] bg-slate-200"></div>
           <div>
-            <h1 className="text-md sm:text-lg font-bold text-white tracking-tight">PT Agung Makmur Logistik</h1>
-            <p className="text-[10px] sm:text-xs text-slate-400 font-mono uppercase">Portal for PIB and PEB Document Records and Delivery Plans</p>
+            <h1 className="text-md sm:text-lg font-bold text-slate-900 tracking-tight">PT Agung Makmur Logistik</h1>
+            <p className="text-[10px] sm:text-xs text-slate-500 font-mono uppercase">Portal for PIB and PEB Document Records and Delivery Plans</p>
           </div>
         </div>
 
@@ -166,14 +166,14 @@ export default function App() {
 
       {/* Main Layout Area */}
       <div className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col gap-6">
-        {/* Navigation Tabs (Only available inline depending on role permissions) */}
-        <div className="flex border-b border-slate-800 gap-1 overflow-x-auto pb-px">
+        {/* Navigation Tabs (Modern capsule style matching the background) */}
+        <div className="bg-white p-1.5 rounded-2xl border border-slate-200 flex items-center gap-2 overflow-x-auto shadow-sm">
           <button
             onClick={() => setActiveTab(0)}
-            className={`flex items-center gap-2 px-5 py-3 border-b-2 text-xs font-bold tracking-wider transition-all whitespace-nowrap cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold tracking-wide transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 0
-                ? 'border-teal-500 text-teal-400'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
+                ? 'bg-teal-600 text-white shadow-sm'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
             <LayoutDashboard className="w-4 h-4" />
@@ -183,10 +183,10 @@ export default function App() {
           {(session.role === 'STAFF_AML' || session.isSuperUser) && (
             <button
               onClick={() => setActiveTab(1)}
-              className={`flex items-center gap-2 px-5 py-3 border-b-2 text-xs font-bold tracking-wider transition-all whitespace-nowrap cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold tracking-wide transition-all whitespace-nowrap cursor-pointer ${
                 activeTab === 1
-                  ? 'border-teal-500 text-teal-400'
-                  : 'border-transparent text-slate-400 hover:text-slate-200'
+                  ? 'bg-teal-600 text-white shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               <FileText className="w-4 h-4" />
@@ -196,10 +196,10 @@ export default function App() {
 
           <button
             onClick={() => setActiveTab(2)}
-            className={`flex items-center gap-2 px-5 py-3 border-b-2 text-xs font-bold tracking-wider transition-all whitespace-nowrap cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold tracking-wide transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 2
-                ? 'border-teal-500 text-teal-400'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
+                ? 'bg-teal-600 text-white shadow-sm'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
             <Truck className="w-4 h-4" />
@@ -208,10 +208,10 @@ export default function App() {
 
           <button
             onClick={() => setActiveTab(3)}
-            className={`flex items-center gap-2 px-5 py-3 border-b-2 text-xs font-bold tracking-wider transition-all whitespace-nowrap cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold tracking-wide transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 3
-                ? 'border-teal-500 text-teal-400'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
+                ? 'bg-teal-600 text-white shadow-sm'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
             <Database className="w-4 h-4" />
@@ -220,10 +220,10 @@ export default function App() {
 
           <button
             onClick={() => setActiveTab(4)}
-            className={`flex items-center gap-2 px-5 py-3 border-b-2 text-xs font-bold tracking-wider transition-all whitespace-nowrap cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold tracking-wide transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 4
-                ? 'border-teal-500 text-teal-400'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
+                ? 'bg-teal-600 text-white shadow-sm'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
             <FileSpreadsheet className="w-4 h-4" />
@@ -233,7 +233,7 @@ export default function App() {
           <button
             onClick={() => setReloadTrigger(prev => prev + 1)}
             disabled={isLoading}
-            className="ml-auto flex items-center gap-1.5 px-3 py-1.5 text-xs text-slate-400 hover:text-teal-400 font-bold tracking-wider transition-all cursor-pointer bg-slate-900 rounded-lg border border-slate-800"
+            className="ml-auto flex items-center gap-1.5 px-4 py-2 text-xs text-slate-600 hover:text-teal-600 hover:bg-slate-100 font-bold tracking-wide transition-all cursor-pointer bg-white rounded-xl border border-slate-200"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
             REFRESH DATA

@@ -85,21 +85,21 @@ export default function Dashboard({
   return (
     <div className="space-y-6">
       {/* Welcome banner */}
-      <div className="bg-gradient-to-r from-slate-800 to-slate-900 border border-slate-700 p-6 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shadow-sm">
         <div>
-          <span className="text-xs font-semibold text-teal-400 bg-teal-400/10 px-2.5 py-1 rounded-full uppercase tracking-wider">
+          <span className="text-xs font-semibold text-teal-600 bg-teal-50 px-2.5 py-1 rounded-full uppercase tracking-wider border border-teal-200/40">
             {isSuperUser ? '👑 Akun Super Power PT AML & Delivery' : userRole === 'STAFF_AML' ? 'Staff Document' : 'Staff Armada / Delivery'}
           </span>
-          <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight mt-2">
+          <h2 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mt-2">
             Selamat Datang, {userFullName}
           </h2>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="text-slate-500 text-sm mt-1 font-medium">
             Gunakan portal ini untuk merekap dokumen PIB, monitoring respon BC, serta melakukan rencana/pemantauan armada pengiriman.
           </p>
         </div>
         <button
           onClick={() => onNavigateToTab(isSuperUser ? 1 : userRole === 'STAFF_AML' ? 1 : 2)}
-          className="flex items-center gap-1.5 text-xs font-medium text-teal-400 hover:text-teal-300 transition-all bg-slate-900 hover:bg-slate-950 px-4 py-2 border border-teal-500/20 rounded-xl cursor-pointer self-stretch md:self-auto text-center justify-center shadow-lg"
+          className="flex items-center gap-1.5 text-xs font-semibold text-teal-600 hover:text-white transition-all bg-teal-50 hover:bg-teal-600 px-4 py-2.5 border border-teal-200 rounded-xl cursor-pointer self-stretch md:self-auto text-center justify-center shadow-sm"
         >
           {isSuperUser ? 'Upload PIB & PEB Baru' : userRole === 'STAFF_AML' ? 'Unggah Dokumen PIB Baru' : 'Lihat Rencana Pengiriman'}
           <ChevronRight className="w-3.5 h-3.5" />
@@ -107,7 +107,7 @@ export default function Dashboard({
       </div>
 
       {/* Statistics Cards */}
-      <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-widest pl-1 mt-6">
+      <h3 className="text-sm font-bold text-slate-500 uppercase tracking-widest pl-1 mt-6">
         monitoring status document PIB and PEB
       </h3>
       <div className={`grid grid-cols-1 sm:grid-cols-2 ${(userRole === 'STAFF_AML' || isSuperUser) ? 'lg:grid-cols-5' : 'lg:grid-cols-3'} gap-4`}>
@@ -194,7 +194,7 @@ export default function Dashboard({
       </div>
 
       {/* Interactive Delivery Board (MOVED UP FOR DESIRED SWAPPED PLACEMENT) */}
-      <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-widest pl-1 mt-6">
+      <h3 className="text-sm font-bold text-slate-500 uppercase tracking-widest pl-1 mt-6">
         Monitoring Pengiriman Container
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -248,43 +248,43 @@ export default function Dashboard({
       </div>
 
       {/* Process & Flow Guidelines explanation (Sesuai Aturan Transisi Status - MOVED DOWN FOR DESIRED SWAPPED PLACEMENT) */}
-      <div className="bg-slate-800/35 border border-slate-700/60 rounded-2xl p-6">
-        <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
-          <Compass className="w-4 h-4 text-teal-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <Compass className="w-4 h-4 text-teal-600" />
           Alur & Aturan Status Dokumen Kepabeanan
         </h4>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300">
-          <div className="space-y-2.5 p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-650">
+          <div className="space-y-2.5 p-4 rounded-xl bg-slate-50 border border-slate-150">
             <div className="flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-teal-5ff/10 text-teal-400 bg-teal-500/10 border border-teal-500/20 text-[10px] font-bold flex items-center justify-center">1</span>
-              <p className="font-bold text-slate-100">Draft PIB & Billing DJBC</p>
+              <span className="w-5 h-5 rounded-full bg-teal-50 text-teal-600 border border-teal-200 text-[10px] font-bold flex items-center justify-center">1</span>
+              <p className="font-bold text-slate-800">Draft PIB & Billing DJBC</p>
             </div>
             <p className="leading-relaxed">
-              Dokumen yang baru diupload otomatis dikategorikan sebagai <span className="text-indigo-400">Draft PIB</span>. Setelah billing diterbitkan oleh DJBC, status dipindahkan to <span className="text-amber-400">Billing DJBC</span> untuk memonitor pelunasan pajak/bea dari Importir sebelum respon kontainer terbit.
+              Dokumen yang baru diupload otomatis dikategorikan sebagai <span className="text-indigo-650 font-semibold">Draft PIB</span>. Setelah billing diterbitkan oleh DJBC, status dipindahkan ke <span className="text-amber-650 font-semibold">Billing DJBC</span> untuk memonitor pelunasan pajak/bea dari Importir sebelum respon kontainer terbit.
             </p>
           </div>
 
-          <div className="space-y-2.5 p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+          <div className="space-y-2.5 p-4 rounded-xl bg-slate-50 border border-slate-150">
             <div className="flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-teal-5ff/10 text-teal-400 bg-teal-500/10 border border-teal-500/20 text-[10px] font-bold flex items-center justify-center">2</span>
-              <p className="font-bold text-slate-100">Evaluasi & Pemeriksaan Fisik</p>
+              <span className="w-5 h-5 rounded-full bg-teal-50 text-teal-600 border border-teal-200 text-[10px] font-bold flex items-center justify-center">2</span>
+              <p className="font-bold text-slate-800">Evaluasi & Pemeriksaan Fisik</p>
             </div>
             <p className="leading-relaxed">
               Jika BC memberikan respon selain kelancaran langsung:
               <br />
-              • <span className="text-rose-450 font-semibold text-rose-400">SPJM (Jalur Merah)</span>: Petugas harus mengajukan pemeriksaan fisik barang. Selesai diperiksa, status akan berubah menjadi SPPB atau diterbitkan beban pajak <span className="text-indigo-300 font-semibold">SPTNP</span> yang wajib dilunasi terlebih dahulu.
+              • <span className="text-rose-600 font-semibold">SPJM (Jalur Merah)</span>: Petugas harus mengajukan pemeriksaan fisik barang. Selesai diperiksa, status akan berubah menjadi SPPB atau diterbitkan beban pajak <span className="text-indigo-650 font-semibold">SPTNP</span> yang wajib dilunasi terlebih dahulu.
               <br />
-              • <span className="text-fuchsia-450 font-semibold text-fuchsia-400">NHI (Nota Hasil Intelijen)</span>: Kontainer dilarang keluar karena kecurigaan khusus. Selesai diaudit, status berujung SPPB atau wajib re-ekspor <span className="text-rose-400 font-semibold">(SPBL)</span>.
+              • <span className="text-fuchsia-600 font-semibold">NHI (Nota Hasil Intelijen)</span>: Kontainer dilarang keluar karena kecurigaan khusus. Selesai diaudit, status berujung SPPB atau wajib re-ekspor <span className="text-rose-600 font-semibold">(SPBL)</span>.
             </p>
           </div>
 
-          <div className="space-y-2.5 p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+          <div className="space-y-2.5 p-4 rounded-xl bg-slate-50 border border-slate-150">
             <div className="flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-teal-5ff/10 text-teal-400 bg-teal-500/10 border border-teal-500/20 text-[10px] font-bold flex items-center justify-center">3</span>
-              <p className="font-bold text-slate-100">SPPB & Delivery Plans</p>
+              <span className="w-5 h-5 rounded-full bg-teal-50 text-teal-600 border border-teal-200 text-[10px] font-bold flex items-center justify-center">3</span>
+              <p className="font-bold text-slate-800">SPPB & Delivery Plans</p>
             </div>
             <p className="leading-relaxed">
-              Respon akhir <span className="text-teal-400 font-bold">SPPB</span> mengonfirmasi nomor container telah memperoleh release formal dari Bea Cukai. Staff kantor dapat segera merencanakan armada, mencantumkan supir, plat truk, pelabuhan/gudang tujuan, dan mencetak <span className="text-teal-400 font-semibold">Surat Jalan PT AML</span> untuk dibawa supir armada delivery.
+              Respon akhir <span className="text-teal-600 font-bold">SPPB</span> mengonfirmasi nomor container telah memperoleh release formal dari Bea Cukai. Staff kantor dapat segera merencanakan armada, mencantumkan supir, plat truk, pelabuhan/gudang tujuan, dan mencetak <span className="text-teal-600 font-semibold">Surat Jalan PT AML</span> untuk dibawa supir armada delivery.
             </p>
           </div>
         </div>

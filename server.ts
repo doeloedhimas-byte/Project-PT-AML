@@ -4,6 +4,16 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import { GoogleGenAI, Type } from "@google/genai";
 import dotenv from "dotenv";
+import { initializeApp } from "firebase/app";
+import { 
+  getFirestore, 
+  collection, 
+  getDocs, 
+  setDoc, 
+  doc as firestoreDoc, 
+  deleteDoc, 
+  query 
+} from "firebase/firestore";
 
 // Load environment variables
 dotenv.config();
@@ -48,67 +58,170 @@ if (!fs.existsSync(dbPath)) {
   writeDb({ documents: [] });
 }
 
+// Initialize Firebase Firestore conditionally
+let firestoreDb: any = null;
+try {
+  const configPath = path.resolve(__dirname, "firebase-applet-config.json");
+  if (fs.existsSync(configPath)) {
+    const firebaseConfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+    if (firebaseConfig.projectId && firebaseConfig.projectId !== "placeholder-project") {
+      const firebaseApp = initializeApp(firebaseConfig);
+      firestoreDb = getFirestore(firebaseApp);
+      console.log("Firebase Firestore successfully initialized on backend. Project ID:", firebaseConfig.projectId);
+    } else {
+      console.log("Using local JSON database fallback (firebase-applet-config.json contains placeholder values).");
+    }
+  } else {
+    console.warn("firebase-applet-config.json not found. Falling back to local db.json.");
+  }
+} catch (err) {
+  console.error("Failed to initialize Firebase on backend, using db.json fallback:", err);
+}
+
+// Firestore / Local DB abstract interfaces
+async function getAllDocuments() {
+  if (firestoreDb) {
+    try {
+      const docsCol = collection(firestoreDb, "documents");
+      const q = query(docsCol);
+      const querySnapshot = await getDocs(q);
+      const docsList: any[] = [];
+      querySnapshot.forEach((doc) => {
+        docsList.push({ ...doc.data() });
+      });
+      // Sort by createdAt descending (most recent first)
+      docsList.sort((a, b) => {
+        const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+        const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+        return dateB - dateA;
+      });
+      return docsList;
+    } catch (err) {
+      console.error("Error fetching from Firestore, falling back to local database:", err);
+      return readDb().documents;
+    }
+  }
+  return readDb().documents;
+}
+
+async function saveDocument(docData: any) {
+  if (firestoreDb) {
+    try {
+      const docRef = firestoreDoc(firestoreDb, "documents", docData.id);
+      await setDoc(docRef, docData);
+      console.log(`Document ${docData.id} saved to Firestore.`);
+      
+      // Keep local db in sync as backup
+      const localDb = readDb();
+      localDb.documents = localDb.documents.filter((d: any) => d.id !== docData.id);
+      localDb.documents.unshift(docData);
+      writeDb(localDb);
+      return;
+    } catch (err) {
+      console.error("Error saving to Firestore, writing to local database instead:", err);
+    }
+  }
+  
+  const localDb = readDb();
+  localDb.documents = localDb.documents.filter((d: any) => d.id !== docData.id);
+  localDb.documents.unshift(docData);
+  writeDb(localDb);
+}
+
+async function deleteDocument(id: string) {
+  if (firestoreDb) {
+    try {
+      const docRef = firestoreDoc(firestoreDb, "documents", id);
+      await deleteDoc(docRef);
+      console.log(`Document ${id} deleted from Firestore.`);
+      
+      // Sync local db
+      const localDb = readDb();
+      localDb.documents = localDb.documents.filter((d: any) => d.id !== id);
+      writeDb(localDb);
+      return true;
+    } catch (err) {
+      console.error("Error deleting from Firestore, applying to local database:", err);
+    }
+  }
+  
+  const localDb = readDb();
+  const initialLength = localDb.documents.length;
+  localDb.documents = localDb.documents.filter((d: any) => d.id !== id);
+  writeDb(localDb);
+  return localDb.documents.length !== initialLength;
+}
+
 // API Routes
 
 // 1. Get all documents
-app.get("/api/documents", (req, res) => {
-  const db = readDb();
-  res.json(db.documents);
+app.get("/api/documents", async (req, res) => {
+  try {
+    const docs = await getAllDocuments();
+    res.json(docs);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // 2. Add or manual update of a document
-app.post("/api/documents", (req, res) => {
-  const db = readDb();
-  const doc = req.body;
-  if (!doc.id) {
-    doc.id = "pib-" + Date.now();
+app.post("/api/documents", async (req, res) => {
+  try {
+    const docData = req.body;
+    if (!docData.id) {
+      docData.id = "pib-" + Date.now();
+    }
+    if (!docData.createdAt) {
+      docData.createdAt = new Date().toISOString();
+    }
+    
+    // Clean dates or fields
+    docData.deliveryPlanned = docData.deliveryPlanned || false;
+    
+    await saveDocument(docData);
+    res.json({ success: true, document: docData });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   }
-  if (!doc.createdAt) {
-    doc.createdAt = new Date().toISOString();
-  }
-  
-  // Clean dates or fields
-  doc.deliveryPlanned = doc.deliveryPlanned || false;
-  
-  db.documents.unshift(doc);
-  writeDb(db);
-  res.json({ success: true, document: doc });
 });
 
 // 3. Update document status or info
-app.put("/api/documents/:id", (req, res) => {
-  const db = readDb();
-  const { id } = req.params;
-  const updates = req.body;
-  
-  const index = db.documents.findIndex((d: any) => d.id === id);
-  if (index === -1) {
-    return res.status(404).json({ error: "Document not found" });
+app.put("/api/documents/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updates = req.body;
+    
+    // Retrieve the document first
+    const docs = await getAllDocuments();
+    const existingDoc = docs.find((d: any) => d.id === id);
+    if (!existingDoc) {
+      return res.status(404).json({ error: "Document not found" });
+    }
+    
+    const updatedDoc = {
+      ...existingDoc,
+      ...updates
+    };
+    
+    await saveDocument(updatedDoc);
+    res.json({ success: true, document: updatedDoc });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   }
-  
-  db.documents[index] = {
-    ...db.documents[index],
-    ...updates
-  };
-  
-  writeDb(db);
-  res.json({ success: true, document: db.documents[index] });
 });
 
 // 4. Delete document
-app.delete("/api/documents/:id", (req, res) => {
-  const db = readDb();
-  const { id } = req.params;
-  
-  const initialLength = db.documents.length;
-  db.documents = db.documents.filter((d: any) => d.id !== id);
-  
-  if (db.documents.length === initialLength) {
-    return res.status(404).json({ error: "Document not found" });
+app.delete("/api/documents/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const success = await deleteDocument(id);
+    if (!success) {
+      return res.status(404).json({ error: "Document not found" });
+    }
+    res.json({ success: true, message: `Document ${id} successfully deleted` });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   }
-  
-  writeDb(db);
-  res.json({ success: true, message: `Document ${id} successfully deleted` });
 });
 
 // 5. Parse PIB PDF file with Gemini AI

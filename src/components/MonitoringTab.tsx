@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PIBDocument, DocumentStatus, DeliveryInfo } from '../types';
 // @ts-ignore
-import amlLogo from '../assets/images/aml_logo_1779260489801.png';
+import amlLogo from '../assets/images/aml_logo_solid_white_1784613581619.jpg';
 import { 
   Search, Shield, CheckCircle, AlertTriangle, FileText, Printer, 
   Truck, ArrowRight, ShieldCheck, DollarSign, RefreshCw, Layers, Edit, Eye, Trash2
@@ -600,7 +600,7 @@ export default function MonitoringTab({
               justify-content: center;
             }
             .logo-section { display: flex; align-items: center; justify-content: center; gap: 16px; }
-            .logo-img { height: 55px; object-fit: contain; }
+            .logo-img { height: 55px; object-fit: contain; mix-blend-mode: multiply; }
             .company-info { text-align: center; }
             .company-name { margin: 0; font-size: 19px; color: #0f172a; font-weight: 850; letter-spacing: -0.5px; }
             .company-address { margin: 3px 0 0 0; font-size: 10px; color: #334155; font-weight: 500; line-height: 1.3; }
@@ -777,41 +777,41 @@ export default function MonitoringTab({
   const getStatusBadge = (status: DocumentStatus) => {
     switch (status) {
       case 'Draft PIB':
-        return 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20';
+        return 'bg-indigo-50 border-indigo-200 text-indigo-600';
       case 'Billing DJBC':
-        return 'bg-amber-500/10 text-amber-400 border-amber-500/20';
+        return 'bg-amber-50 border-amber-200 text-amber-600';
       case 'SPPB':
-        return 'bg-teal-500/10 text-teal-400 border-teal-500/30';
+        return 'bg-teal-50 border-teal-200 text-teal-600';
       case 'SPJM':
-        return 'bg-pink-500/10 text-pink-400 border-pink-500/20';
+        return 'bg-pink-50 border-pink-200 text-pink-600';
       case 'NHI':
-        return 'bg-purple-500/10 text-purple-400 border-purple-500/20';
+        return 'bg-purple-50 border-purple-200 text-purple-600';
       case 'SPTNP':
-        return 'bg-rose-500/10 text-rose-400 border-rose-500/20';
+        return 'bg-rose-50 border-rose-200 text-rose-600';
       case 'SPBL':
-        return 'bg-red-500/10 text-red-400 border-red-500/20';
+        return 'bg-red-50 border-red-200 text-red-600';
       default:
-        return 'bg-slate-500/10 text-slate-400 border-slate-500/20';
+        return 'bg-slate-50 border-slate-200 text-slate-600';
     }
   };
 
   return (
     <div className="space-y-6">
       {/* Search and Filters */}
-      <div className="flex flex-col md:flex-row gap-4 items-stretch justify-between bg-slate-800/20 p-4 rounded-xl border border-slate-700/50">
+      <div className="flex flex-col md:flex-row gap-4 items-stretch justify-between bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-450" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
             placeholder="Cari No Pengajuan, Importir, atau Nomor B/L..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-705 border-slate-700/80 rounded-xl py-2 pl-10 pr-4 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-teal-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 pl-10 pr-4 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-colors"
           />
         </div>
 
         <div className="flex gap-2 items-center flex-wrap">
-          <span className="text-xs text-slate-400 font-medium">Filter Status:</span>
+          <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Filter Status:</span>
           {((userRole === 'STAFF_AML' || isSuperUser) ? ['All', 'Draft PIB', 'Billing DJBC', 'SPPB', 'SPJM', 'NHI'] : ['All', 'SPPB', 'SPJM', 'NHI']).map((status) => (
             <button
               key={status}
@@ -819,10 +819,10 @@ export default function MonitoringTab({
                 setStatusFilter(status);
                 setDeliveryFilter('All');
               }}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-colors ${
+              className={`px-3 py-2 rounded-xl text-xs font-bold tracking-wide transition-all cursor-pointer ${
                 statusFilter === status && deliveryFilter === 'All'
-                  ? 'bg-teal-500 text-slate-950 shadow-md'
-                  : 'bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-850'
+                  ? 'bg-teal-600 text-white shadow-sm'
+                  : 'bg-slate-50 text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200/60'
               }`}
             >
               {status === 'Draft PIB' ? 'Draft PIB & PEB' : status}
@@ -834,7 +834,7 @@ export default function MonitoringTab({
                 setDeliveryFilter('All');
                 setStatusFilter('All');
               }}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold tracking-wide bg-rose-500/10 border border-rose-500/20 text-rose-400 hover:bg-rose-500/20 transition-colors cursor-pointer flex items-center gap-1.5"
+              className="px-3 py-2 rounded-xl text-xs font-bold tracking-wide bg-rose-50 border border-rose-200 text-rose-600 hover:bg-rose-100 transition-colors cursor-pointer flex items-center gap-1.5"
             >
               Filter Pengiriman: {deliveryFilter === 'Belum Dijadwalkan' ? 'Belum dikirim' : deliveryFilter} ✕
             </button>
@@ -847,17 +847,17 @@ export default function MonitoringTab({
         {/* Left Column: Documents List */}
         <div className="w-full space-y-4">
           <div className="flex justify-between items-center px-1">
-            <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider">
+            <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wider">
               DAFTAR DOKUMEN PIB & PEB ({sortedDocs.length})
             </h3>
-            <span className="text-[10px] text-slate-500 font-mono">PT AML Database</span>
+            <span className="text-[10px] text-slate-400 font-mono">PT AML Database</span>
           </div>
 
           {sortedDocs.length === 0 ? (
-            <div className="bg-slate-800/10 border border-slate-800 rounded-xl p-12 text-center text-slate-500">
-              <FileText className="w-10 h-10 text-slate-700 mx-auto mb-3" />
-              <p className="text-sm font-semibold text-slate-400">Tidak ada dokumen PIB yang sesuai</p>
-              <p className="text-xs text-slate-505  text-slate-500 mt-1 max-w-sm mx-auto">Silakan ubah kata kunci pencarian atau unggah file PIB baru di tab kedua.</p>
+            <div className="bg-white border border-slate-200 rounded-xl p-12 text-center text-slate-400 shadow-sm">
+              <FileText className="w-10 h-10 text-slate-300 mx-auto mb-3" />
+              <p className="text-sm font-bold text-slate-700">Tidak ada dokumen PIB yang sesuai</p>
+              <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">Silakan ubah kata kunci pencarian atau unggah file PIB baru di tab kedua.</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -900,21 +900,21 @@ export default function MonitoringTab({
                       }}
                       className={`p-5 rounded-xl border transition-all cursor-pointer ${
                         isSelected
-                          ? 'bg-slate-800/90 border-teal-500 shadow-lg shadow-teal-500/5'
-                          : 'bg-slate-800/30 border-slate-700/60 hover:bg-slate-800/55 hover:border-slate-600'
+                          ? 'bg-white border-teal-500 shadow-md shadow-teal-500/5'
+                          : 'bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300 shadow-sm'
                       }`}
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                         <div>
-                          <span className="text-[10px] font-mono font-bold text-slate-500 block mb-0.5">NO PENGAJUAN PIB</span>
-                          <p className="text-xs font-mono font-bold text-white tracking-wide truncate max-w-xs">{doc.noPengajuan}</p>
+                          <span className="text-[10px] font-mono font-bold text-slate-400 block mb-0.5">NO PENGAJUAN PIB</span>
+                          <p className="text-xs font-mono font-bold text-slate-800 tracking-wide truncate max-w-xs">{doc.noPengajuan}</p>
                         </div>
                         <div className="flex items-center gap-2 self-start sm:self-auto">
                           <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold border ${getStatusBadge(doc.status)}`}>
                             {doc.status === 'Draft PIB' ? 'Draft PIB & PEB' : doc.status}
                           </span>
                           {doc.deliveryPlanned && (
-                            <span className="bg-teal-500/10 text-teal-400 border border-teal-500/20 px-2 py-0.5 rounded text-[9px] font-bold flex items-center gap-1">
+                            <span className="bg-teal-50 text-teal-600 border border-teal-200 px-2 py-0.5 rounded-lg text-[9px] font-bold flex items-center gap-1">
                               <Truck className="w-2.5 h-2.5" />
                               Planned
                             </span>
@@ -925,20 +925,20 @@ export default function MonitoringTab({
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs mb-4">
                         <div className="space-y-1">
                           <p className="text-slate-400 font-semibold text-[10px] uppercase tracking-wider">Perusahaan Importir</p>
-                          <p className="text-white font-medium truncate">{doc.importer}</p>
+                          <p className="text-slate-700 font-semibold truncate">{doc.importer}</p>
                         </div>
                         <div className="space-y-1">
                           <p className="text-slate-400 font-semibold text-[10px] uppercase tracking-wider">No. Bill of Lading</p>
-                          <p className="text-white font-medium truncate">{doc.blNumber} <span className="text-slate-500 font-mono">({doc.blDate})</span></p>
+                          <p className="text-slate-700 font-medium truncate">{doc.blNumber} <span className="text-slate-400 font-mono">({doc.blDate})</span></p>
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-700/40 pt-3 text-[11px]">
-                        <div className="flex items-center gap-1.5 text-slate-450">
-                          <span className="px-1.5 py-0.5 bg-slate-900 border border-slate-800 text-slate-300 rounded font-mono text-[9px]" title="Jumlah Container FCL">
+                      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-3 text-[11px]">
+                        <div className="flex items-center gap-1.5 text-slate-500">
+                          <span className="px-1.5 py-0.5 bg-slate-50 border border-slate-200 text-slate-600 rounded font-mono text-[9px]" title="Jumlah Container FCL">
                             {doc.containers.length} Ctr
                           </span>
-                          <span className="text-slate-400 font-mono text-[10px] truncate max-w-[320px]">
+                          <span className="text-slate-500 font-mono text-[10px] truncate max-w-[320px]">
                             Container: {doc.containers.map(c => {
                               const isContPlanned = doc.containers.length > 1 
                                 ? !!doc.deliveryInfoMap?.[c] 
@@ -948,9 +948,9 @@ export default function MonitoringTab({
                           </span>
                         </div>
                         
-                        <div className="text-teal-400 font-semibold flex items-center gap-1 text-xs">
+                        <div className="text-teal-600 font-semibold flex items-center gap-1 text-xs">
                           {isSelected ? 'Tutup Detail' : 'Action & Manajemen Status'}
-                          <ArrowRight className={`w-3.5 h-3.5 transition-transform duration-250 ${isSelected ? 'rotate-90 text-teal-300' : ''}`} />
+                          <ArrowRight className={`w-3.5 h-3.5 transition-transform duration-250 ${isSelected ? 'rotate-90 text-teal-600' : ''}`} />
                         </div>
                       </div>
                     </motion.div>
@@ -962,15 +962,15 @@ export default function MonitoringTab({
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.25 }}
-                          className="bg-slate-900/90 border border-teal-500/40 rounded-xl p-5 md:p-6 shadow-xl space-y-6 overflow-hidden"
+                          className="bg-slate-50 border border-teal-500/20 rounded-2xl p-5 md:p-6 shadow-sm space-y-6 overflow-hidden"
                         >
                           {/* Panel Header */}
-                          <div className="flex items-start justify-between border-b border-slate-800 pb-3">
+                          <div className="flex items-start justify-between border-b border-slate-200 pb-3">
                             <div>
-                              <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+                              <h4 className="text-sm font-extrabold text-slate-800 uppercase tracking-wider">
                                 Detail Status PIB dan PEB
                               </h4>
-                              <p className="text-slate-400 text-[10px] mt-0.5 font-mono">ID: {doc.id}</p>
+                              <p className="text-slate-500 text-[10px] mt-0.5 font-mono">ID: {doc.id}</p>
                             </div>
                             <div className="flex items-center gap-1.5">
                               {isSuperUser && (
@@ -982,7 +982,7 @@ export default function MonitoringTab({
                                       setSelectedDoc(null);
                                     }
                                   }}
-                                  className="p-1 px-2.5 py-1.5 bg-rose-500/10 border border-rose-500/20 hover:bg-rose-500/20 rounded-xl text-rose-455 text-rose-400 text-xs transition-colors flex items-center gap-1 cursor-pointer"
+                                  className="p-1 px-2.5 py-1.5 bg-rose-50 border border-rose-200 hover:bg-rose-100 rounded-xl text-rose-600 text-xs transition-colors flex items-center gap-1 cursor-pointer"
                                 >
                                   <Trash2 className="w-3.5 h-3.5" />
                                   Hapus
@@ -990,7 +990,7 @@ export default function MonitoringTab({
                               )}
                               <button
                                 onClick={() => setSelectedDoc(null)}
-                                className="text-xs text-slate-400 hover:text-white bg-slate-950 border border-slate-800 px-2 py-1 rounded cursor-pointer"
+                                className="text-xs text-slate-600 hover:text-slate-900 bg-white border border-slate-200 px-2 py-1 rounded-lg cursor-pointer"
                               >
                                 Tutup
                               </button>
@@ -1000,17 +1000,17 @@ export default function MonitoringTab({
                           {/* Status progress overview */}
                           <div>
                             <div className="flex justify-between items-center text-xs font-semibold mb-2">
-                              <span className="text-slate-300">Status Saat Ini:</span>
+                              <span className="text-slate-600">Status Saat Ini:</span>
                               <span className={`px-2 py-0.5 rounded border text-[10px] font-bold ${getStatusBadge(doc.status)}`}>
                                 {doc.status === 'Draft PIB' ? 'Draft PIB & PEB' : doc.status}
                               </span>
                             </div>
 
                             {/* Flow guide message depending on current status */}
-                            <div className="bg-slate-955 bg-slate-905 bg-slate-950/60 border border-slate-800 rounded-xl p-3.5 text-xs text-slate-300 leading-relaxed mb-4">
+                            <div className="bg-white border border-slate-200 rounded-xl p-3.5 text-xs text-slate-700 leading-relaxed mb-4 shadow-sm">
                               {doc.status === 'Draft PIB' && (
                                 <p>
-                                  💡 <strong>Langkah Berikutnya:</strong> PIB ini baru saja direkap Gemini. Staff kantor perlu mengoordinasikan penerbitan billing kementerian Keuangan (DJBC). Silakan klik <span className="text-amber-400 font-bold">Terbitkan Billing</span> untuk merubah status.
+                                  💡 <strong>Langkah Berikutnya:</strong> PIB ini baru saja direkap Gemini. Staff kantor perlu mengoordinasikan penerbitan billing kementerian Keuangan (DJBC). Silakan klik <span className="text-amber-600 font-bold">Terbitkan Billing</span> untuk merubah status.
                                 </p>
                               )}
                               {doc.status === 'Billing DJBC' && (
@@ -1024,12 +1024,12 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { billingPaid: true });
                                         setSelectedDoc({ ...doc, billingPaid: true });
                                       }}
-                                      className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1.5 rounded-lg text-[10px] cursor-pointer"
+                                      className="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 rounded-xl text-[10px] cursor-pointer"
                                     >
                                       Setujui Pelunasan Billing Importir
                                     </button>
                                   ) : (
-                                    <div className="p-2 border border-emerald-500/20 bg-emerald-500/15 rounded text-[10px] text-emerald-400">
+                                    <div className="p-2.5 border border-emerald-200 bg-emerald-50 rounded-xl text-[10px] text-emerald-700 font-medium">
                                       Pembayaran Bea Cukai telah divalidasi. Silakan tentukan Respon Resmi Beacukai di bawah untuk rilis kontainer.
                                     </div>
                                   )}
@@ -1037,7 +1037,7 @@ export default function MonitoringTab({
                               )}
                               {doc.status === 'SPJM' && (
                                 <div className="space-y-2.5">
-                                  <p className="text-pink-400 font-medium">⚠️ Jalur pemeriksaan fisik barang</p>
+                                  <p className="text-pink-600 font-bold">⚠️ Jalur pemeriksaan fisik barang</p>
                                   <p className="text-[11px]">
                                     Kontainer wajib diperiksa oleh aparat Bea Cukai. Selesai pemeriksaan fisik, Bea Cukai akan menerbitkan respon final: SPPB atau SPTNP (Surat Penetapan Tarif/Nilai Pabean).
                                   </p>
@@ -1048,7 +1048,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'SPPB' });
                                         setSelectedDoc({ ...doc, status: 'SPPB' });
                                       }}
-                                      className="bg-indigo-500 hover:bg-indigo-400 text-white font-bold py-1 px-2 rounded-lg text-[10px] cursor-pointer"
+                                      className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2 rounded-xl text-[10px] cursor-pointer"
                                     >
                                       Release SPPB
                                     </button>
@@ -1057,7 +1057,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'SPTNP', sptnpPaid: false });
                                         setSelectedDoc({ ...doc, status: 'SPTNP', sptnpPaid: false });
                                       }}
-                                      className="bg-rose-500 hover:bg-rose-455 hover:bg-rose-400 text-white font-bold py-1 px-2 rounded-lg text-[10px] cursor-pointer"
+                                      className="bg-rose-600 hover:bg-rose-700 text-white font-bold py-1.5 px-2 rounded-xl text-[10px] cursor-pointer"
                                     >
                                       SPTNP
                                     </button>
@@ -1066,7 +1066,7 @@ export default function MonitoringTab({
                               )}
                               {doc.status === 'SPTNP' && (
                                 <div className="space-y-2.5">
-                                  <p className="text-rose-400 font-bold">⚠️ Menunggu Pelunasan SPTNP</p>
+                                  <p className="text-rose-600 font-bold">⚠️ Menunggu Pelunasan SPTNP</p>
                                   <p className="text-[11px]">
                                     Pembayaran tambahan Bea Masuk dari Importir wajib dilunasi terlebih dahulu.
                                   </p>
@@ -1076,13 +1076,13 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { sptnpPaid: true });
                                         setSelectedDoc({ ...doc, sptnpPaid: true });
                                       }}
-                                      className="w-full bg-rose-500 hover:bg-rose-400 text-white font-bold py-1.5 rounded-lg text-[10px] cursor-pointer"
+                                      className="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 rounded-xl text-[10px] cursor-pointer"
                                     >
                                       Konfirmasi Pajak SPTNP Telah Dibayar
                                     </button>
                                   ) : (
                                     <div className="space-y-2">
-                                      <div className="p-1 px-2 border border-emerald-500/20 bg-emerald-555/15 bg-emerald-500/15 rounded text-[10px] text-emerald-400 text-center font-bold">
+                                      <div className="p-1 px-2 border border-emerald-200 bg-emerald-50 rounded-xl text-[10px] text-emerald-700 text-center font-bold">
                                         SPTNP LULUS PELUNASAN
                                       </div>
                                       <button
@@ -1090,7 +1090,7 @@ export default function MonitoringTab({
                                           onUpdateDocument(doc.id, { status: 'SPPB' });
                                           setSelectedDoc({ ...doc, status: 'SPPB' });
                                         }}
-                                        className="w-full bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold py-1.5 rounded-lg text-[10px] cursor-pointer"
+                                        className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 rounded-xl text-[10px] cursor-pointer"
                                       >
                                         Selesaikan & Terbitkan SPPB Rilis
                                       </button>
@@ -1100,7 +1100,7 @@ export default function MonitoringTab({
                               )}
                               {doc.status === 'NHI' && (
                                 <div className="space-y-2.5">
-                                  <p className="text-purple-400 font-bold">🕵️ Nota Hasil Intelijen (NHI)</p>
+                                  <p className="text-purple-600 font-bold">🕵️ Nota Hasil Intelijen (NHI)</p>
                                   <p className="text-[11px]">
                                     Pemeriksaan mendalam atas kecurigaan khusus kepabeanan. Evaluasi keputusan instansi penegak hukum:
                                   </p>
@@ -1110,7 +1110,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'SPPB' });
                                         setSelectedDoc({ ...doc, status: 'SPPB' });
                                       }}
-                                      className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] cursor-pointer"
+                                      className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-2 rounded-xl text-[10px] cursor-pointer"
                                     >
                                       Lulus (Set SPPB)
                                     </button>
@@ -1119,7 +1119,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'SPBL' });
                                         setSelectedDoc({ ...doc, status: 'SPBL' });
                                       }}
-                                      className="bg-red-500 hover:bg-red-400 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] cursor-pointer"
+                                      className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-2 rounded-xl text-[10px] cursor-pointer"
                                     >
                                       Re-Ekspor (SPBL)
                                     </button>
@@ -1127,12 +1127,12 @@ export default function MonitoringTab({
                                 </div>
                               )}
                               {doc.status === 'SPBL' && (
-                                <p className="text-rose-400">
+                                <p className="text-rose-600">
                                   🛑 <strong>Status Surat Bukti Larangan (SPBL):</strong> Kontainer dilarang masuk Indonesia dan wajib dikembalikan (re-ekspor) ke pelabuhan asal negara importir. Pengiriman dibekukan.
                                 </p>
                               )}
                               {doc.status === 'SPPB' && (
-                                <p className="text-teal-400 font-medium">
+                                <p className="text-teal-600 font-bold">
                                   🎉 Dokumen Resmi SPPB Rilis! Kontainer diizinkan keluar depo dan dikirim langsung ke gudang logistik importir.
                                 </p>
                               )}
@@ -1142,7 +1142,7 @@ export default function MonitoringTab({
                           {/* ACTION MENU TRANSITION STATUS (Untuk Staff AML) */}
                           {(userRole === 'STAFF_AML' || isSuperUser) && (
                             <div className="space-y-3">
-                              <h5 className="text-xs font-semibold text-slate-300 uppercase tracking-widest pl-1 font-sans">
+                              <h5 className="text-xs font-semibold text-slate-600 uppercase tracking-widest pl-1 font-sans">
                                 Ubah Status Berdasarkan Respon DJBC / Bea Cukai
                               </h5>
                               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -1154,7 +1154,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'Billing DJBC' });
                                         setSelectedDoc({ ...doc, status: 'Billing DJBC' });
                                       }}
-                                      className="flex items-center justify-center gap-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                      className="flex items-center justify-center gap-1 bg-amber-50 hover:bg-amber-100 text-amber-600 border border-amber-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                     >
                                       <DollarSign className="w-3.5 h-3.5" />
                                       Billing DJBC
@@ -1164,7 +1164,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'SPPB' });
                                         setSelectedDoc({ ...doc, status: 'SPPB' });
                                       }}
-                                      className="flex items-center justify-center gap-1 bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 border border-teal-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                      className="flex items-center justify-center gap-1 bg-teal-50 hover:bg-teal-100 text-teal-600 border border-teal-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                     >
                                       <ShieldCheck className="w-3.5 h-3.5" />
                                       SPPB
@@ -1174,7 +1174,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'SPJM' });
                                         setSelectedDoc({ ...doc, status: 'SPJM' });
                                       }}
-                                      className="flex items-center justify-center gap-1 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                      className="flex items-center justify-center gap-1 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                     >
                                       <RefreshCw className="w-3.5 h-3.5" />
                                       SPJM
@@ -1184,7 +1184,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'NHI' });
                                         setSelectedDoc({ ...doc, status: 'NHI' });
                                       }}
-                                      className="flex items-center justify-center gap-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                      className="flex items-center justify-center gap-1 bg-purple-50 hover:bg-purple-100 text-purple-600 border border-purple-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                     >
                                       <Layers className="w-3.5 h-3.5" />
                                       NHI
@@ -1200,7 +1200,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'Draft PIB' });
                                         setSelectedDoc({ ...doc, status: 'Draft PIB' });
                                       }}
-                                      className="flex items-center justify-center gap-1 bg-slate-500/10 hover:bg-slate-500/20 text-slate-300 border border-slate-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                      className="flex items-center justify-center gap-1 bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                     >
                                       <RefreshCw className="w-3.5 h-3.5" />
                                       Ubah ke Draft
@@ -1210,7 +1210,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'SPPB' });
                                         setSelectedDoc({ ...doc, status: 'SPPB' });
                                       }}
-                                      className="flex items-center justify-center gap-1 bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 border border-teal-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                      className="flex items-center justify-center gap-1 bg-teal-50 hover:bg-teal-100 text-teal-600 border border-teal-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                     >
                                       <ShieldCheck className="w-3.5 h-3.5" />
                                       SPPB
@@ -1220,7 +1220,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'SPJM' });
                                         setSelectedDoc({ ...doc, status: 'SPJM' });
                                       }}
-                                      className="flex items-center justify-center gap-1 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                      className="flex items-center justify-center gap-1 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                     >
                                       <RefreshCw className="w-3.5 h-3.5" />
                                       SPJM
@@ -1230,7 +1230,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'NHI' });
                                         setSelectedDoc({ ...doc, status: 'NHI' });
                                       }}
-                                      className="flex items-center justify-center gap-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                      className="flex items-center justify-center gap-1 bg-purple-50 hover:bg-purple-100 text-purple-600 border border-purple-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                     >
                                       <Layers className="w-3.5 h-3.5" />
                                       NHI
@@ -1246,7 +1246,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'Billing DJBC' });
                                         setSelectedDoc({ ...doc, status: 'Billing DJBC' });
                                       }}
-                                      className="flex items-center justify-center gap-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                      className="flex items-center justify-center gap-1 bg-amber-50 hover:bg-amber-100 text-amber-600 border border-amber-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                     >
                                       <DollarSign className="w-3.5 h-3.5" />
                                       Ubah ke Billing
@@ -1256,7 +1256,7 @@ export default function MonitoringTab({
                                         onUpdateDocument(doc.id, { status: 'Draft PIB' });
                                         setSelectedDoc({ ...doc, status: 'Draft PIB' });
                                       }}
-                                      className="flex items-center justify-center gap-1 bg-slate-500/10 hover:bg-slate-500/20 text-slate-300 border border-slate-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                      className="flex items-center justify-center gap-1 bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                     >
                                       <RefreshCw className="w-3.5 h-3.5" />
                                       Ubah ke Draft
@@ -1267,7 +1267,7 @@ export default function MonitoringTab({
                                           onUpdateDocument(doc.id, { status: 'SPPB' });
                                           setSelectedDoc({ ...doc, status: 'SPPB' });
                                         }}
-                                        className="flex items-center justify-center gap-1 bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 border border-teal-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                        className="flex items-center justify-center gap-1 bg-teal-50 hover:bg-teal-100 text-teal-600 border border-teal-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                       >
                                         <ShieldCheck className="w-3.5 h-3.5" />
                                         SPPB
@@ -1279,7 +1279,7 @@ export default function MonitoringTab({
                                           onUpdateDocument(doc.id, { status: 'SPJM' });
                                           setSelectedDoc({ ...doc, status: 'SPJM' });
                                         }}
-                                        className="flex items-center justify-center gap-1 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                        className="flex items-center justify-center gap-1 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                       >
                                         <RefreshCw className="w-3.5 h-3.5" />
                                         SPJM
@@ -1291,7 +1291,7 @@ export default function MonitoringTab({
                                           onUpdateDocument(doc.id, { status: 'NHI' });
                                           setSelectedDoc({ ...doc, status: 'NHI' });
                                         }}
-                                        className="flex items-center justify-center gap-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                                        className="flex items-center justify-center gap-1 bg-purple-50 hover:bg-purple-100 text-purple-600 border border-purple-200 py-2 rounded-xl text-xs font-bold font-sans cursor-pointer transition-colors"
                                       >
                                         <Layers className="w-3.5 h-3.5" />
                                         NHI
@@ -1305,21 +1305,21 @@ export default function MonitoringTab({
 
                           {/* DELIVERY PLANNING SECTION */}
                           {doc.status === 'SPPB' ? (
-                            <div className="border-t border-slate-700/60 pt-4 space-y-4 font-sans">
+                            <div className="border-t border-slate-200 pt-4 space-y-4 font-sans">
                               <div className="flex items-center justify-between">
-                                <h5 className="text-xs font-bold text-slate-300 uppercase tracking-widest pl-1 flex items-center gap-1.5">
-                                  <Truck className="w-4 h-4 text-teal-400" />
+                                <h5 className="text-xs font-bold text-slate-700 uppercase tracking-widest pl-1 flex items-center gap-1.5">
+                                  <Truck className="w-4 h-4 text-teal-600" />
                                   Rencana & Rute Pengiriman
                                 </h5>
                                 {(doc.containers.length > 1 ? !!doc.deliveryInfoMap?.[activeContainer] : doc.deliveryPlanned) && (
                                   <div className="flex items-center gap-1.5 flex-wrap">
                                     {(doc.containers.length > 1 ? doc.deliveryInfoMap?.[activeContainer]?.suratJalanDiterima : doc.deliveryInfo?.suratJalanDiterima) && (
-                                      <span className="bg-teal-500/10 border border-teal-500/20 text-teal-400 text-[10px] px-2 py-0.5 rounded uppercase font-bold flex items-center gap-1">
-                                        <ShieldCheck className="w-3 h-3 text-teal-400" />
+                                      <span className="bg-teal-50 border border-teal-200 text-teal-600 text-[10px] px-2 py-0.5 rounded-lg uppercase font-bold flex items-center gap-1">
+                                        <ShieldCheck className="w-3 h-3 text-teal-600" />
                                         S.J Diterima Kantor
                                       </span>
                                     )}
-                                    <span className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded uppercase font-bold text-center">
+                                    <span className="bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] px-2 py-0.5 rounded-lg uppercase font-extrabold text-center">
                                       {(doc.containers.length > 1 ? doc.deliveryInfoMap?.[activeContainer]?.status : doc.deliveryInfo?.status) || 'Belum Dikirim'}
                                     </span>
                                   </div>
@@ -1329,7 +1329,7 @@ export default function MonitoringTab({
                               {/* Container selector if more than 1 container */}
                               {doc.containers.length > 1 && (
                                 <div className="space-y-1.5 mb-2">
-                                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1">Pilih Nomor Container untuk Rencana Pengiriman:</p>
+                                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest pl-1">Pilih Nomor Container untuk Rencana Pengiriman:</p>
                                   <div className="flex flex-wrap gap-2">
                                     {doc.containers.map((cont) => {
                                       const info = doc.deliveryInfoMap?.[cont];
@@ -1342,21 +1342,21 @@ export default function MonitoringTab({
                                           onClick={() => {
                                             setActiveContainer(cont);
                                           }}
-                                          className={`px-3 py-1.5 rounded-lg border text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+                                          className={`px-3 py-1.5 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
                                             isCurrent
-                                              ? 'bg-teal-500/15 border-teal-500 text-teal-400 font-bold'
-                                              : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-300 hover:bg-slate-850'
+                                              ? 'bg-teal-55 border-teal-500 text-teal-700 font-bold bg-teal-50'
+                                              : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                                           }`}
                                         >
                                           <span className="font-mono text-[11px]">{getContainerDisplay(cont)}</span>
-                                          <span className={`text-[9px] px-1 py-0.5 rounded font-mono ${
+                                          <span className={`text-[9px] px-1 py-0.5 rounded-md font-mono ${
                                             status === 'Selesai'
-                                              ? 'bg-emerald-500/10 text-emerald-400'
+                                              ? 'bg-emerald-50 text-emerald-700 font-bold'
                                               : status === 'Delivery'
-                                                ? 'bg-sky-500/10 text-sky-400'
+                                                ? 'bg-sky-50 text-sky-700 font-bold'
                                                 : status === 'Dibatalkan'
-                                                  ? 'bg-rose-500/10 text-rose-400 font-bold'
-                                                  : 'bg-slate-850 text-slate-400'
+                                                  ? 'bg-rose-50 text-rose-700 font-bold'
+                                                  : 'bg-slate-100 text-slate-600'
                                           }`}>
                                             {status}
                                           </span>
@@ -1367,15 +1367,15 @@ export default function MonitoringTab({
                                 </div>
                               )}
 
-                                <div className="space-y-3.5 bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                <div className="space-y-3.5 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
                                   {(userRole === 'STAFF_AML' && !isSuperUser) && (
-                                    <div className="bg-rose-500/10 border border-rose-500/20 text-rose-400 p-3 rounded-lg text-xs font-semibold mb-2 flex items-center gap-1.5 font-sans">
-                                      <AlertTriangle className="w-4 h-4 text-rose-455 text-rose-400 flex-shrink-0" />
+                                    <div className="bg-rose-50 border border-rose-200 text-rose-600 p-3 rounded-lg text-xs font-semibold mb-2 flex items-center gap-1.5 font-sans">
+                                      <AlertTriangle className="w-4 h-4 text-rose-600 flex-shrink-0" />
                                       <span>Akses Dibatasi: Hanya Staff Delivery / Super Power yang dapat mengisi Rencana & Rute Pengiriman.</span>
                                     </div>
                                   )}
                                   <div>
-                                    <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">
+                                    <label className="block text-slate-500 text-[10px] font-bold uppercase tracking-wide mb-1">
                                       Nomor Surat Jalan PT AML {doc.containers.length > 1 && `(Container: ${getContainerDisplay(activeContainer)})`}
                                     </label>
                                     <input
@@ -1383,78 +1383,78 @@ export default function MonitoringTab({
                                       value={deliveryNoteNumber}
                                       onChange={(e) => setDeliveryNoteNumber(e.target.value)}
                                       disabled={(userRole === 'STAFF_AML') && !isSuperUser}
-                                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white uppercase font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+                                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-800 uppercase font-bold disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:border-teal-500"
                                     />
                                   </div>
 
                                   <div className="grid grid-cols-2 gap-3">
                                     <div>
-                                      <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">Nama Supir Armada</label>
+                                      <label className="block text-slate-500 text-[10px] font-bold uppercase tracking-wide mb-1">Nama Supir Armada</label>
                                       <input
                                         type="text"
                                         placeholder="Contoh: Ahmad"
                                         value={driverName}
                                         onChange={(e) => setDriverName(e.target.value)}
                                         disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-800 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:border-teal-500"
                                       />
                                     </div>
                                     <div>
-                                      <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">No. HP Supir</label>
+                                      <label className="block text-slate-500 text-[10px] font-bold uppercase tracking-wide mb-1">No. HP Supir</label>
                                       <input
                                         type="text"
                                         placeholder="0812-xxxx"
                                         value={driverPhone}
                                         onChange={(e) => setDriverPhone(e.target.value)}
                                         disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-800 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:border-teal-500"
                                       />
                                     </div>
                                   </div>
 
                                   <div className="grid grid-cols-2 gap-3">
                                     <div>
-                                      <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">Plat Truk Container</label>
+                                      <label className="block text-slate-500 text-[10px] font-bold uppercase tracking-wide mb-1">Plat Truk Container</label>
                                       <input
                                         type="text"
                                         placeholder="B 9801 UTX"
                                         value={plateNumber}
                                         onChange={(e) => setPlateNumber(e.target.value)}
                                         disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-800 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:border-teal-500"
                                       />
                                     </div>
                                     <div>
-                                      <label className="block text-slate-450 text-slate-440 text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">Tanggal Pengiriman</label>
+                                      <label className="block text-slate-500 text-[10px] font-bold uppercase tracking-wide mb-1">Tanggal Pengiriman</label>
                                       <input
                                         type="date"
                                         value={scheduledDate}
                                         onChange={(e) => setScheduledDate(e.target.value)}
                                         disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-800 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:border-teal-500"
                                       />
                                     </div>
                                   </div>
 
                                   <div>
-                                    <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">Gudang / Pelabuhan Tujuan Importir</label>
+                                    <label className="block text-slate-500 text-[10px] font-bold uppercase tracking-wide mb-1">Gudang / Pelabuhan Tujuan Importir</label>
                                     <input
                                       type="text"
                                       placeholder="Jalan Industri No 12, Cikarang"
                                       value={warehouseTarget}
                                       onChange={(e) => setWarehouseTarget(e.target.value)}
                                       disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-800 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:border-teal-500"
                                     />
                                   </div>
 
                                   <div>
-                                    <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">Nama Vendor Armada</label>
+                                    <label className="block text-slate-500 text-[10px] font-bold uppercase tracking-wide mb-1">Nama Vendor Armada</label>
                                     <select
                                       value={vendorArmada}
                                       onChange={(e) => setVendorArmada(e.target.value)}
                                       disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:border-pink-500"
+                                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:border-teal-500"
                                     >
                                       <option value="">-- Pilih Vendor Armada --</option>
                                       {VENDOR_OPTIONS.map((opt) => (
@@ -1468,7 +1468,7 @@ export default function MonitoringTab({
                                   <button
                                     type="button"
                                     onClick={handleSaveDeliveryInfo}
-                                    className="w-full bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold py-2 rounded-lg text-xs cursor-pointer transition-colors flex items-center justify-center gap-1"
+                                    className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 rounded-xl text-xs cursor-pointer transition-colors flex items-center justify-center gap-1 shadow-sm"
                                   >
                                     <CheckCircle className="w-4 h-4" />
                                     Simpan Rencana & Plot Jalan
@@ -1477,46 +1477,46 @@ export default function MonitoringTab({
 
                                 {/* Print and Status controls on active container scheduled state */}
                                 {(doc.containers.length > 1 ? !!doc.deliveryInfoMap?.[activeContainer] : doc.deliveryPlanned) && (
-                                  <div className="pt-2.5 border-t border-slate-800 space-y-3 font-sans">
+                                  <div className="pt-2.5 border-t border-slate-200 space-y-3 font-sans">
                                     <button
                                       type="button"
                                       onClick={() => handlePrintSuratJalan(doc, activeContainer)}
-                                      className="w-full border border-teal-500/30 bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 font-bold py-2 rounded-lg text-xs cursor-pointer transition-colors flex items-center justify-center gap-1.5"
+                                      className="w-full border border-teal-200 bg-teal-50 hover:bg-teal-100 text-teal-750 text-teal-700 font-bold py-2 rounded-xl text-xs cursor-pointer transition-colors flex items-center justify-center gap-1.5 shadow-sm"
                                     >
-                                      <Printer className="w-4 h-4" />
+                                      <Printer className="w-4 h-4 text-teal-600" />
                                       Cetak Surat Jalan PT AML (Print PDF - Cont: {getContainerDisplay(activeContainer || doc.containers[0])})
                                     </button>
 
                                     {/* Delivery status update triggers */}
                                     <div className="space-y-1.5 font-sans">
-                                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-0.5">Kontrol Status Pengiriman Armada:</p>
+                                      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest pl-0.5">Kontrol Status Pengiriman Armada:</p>
                                       <div className="grid grid-cols-3 gap-1.5">
                                         <button
                                           onClick={() => updateDeliveryStatus('Delivery')}
-                                          className={`py-1.5 rounded text-[10px] font-bold transition-all cursor-pointer ${
+                                          className={`py-1.5 rounded-lg text-[10px] font-bold transition-all cursor-pointer ${
                                             ((doc.containers.length > 1 ? doc.deliveryInfoMap?.[activeContainer]?.status : doc.deliveryInfo?.status) === 'Delivery')
-                                              ? 'bg-sky-500 text-slate-950 font-extrabold'
-                                              : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                                              ? 'bg-sky-500 text-white font-extrabold shadow-sm'
+                                              : 'bg-white border border-slate-200 text-slate-500 hover:text-slate-800 hover:bg-slate-50'
                                           }`}
                                         >
                                           Delivery
                                         </button>
                                         <button
                                           onClick={() => updateDeliveryStatus('Selesai')}
-                                          className={`py-1.5 rounded text-[10px] font-bold transition-all cursor-pointer ${
+                                          className={`py-1.5 rounded-lg text-[10px] font-bold transition-all cursor-pointer ${
                                             ((doc.containers.length > 1 ? doc.deliveryInfoMap?.[activeContainer]?.status : doc.deliveryInfo?.status) === 'Selesai')
-                                              ? 'bg-emerald-500 text-slate-950 font-extrabold'
-                                              : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                                              ? 'bg-emerald-600 text-white font-extrabold shadow-sm'
+                                              : 'bg-white border border-slate-200 text-slate-500 hover:text-slate-800 hover:bg-slate-50'
                                           }`}
                                         >
                                           Selesai
                                         </button>
                                         <button
                                           onClick={() => updateDeliveryStatus('Dibatalkan')}
-                                          className={`py-1.5 rounded text-[10px] font-bold transition-all cursor-pointer ${
+                                          className={`py-1.5 rounded-lg text-[10px] font-bold transition-all cursor-pointer ${
                                             ((doc.containers.length > 1 ? doc.deliveryInfoMap?.[activeContainer]?.status : doc.deliveryInfo?.status) === 'Dibatalkan')
-                                              ? 'bg-rose-500 text-white font-extrabold'
-                                              : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                                              ? 'bg-rose-600 text-white font-extrabold shadow-sm'
+                                              : 'bg-white border border-slate-200 text-slate-500 hover:text-slate-800 hover:bg-slate-50'
                                           }`}
                                         >
                                           Batal
@@ -1524,14 +1524,14 @@ export default function MonitoringTab({
                                       </div>
                                       
                                       {/* Surat Jalan Diterima Toggle Pin */}
-                                      <div className="pt-2.5 border-t border-slate-800/70 mt-2">
+                                      <div className="pt-2.5 border-t border-slate-200 mt-2">
                                         <button
                                           type="button"
                                           onClick={() => toggleSuratJalanDiterima()}
-                                          className={`w-full py-1.5 rounded-lg text-[10px] font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 border ${
+                                          className={`w-full py-2 rounded-xl text-[10px] font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 border ${
                                             (doc.containers.length > 1 ? doc.deliveryInfoMap?.[activeContainer]?.suratJalanDiterima : doc.deliveryInfo?.suratJalanDiterima)
-                                              ? 'bg-teal-500/10 border-teal-500/40 text-teal-400 font-extrabold shadow-sm'
-                                              : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-705'
+                                              ? 'bg-teal-50 border-teal-200 text-teal-700 font-extrabold shadow-sm'
+                                              : 'bg-white border-slate-200 text-slate-500 hover:text-slate-800 hover:bg-slate-50'
                                           }`}
                                         >
                                           <ShieldCheck className="w-3.5 h-3.5" />
@@ -1546,11 +1546,11 @@ export default function MonitoringTab({
                               </div>
                             </div>
                           ) : (
-                            <div className="bg-slate-950 p-4 border border-slate-800 rounded-xl flex items-center gap-3 text-xs text-rose-300">
-                              <AlertTriangle className="w-5 h-5 flex-shrink-0" />
+                            <div className="bg-rose-50 p-4 border border-rose-100 rounded-xl flex items-center gap-3 text-xs text-rose-700">
+                              <AlertTriangle className="w-5 h-5 flex-shrink-0 text-rose-500" />
                               <div>
                                 <p className="font-bold">Menunggu Release SPPB Bea Cukai</p>
-                                <p className="text-[11px] text-slate-400 font-sans">Rencana pengiriman kontainer dan pencetakan Surat Jalan hanya dapat dilakukan setelah dokumen memperoleh respon final SPPB.</p>
+                                <p className="text-[11px] text-slate-500 font-sans mt-0.5">Rencana pengiriman kontainer dan pencetakan Surat Jalan hanya dapat dilakukan setelah dokumen memperoleh respon final SPPB.</p>
                               </div>
                             </div>
                           )}

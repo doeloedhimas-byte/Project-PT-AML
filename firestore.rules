@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global Safety Net: default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Path Variable Hardening: ID Poisoning Guard
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // 2. Collection Rules for custom documents collection
+    match /documents/{documentId} {
+      // Since our backend applet accesses Firestore using the Firebase Web client SDK
+      // as an unauthenticated service proxy on behalf of authenticated app users,
+      // we permit read/write access guarded strictly by ID safety validations.
+      allow read, write: if isValidId(documentId);
+    }
+  }
+}

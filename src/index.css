@@ -1,1 +1,185 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom modern bright theme stylesheet */
+:root, body, #root, html {
+  background-color: #f8fafc !important; /* Soft off-white */
+  color: #0f172a !important; /* Rich slate text */
+}
+
+/* Force container colors to light */
+.min-h-screen.bg-slate-950, .min-h-screen.bg-slate-900 {
+  background-color: #f8fafc !important;
+}
+
+header.bg-slate-900 {
+  background-color: #ffffff !important;
+  border-bottom-color: #e2e8f0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+header h1 {
+  color: #0f172a !important;
+}
+
+header p {
+  color: #64748b !important;
+}
+
+header .text-white {
+  color: #0f172a !important;
+}
+
+/* Universal multiply blend mode for logo to remove white background */
+img[alt*="Logo"], .logo-img, img[src*="logo_new"], img[alt*="Logo"] {
+  mix-blend-mode: multiply !important;
+}
+
+/* Cards and sections */
+.bg-slate-900, .bg-slate-800, .bg-slate-850 {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+.bg-slate-800\/50, .bg-slate-800\/40, .bg-slate-800\/35, .bg-slate-800\/85 {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02) !important;
+}
+
+.bg-slate-900\/40, .bg-slate-900\/60, .bg-slate-900\/80 {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Inputs and interactive elements */
+input[type="text"], input[type="password"], input[type="date"], select, textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, select:focus, textarea:focus {
+  border-color: #0d9488 !important; /* teal-600 */
+  box-shadow: 0 0 0 1px #0d9488 !important;
+}
+
+/* Borders */
+.border-slate-800, .border-slate-700, .border-slate-700\/80, .border-slate-700\/60 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Text overrides */
+.text-slate-100 {
+  color: #0f172a !important;
+}
+.text-slate-200 {
+  color: #1e293b !important;
+}
+.text-slate-300 {
+  color: #334155 !important;
+}
+.text-slate-400 {
+  color: #475569 !important;
+}
+.text-slate-500 {
+  color: #64748b !important;
+}
+.text-white {
+  color: #0f172a !important;
+}
+
+/* Keep actual dark elements white for buttons, badges or icons */
+.bg-teal-500 .text-slate-950, .bg-teal-500 .text-white, .text-teal-950 {
+  color: #0f172a !important;
+}
+
+button.bg-teal-500, button.bg-teal-600, .bg-teal-500, .bg-teal-600 {
+  color: #ffffff !important;
+}
+
+/* Fix tabs text colors */
+button.border-teal-500 {
+  color: #0d9488 !important; /* teal-600 */
+}
+
+/* Footer overrides */
+footer.bg-slate-900 {
+  background-color: #ffffff !important;
+  border-top-color: #e2e8f0 !important;
+}
+
+footer p {
+  color: #64748b !important;
+}
+
+/* Table overrides to look incredibly clean and professional */
+table th {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+table td {
+  background-color: #ffffff !important;
+  color: #334155 !important;
+  border-color: #f1f5f9 !important;
+}
+
+/* Fix text-indigo-400, text-amber-400 and other light-theme contrasts */
+.text-indigo-400 {
+  color: #4f46e5 !important; /* indigo-600 */
+}
+.text-amber-400 {
+  color: #d97706 !important; /* amber-600 */
+}
+.text-teal-400 {
+  color: #0d9488 !important; /* teal-600 */
+}
+.text-fuchsia-400 {
+  color: #c026d3 !important; /* fuchsia-600 */
+}
+.text-rose-400 {
+  color: #e11d48 !important; /* rose-600 */
+}
+.text-sky-400 {
+  color: #0284c7 !important; /* sky-600 */
+}
+.text-emerald-400 {
+  color: #059669 !important; /* emerald-600 */
+}
+
+/* Fix badges background colors so they are readable on light theme */
+.bg-indigo-500\/10 {
+  background-color: #e0e7ff !important;
+  color: #4f46e5 !important;
+}
+.bg-amber-500\/10 {
+  background-color: #fef3c7 !important;
+  color: #b45309 !important;
+}
+.bg-teal-500\/10 {
+  background-color: #ccfbf1 !important;
+  color: #0f766e !important;
+}
+.bg-fuchsia-500\/10 {
+  background-color: #fae8ff !important;
+  color: #86198f !important;
+}
+.bg-rose-500\/10 {
+  background-color: #ffe4e6 !important;
+  color: #be123c !important;
+}
+.bg-emerald-500\/10 {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+}
+.bg-sky-500\/10 {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+}

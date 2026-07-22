@@ -199,14 +199,14 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 mb-2">
         <div>
-          <h2 className="text-xl font-bold text-white tracking-tight">
+          <h2 className="text-xl font-bold text-slate-900 tracking-tight">
             Unggah & Ringkasan Dokumen PIB & PEB
           </h2>
-          <p className="text-slate-400 text-sm">
+          <p className="text-slate-600 text-sm">
             Gunakan motor AI Gemini untuk mengenali dan menulis ulang (rekap) seluruh detail manifes kontainer.
           </p>
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-amber-400 bg-amber-400/10 px-3 py-1.5 rounded-lg border border-amber-500/10">
+        <div className="flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-200">
           <Coins className="w-3.5 h-3.5" />
           Powered by Gemini 3.5-Flash
         </div>
@@ -216,14 +216,14 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
         <motion.div 
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-slate-800/85 border border-teal-500/20 rounded-2xl p-8 max-w-2xl mx-auto text-center space-y-6"
+          className="bg-white border border-slate-200 rounded-2xl p-8 max-w-2xl mx-auto text-center space-y-6 shadow-sm"
         >
-          <div className="inline-flex items-center justify-center p-3 rounded-full bg-teal-500/10 text-teal-400 mb-2">
+          <div className="inline-flex items-center justify-center p-3 rounded-full bg-teal-50 text-teal-600 border border-teal-200/50 mb-2">
             <CheckCircle className="w-10 h-10" />
           </div>
-          <h3 className="text-xl font-bold text-white">Dokumen Berhasil Direkap ke Portal!</h3>
-          <p className="text-slate-350 text-sm max-w-md mx-auto leading-relaxed">
-            PIB PT Agung Makmur Logistik telah didaftarkan dalam status <span className="text-indigo-400 font-bold">Draft PIB</span>. Sekarang Anda bisa memperbarui pembayaran billing DJBC, memproses koordinasi Bea Cukai, atau menyusun Surat Jalan.
+          <h3 className="text-xl font-bold text-slate-900">Dokumen Berhasil Direkap ke Portal!</h3>
+          <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
+            PIB PT Agung Makmur Logistik telah didaftarkan dalam status <span className="text-indigo-650 font-bold">Draft PIB</span>. Sekarang Anda bisa memperbarui pembayaran billing DJBC, memproses koordinasi Bea Cukai, atau menyusun Surat Jalan.
           </p>
           <div className="pt-4 flex justify-center gap-4">
             <button
@@ -232,7 +232,7 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
                 setFile(null);
                 setParsedData(null);
               }}
-              className="bg-slate-900 hover:bg-slate-950 border border-slate-700 hover:border-slate-650 text-slate-200 text-xs font-semibold py-2.5 px-5 rounded-xl cursor-pointer transition-colors"
+              className="bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-semibold py-2.5 px-5 rounded-xl cursor-pointer transition-colors"
             >
               Proses Dokumen Lain
             </button>
@@ -241,7 +241,7 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
                 onNavigateToTab(2); // Redirect to monitoring list
                 setIsSuccessful(false);
               }}
-              className="bg-teal-500 hover:bg-teal-400 text-slate-950 text-xs font-semibold py-2.5 px-5 rounded-xl cursor-pointer shadow-lg shadow-teal-500/15 transition-all animate-pulse"
+              className="bg-teal-600 hover:bg-teal-750 text-white text-xs font-semibold py-2.5 px-5 rounded-xl cursor-pointer shadow-lg shadow-teal-600/10 transition-all animate-pulse"
             >
               Lihat Daftar & Atur Status
             </button>
@@ -257,8 +257,8 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
               onClick={() => fileInputRef.current?.click()}
               className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all ${
                 file 
-                ? 'border-teal-500/50 bg-teal-500/5' 
-                : 'border-slate-700 bg-slate-800/20 hover:bg-slate-800/40 hover:border-slate-600'
+                ? 'border-teal-500/50 bg-teal-50/50' 
+                : 'border-slate-300 bg-slate-50 hover:bg-slate-100/50 hover:border-slate-400'
               }`}
             >
               <input 
@@ -269,31 +269,31 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
                 className="hidden"
               />
               <div className="flex flex-col items-center justify-center space-y-3">
-                <div className={`p-3 rounded-xl ${file ? 'bg-teal-500/10 text-teal-400' : 'bg-slate-800 text-slate-400'}`}>
+                <div className={`p-3 rounded-xl ${file ? 'bg-teal-50 text-teal-600 border border-teal-200' : 'bg-slate-100 text-slate-500 border border-slate-200'}`}>
                   <Upload className="w-6 h-6" />
                 </div>
                 {file ? (
                   <div>
-                    <p className="text-sm font-semibold text-white truncate max-w-[250px] mx-auto">
+                    <p className="text-sm font-semibold text-slate-800 truncate max-w-[250px] mx-auto">
                       {file.name}
                     </p>
-                    <p className="text-xs text-slate-400 mt-0.5">
+                    <p className="text-xs text-slate-500 mt-0.5">
                       {(file.size / (1024 * 1024)).toFixed(2)} MB - Siap Proses
                     </p>
                   </div>
                 ) : (
                   <div>
-                    <h4 className="text-sm font-semibold text-slate-200">
+                    <h4 className="text-sm font-semibold text-slate-800">
                       Tarik & Lepaskan File PIB PDF
                     </h4>
-                    <p className="text-xs text-slate-400 mt-1">
+                    <p className="text-xs text-slate-500 mt-1">
                       Mendukung file PDF standar ekspor impor DJBC
                     </p>
                   </div>
                 )}
                 <button
                   type="button"
-                  className="mt-3 bg-slate-800 border border-slate-700 hover:bg-slate-755 text-xs text-slate-300 font-semibold px-4 py-2 rounded-xl"
+                  className="mt-3 bg-white border border-slate-300 hover:bg-slate-50 text-xs text-slate-700 font-semibold px-4 py-2 rounded-xl"
                 >
                   {file ? 'Ubah File' : 'Cari Dokumen PDF'}
                 </button>
@@ -301,21 +301,21 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
             </div>
 
             {/* Quick Demo Simulator trigger */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/80 p-5 rounded-2xl space-y-3 shadow-lg">
+            <div className="bg-amber-50/50 border border-amber-200 p-5 rounded-2xl space-y-3 shadow-sm">
               <div className="flex items-center gap-2">
-                <Sliders className="w-4 h-4 text-amber-400" />
-                <h4 className="text-xs font-bold text-slate-200 uppercase tracking-widest">
+                <Sliders className="w-4 h-4 text-amber-600" />
+                <h4 className="text-xs font-bold text-slate-800 uppercase tracking-widest">
                   Pengujian Instan Tanpa File PDF (Rekomendasi)
                 </h4>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Tidak memiliki file PIB asli di komputer Anda? Jalankan algoritma simulasi generator PIB untuk mereplikasi proses AI.
               </p>
               <button
                 type="button"
                 onClick={() => runParser(true)}
                 disabled={isParsing}
-                className="w-full inline-flex items-center justify-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold py-2.5 px-4 rounded-xl cursor-pointer shadow-md shadow-amber-500/10 transition-all disabled:opacity-50"
+                className="w-full inline-flex items-center justify-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold py-2.5 px-4 rounded-xl cursor-pointer shadow-md shadow-amber-500/10 transition-all disabled:opacity-50"
               >
                 <Play className="w-3.5 h-3.5 fill-current" />
                 Simulasikan Unggah & Parsing PIB AML
@@ -328,7 +328,7 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
                 type="button"
                 onClick={() => runParser(false)}
                 disabled={isParsing}
-                className="w-full flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-lg transition-all disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all disabled:opacity-50"
               >
                 Start Gemini AI Extraction
               </button>
@@ -336,8 +336,8 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
 
             {/* Console logs */}
             {(isParsing || parseLog.length > 0) && (
-              <div className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 font-mono text-[10px] text-slate-350 space-y-1.5 max-h-[170px] overflow-y-auto">
-                <p className="text-[11px] font-bold text-teal-400 border-b border-slate-800 pb-1 flex justify-between">
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 font-mono text-[10px] text-slate-600 space-y-1.5 max-h-[170px] overflow-y-auto">
+                <p className="text-[11px] font-bold text-teal-600 border-b border-slate-200 pb-1 flex justify-between">
                   <span>SYSTEM_PIB_LOGGER:</span>
                   <span className="animate-pulse">{isParsing ? 'Mengekstrak...' : 'Siap'}</span>
                 </p>
@@ -361,61 +361,61 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 space-y-4"
+                className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm"
               >
-                <div className="flex items-center gap-2 border-b border-slate-700/60 pb-3 mb-2">
-                  <FileText className="w-5 h-5 text-teal-400" />
+                <div className="flex items-center gap-2 border-b border-slate-100 pb-3 mb-2">
+                  <FileText className="w-5 h-5 text-teal-650" />
                   <div>
-                    <h3 className="text-sm font-semibold text-white">Inspeksi & Simpan Hasil Rekap</h3>
-                    <p className="text-slate-400 text-[11px]">Silakan edit data jika ada rincian yang kurang presisi dari pembacaan AI.</p>
+                    <h3 className="text-sm font-semibold text-slate-800">Inspeksi & Simpan Hasil Rekap</h3>
+                    <p className="text-slate-500 text-[11px]">Silakan edit data jika ada rincian yang kurang presisi dari pembacaan AI.</p>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-400 mb-1.5">Nomor Pengajuan PIB</label>
+                      <label className="block text-xs font-semibold text-slate-500 mb-1.5">Nomor Pengajuan PIB</label>
                       <input 
                         type="text" 
                         value={noPengajuan}
                         onChange={(e) => setNoPengajuan(e.target.value)}
-                        className="w-full bg-slate-900 border border-slate-705 border-slate-700 rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-teal-500"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 text-xs focus:outline-none focus:border-teal-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-slate-400 mb-1.5">Nama Perusahaan Importir (Penerima)</label>
+                      <label className="block text-xs font-semibold text-slate-500 mb-1.5">Nama Perusahaan Importir (Penerima)</label>
                       <input 
                         type="text" 
                         value={importer}
                         onChange={(e) => setImporter(e.target.value)}
-                        className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-teal-500"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 text-xs focus:outline-none focus:border-teal-500"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-400 mb-1.5">Nomor Bill of Lading (B/L)</label>
+                      <label className="block text-xs font-semibold text-slate-500 mb-1.5">Nomor Bill of Lading (B/L)</label>
                       <input 
                         type="text" 
                         value={blNumber}
                         onChange={(e) => setBlNumber(e.target.value)}
-                        className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-teal-500"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 text-xs focus:outline-none focus:border-teal-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-slate-400 mb-1.5">Tanggal Bill of Lading</label>
+                      <label className="block text-xs font-semibold text-slate-500 mb-1.5">Tanggal Bill of Lading</label>
                       <input 
                         type="date" 
                         value={blDate}
                         onChange={(e) => setBlDate(e.target.value)}
-                        className="w-full bg-slate-900 border border-slate-700 border-slate-700/80 rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-teal-500"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 text-xs focus:outline-none focus:border-teal-500"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-1">
+                    <label className="block text-xs font-semibold text-slate-500 mb-1">
                       Nomor Container (Gunakan koma sebagai pemisah jika lebih dari 1)
                     </label>
                     <input 
@@ -423,7 +423,7 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
                       value={containersStr}
                       onChange={(e) => setContainersStr(e.target.value)}
                       placeholder="MSKU3001844, OOLU2228392"
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-teal-500"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 text-xs focus:outline-none focus:border-teal-500"
                     />
                     <p className="text-[10px] text-slate-500 mt-1">
                       * Seluruh kontainer yang dideteksi dibaca oleh Gemini dan dimasukkan sebagai list rilis terpisah.
@@ -431,7 +431,7 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-1">
+                    <label className="block text-xs font-semibold text-slate-500 mb-1">
                       Detail Uraian Barang (Dipisahkan baris baru, maks 5 jenis barang)
                     </label>
                     <textarea 
@@ -439,37 +439,37 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
                       value={uraianStr}
                       onChange={(e) => setUraianStr(e.target.value)}
                       placeholder="1. POLYURETHANE RAW PELLETS&#10;2. CHEMICAL CATALYST AGENTS"
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-teal-500 font-mono"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 text-xs focus:outline-none focus:border-teal-500 font-mono"
                     />
                     <p className="text-[10px] text-slate-500">
                       * Sesuai ketentuan, detail uraian barang dibatasi maksimal 5 jenis barang terpenting agar rekap ringkas.
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-700 flex justify-end gap-3">
+                  <div className="pt-4 border-t border-slate-150 flex justify-end gap-3">
                     <button
                       type="button"
                       onClick={() => setParsedData(null)}
-                      className="bg-slate-900 border border-slate-700 hover:bg-slate-950 text-xs font-semibold text-slate-300 py-2 px-4 rounded-xl"
+                      className="bg-slate-100 border border-slate-200 hover:bg-slate-200 text-xs font-semibold text-slate-600 py-2 px-4 rounded-xl"
                     >
                       Batal
                     </button>
                     <button
                       type="button"
                       onClick={handleSaveDocument}
-                      className="bg-teal-500 hover:bg-teal-400 text-slate-950 text-xs font-bold py-2 px-5 rounded-xl shadow-md cursor-pointer flex items-center gap-1.5"
+                      className="bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold py-2 px-5 rounded-xl shadow-md cursor-pointer flex items-center gap-1.5"
                     >
-                      <Plus className="w-3.5 h-3.5 text-slate-950" />
+                      <Plus className="w-3.5 h-3.5 text-white" />
                       Simpan Dokumen ke Portal
                     </button>
                   </div>
                 </div>
               </motion.div>
             ) : (
-              <div className="bg-slate-800/10 border border-slate-800/80 rounded-2xl p-12 text-center text-slate-500 min-h-[350px] flex flex-col items-center justify-center space-y-4">
-                <FileText className="w-12 h-12 text-slate-700" />
+              <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center text-slate-500 min-h-[350px] flex flex-col items-center justify-center space-y-4 shadow-sm">
+                <FileText className="w-12 h-12 text-slate-300" />
                 <div>
-                  <h4 className="text-slate-400 font-semibold text-sm">Menunggu Unggahan Dokumen</h4>
+                  <h4 className="text-slate-700 font-semibold text-sm">Menunggu Unggahan Dokumen</h4>
                   <p className="text-xs text-slate-500 max-w-sm mt-1 mx-auto leading-relaxed">
                     Data rekap akan langsung ditampilkan di panel kanan ini setelah dokumen diunggah dan dianalisis oleh Gemini AI model.
                   </p>
