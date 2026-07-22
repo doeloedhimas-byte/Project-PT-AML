@@ -166,29 +166,29 @@ export default function MonitoringTab({
     };
 
     return (
-      <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4 font-sans mt-3">
-        <div className="flex items-center gap-2 border-b border-slate-800/80 pb-2">
+      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4 font-sans mt-3">
+        <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
           <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" />
-          <span className="text-[11px] font-bold text-pink-400 uppercase tracking-widest pl-1">
+          <span className="text-[11px] font-bold text-pink-600 uppercase tracking-widest pl-1">
             Perjalanan Status Dokumen SPJM
           </span>
         </div>
 
-        <div className="space-y-4 relative pl-4 border-l border-slate-800 ml-2">
+        <div className="space-y-4 relative pl-4 border-l border-slate-200 ml-2">
           {SPJM_STEPS.map((step, idx) => {
             const isCompleted = idx < currentIdx;
             const isActive = idx === currentIdx;
             const isPending = idx > currentIdx;
 
-            let circleStyle = 'bg-slate-900 border-slate-800 text-slate-500';
+            let circleStyle = 'bg-slate-100 border-slate-200 text-slate-500';
             let labelStyle = 'text-slate-500 font-sans';
             
             if (isCompleted) {
-              circleStyle = 'bg-emerald-500/10 border-emerald-500/80 text-emerald-400';
-              labelStyle = 'text-slate-300 font-medium font-sans';
+              circleStyle = 'bg-emerald-50 border-emerald-300 text-emerald-700';
+              labelStyle = 'text-slate-700 font-medium font-sans';
             } else if (isActive) {
-              circleStyle = 'bg-pink-500/15 border-pink-500 text-pink-400 font-bold';
-              labelStyle = 'text-white font-bold font-sans';
+              circleStyle = 'bg-pink-50 border-pink-400 text-pink-700 font-bold';
+              labelStyle = 'text-slate-900 font-bold font-sans';
             }
 
             return (
@@ -202,7 +202,7 @@ export default function MonitoringTab({
                   <p className={`text-xs ${labelStyle} flex items-center gap-1.5`}>
                     {step.label}
                     {isActive && (
-                      <span className="text-[9px] bg-pink-500/10 px-1.5 py-0.5 rounded text-pink-400 font-semibold animate-pulse uppercase">
+                      <span className="text-[9px] bg-pink-100 px-1.5 py-0.5 rounded text-pink-700 font-semibold animate-pulse uppercase">
                         Active
                       </span>
                     )}
@@ -226,7 +226,7 @@ export default function MonitoringTab({
                           <button
                             type="button"
                             onClick={() => handleSetSPJMStep(SPJM_STEPS[currentIdx - 1].id)}
-                            className="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-[10px] px-3 py-1 rounded shadow cursor-pointer transition-colors uppercase font-bold tracking-wider flex items-center gap-1"
+                            className="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[10px] px-3 py-1 rounded shadow-sm cursor-pointer transition-colors uppercase font-bold tracking-wider flex items-center gap-1"
                           >
                             Cancel
                           </button>
@@ -260,7 +260,7 @@ export default function MonitoringTab({
                             <button
                               type="button"
                               onClick={() => handleSetSPJMStep(SPJM_STEPS[currentIdx - 1].id)}
-                              className="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-[10px] px-3 py-1 rounded shadow cursor-pointer transition-colors uppercase font-bold tracking-wider flex items-center gap-1"
+                              className="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[10px] px-3 py-1 rounded shadow-sm cursor-pointer transition-colors uppercase font-bold tracking-wider flex items-center gap-1"
                             >
                               Cancel
                             </button>
@@ -269,12 +269,12 @@ export default function MonitoringTab({
                             <button
                               type="button"
                               onClick={() => handleSetSPJMStep(step.id)}
-                              className="bg-pink-500 hover:bg-pink-400 text-slate-950 font-extrabold text-[10px] px-3 py-1 rounded shadow cursor-pointer transition-colors uppercase tracking-wider"
+                              className="bg-pink-600 hover:bg-pink-700 text-white font-extrabold text-[10px] px-3 py-1 rounded shadow-sm cursor-pointer transition-colors uppercase tracking-wider"
                             >
                               Done
                             </button>
                           ) : (
-                            <span className="text-[9px] bg-slate-900 border border-slate-800 text-slate-500 px-2 py-0.5 rounded italic font-mono uppercase">
+                            <span className="text-[9px] bg-slate-100 border border-slate-200 text-slate-500 px-2 py-0.5 rounded italic font-mono uppercase">
                               Terkunci ({step.roleAllowed === 'STAFF_AML' ? 'Staff Doc Only' : 'Staff Delivery Only'})
                             </span>
                           )}
@@ -289,11 +289,11 @@ export default function MonitoringTab({
         </div>
 
         {isSuperUser && currentIdx > 0 && (
-          <div className="pt-2 border-t border-slate-800/80 flex justify-end">
+          <div className="pt-2 border-t border-slate-200 flex justify-end">
             <button
               type="button"
               onClick={() => handleSetSPJMStep('SPJM')}
-              className="text-[9px] font-bold text-slate-500 hover:text-rose-400 transition-colors uppercase cursor-pointer"
+              className="text-[9px] font-bold text-slate-500 hover:text-rose-600 transition-colors uppercase cursor-pointer"
             >
               Reset SPJM Step Tracker
             </button>
@@ -1573,15 +1573,15 @@ export default function MonitoringTab({
                 initial={{ opacity: 0, x: 10 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0 }}
-                className="bg-slate-800/80 border border-slate-700/90 rounded-2xl p-6 shadow-xl space-y-6"
+                className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6"
               >
                 {/* Panel Header */}
-                <div className="flex items-start justify-between border-b border-slate-700/60 pb-3">
+                <div className="flex items-start justify-between border-b border-slate-200 pb-3">
                   <div>
-                    <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+                    <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                       Detail Status PIB dan PEB
                     </h4>
-                    <p className="text-slate-400 text-[10px] mt-0.5 font-mono">ID: {selectedDoc.id}</p>
+                    <p className="text-slate-500 text-[10px] mt-0.5 font-mono">ID: {selectedDoc.id}</p>
                   </div>
                   <div className="flex items-center gap-1.5">
                     {isSuperUser && (
@@ -1593,7 +1593,7 @@ export default function MonitoringTab({
                             setSelectedDoc(null);
                           }
                         }}
-                        className="p-1 px-2.5 py-1.5 bg-rose-500/10 border border-rose-500/20 hover:bg-rose-500/20 rounded-xl text-rose-455 text-rose-400 text-xs transition-colors flex items-center gap-1"
+                        className="p-1 px-2.5 py-1.5 bg-rose-50 border border-rose-200 hover:bg-rose-100 rounded-xl text-rose-700 text-xs transition-colors flex items-center gap-1 font-bold"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                         Hapus
@@ -1601,7 +1601,7 @@ export default function MonitoringTab({
                     )}
                     <button
                       onClick={() => setSelectedDoc(null)}
-                      className="text-xs text-slate-400 hover:text-white bg-slate-900 border border-slate-800 px-2 py-1 rounded"
+                      className="text-xs text-slate-600 hover:text-slate-900 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-lg font-bold transition-colors cursor-pointer"
                     >
                       Tutup
                     </button>
@@ -1611,17 +1611,17 @@ export default function MonitoringTab({
                 {/* Status progress overview */}
                 <div>
                   <div className="flex justify-between items-center text-xs font-semibold mb-2">
-                    <span className="text-slate-300">Status Saat Ini:</span>
+                    <span className="text-slate-700">Status Saat Ini:</span>
                     <span className={`px-2 py-0.5 rounded border text-[10px] font-bold ${getStatusBadge(selectedDoc.status)}`}>
                       {selectedDoc.status === 'Draft PIB' ? 'Draft PIB & PEB' : selectedDoc.status}
                     </span>
                   </div>
 
                   {/* Flow guide message depending on current status */}
-                  <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-3.5 text-xs text-slate-300 leading-relaxed mb-4">
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-xs text-slate-700 leading-relaxed mb-4">
                     {selectedDoc.status === 'Draft PIB' && (
                       <p>
-                        💡 <strong>Langkah Berikutnya:</strong> PIB ini baru saja direkap Gemini. Staff kantor perlu mengoordinasikan penerbitan billing kementerian Keuangan (DJBC). Silakan klik <span className="text-amber-400 font-bold">Terbitkan Billing</span> untuk merubah status.
+                        💡 <strong>Langkah Berikutnya:</strong> PIB ini baru saja direkap Gemini. Staff kantor perlu mengoordinasikan penerbitan billing kementerian Keuangan (DJBC). Silakan klik <span className="text-amber-700 font-bold">Terbitkan Billing</span> untuk merubah status.
                       </p>
                     )}
                     {selectedDoc.status === 'Billing DJBC' && (
@@ -1635,12 +1635,12 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { billingPaid: true });
                               setSelectedDoc({ ...selectedDoc, billingPaid: true });
                             }}
-                            className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1.5 rounded-lg text-[10px] cursor-pointer"
+                            className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-1.5 rounded-lg text-[10px] cursor-pointer shadow-sm"
                           >
                             Setujui Pelunasan Billing Importir
                           </button>
                         ) : (
-                          <div className="p-2 border border-emerald-500/20 bg-emerald-500/15 rounded text-[10px] text-emerald-400">
+                          <div className="p-2 border border-emerald-200 bg-emerald-50 rounded text-[10px] text-emerald-800 font-medium">
                             Pembayaran Bea Cukai telah divalidasi. Silakan tentukan Respon Resmi Beacukai di bawah untuk rilis kontainer.
                           </div>
                         )}
@@ -1648,8 +1648,8 @@ export default function MonitoringTab({
                     )}
                     {selectedDoc.status === 'SPJM' && (
                       <div className="space-y-2.5">
-                        <p className="text-pink-400 font-medium">⚠️ Jalur pemeriksaan fisik barang</p>
-                        <p className="text-[11px]">
+                        <p className="text-pink-700 font-bold">⚠️ Jalur pemeriksaan fisik barang</p>
+                        <p className="text-[11px] text-slate-600">
                           Kontainer wajib diperiksa oleh aparat Bea Cukai. Selesai pemeriksaan fisik, Bea Cukai akan menerbitkan respon final: SPPB atau SPTNP (Surat Penetapan Tarif/Nilai Pabean).
                         </p>
                         {renderSPJMJourney(selectedDoc)}
@@ -1659,7 +1659,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'SPPB' });
                               setSelectedDoc({ ...selectedDoc, status: 'SPPB' });
                             }}
-                            className="bg-indigo-500 hover:bg-indigo-400 text-white font-bold py-1 px-2 rounded-lg text-[10px] cursor-pointer"
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] cursor-pointer shadow-sm"
                           >
                             Release SPPB
                           </button>
@@ -1668,7 +1668,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'SPTNP', sptnpPaid: false });
                               setSelectedDoc({ ...selectedDoc, status: 'SPTNP', sptnpPaid: false });
                             }}
-                            className="bg-rose-550/10 border border-rose-500/20 hover:bg-rose-500/15 text-rose-400 font-bold py-1 px-2 rounded-lg text-[10px] cursor-pointer"
+                            className="bg-rose-50 border border-rose-200 hover:bg-rose-100 text-rose-700 font-bold py-1.5 px-2 rounded-lg text-[10px] cursor-pointer shadow-sm"
                           >
                             SPTNP
                           </button>
@@ -1677,8 +1677,8 @@ export default function MonitoringTab({
                     )}
                     {selectedDoc.status === 'SPTNP' && (
                       <div className="space-y-2.5">
-                        <p className="text-rose-400 font-bold">⚠️ Menunggu Pelunasan SPTNP</p>
-                        <p className="text-[11px]">
+                        <p className="text-rose-700 font-bold">⚠️ Menunggu Pelunasan SPTNP</p>
+                        <p className="text-[11px] text-slate-600">
                           Pembayaran tambahan Bea Masuk dari Importir wajib dilunasi terlebih dahulu.
                         </p>
                         {!selectedDoc.sptnpPaid ? (
@@ -1687,13 +1687,13 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { sptnpPaid: true });
                               setSelectedDoc({ ...selectedDoc, sptnpPaid: true });
                             }}
-                            className="w-full bg-rose-500 hover:bg-rose-400 text-white font-bold py-1.5 rounded-lg text-[10px] cursor-pointer"
+                            className="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-1.5 rounded-lg text-[10px] cursor-pointer shadow-sm"
                           >
                             Konfirmasi Pajak SPTNP Telah Dibayar
                           </button>
                         ) : (
                           <div className="space-y-2">
-                            <div className="p-1 px-2 border border-emerald-500/20 bg-emerald-500/15 rounded text-[10px] text-emerald-400 text-center font-bold">
+                            <div className="p-1 px-2 border border-emerald-200 bg-emerald-50 rounded text-[10px] text-emerald-800 text-center font-bold">
                               SPTNP LULUS PELUNASAN
                             </div>
                             <button
@@ -1701,7 +1701,7 @@ export default function MonitoringTab({
                                 onUpdateDocument(selectedDoc.id, { status: 'SPPB' });
                                 setSelectedDoc({ ...selectedDoc, status: 'SPPB' });
                               }}
-                              className="w-full bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold py-1.5 rounded-lg text-[10px] cursor-pointer"
+                              className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-1.5 rounded-lg text-[10px] cursor-pointer shadow-sm"
                             >
                               Selesaikan & Terbitkan SPPB Rilis
                             </button>
@@ -1711,8 +1711,8 @@ export default function MonitoringTab({
                     )}
                     {selectedDoc.status === 'NHI' && (
                       <div className="space-y-2.5">
-                        <p className="text-purple-400 font-bold">🕵️ Nota Hasil Intelijen (NHI)</p>
-                        <p className="text-[11px]">
+                        <p className="text-purple-700 font-bold">🕵️ Nota Hasil Intelijen (NHI)</p>
+                        <p className="text-[11px] text-slate-600">
                           Pemeriksaan mendalam atas kecurigaan khusus kepabeanan. Evaluasi keputusan instansi penegak hukum:
                         </p>
                         <div className="grid grid-cols-2 gap-2">
@@ -1721,7 +1721,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'SPPB' });
                               setSelectedDoc({ ...selectedDoc, status: 'SPPB' });
                             }}
-                            className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] cursor-pointer"
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] cursor-pointer shadow-sm"
                           >
                             Lulus (Set SPPB)
                           </button>
@@ -1730,7 +1730,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'SPBL' });
                               setSelectedDoc({ ...selectedDoc, status: 'SPBL' });
                             }}
-                            className="bg-red-500 hover:bg-red-400 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] cursor-pointer"
+                            className="bg-rose-600 hover:bg-rose-700 text-white font-bold py-1.5 px-2 rounded-lg text-[10px] cursor-pointer shadow-sm"
                           >
                             Re-Ekspor (SPBL)
                           </button>
@@ -1738,12 +1738,12 @@ export default function MonitoringTab({
                       </div>
                     )}
                     {selectedDoc.status === 'SPBL' && (
-                      <p className="text-rose-400">
+                      <p className="text-rose-700 font-bold">
                         🛑 <strong>Status Surat Bukti Larangan (SPBL):</strong> Kontainer dilarang masuk Indonesia dan wajib dikembalikan (re-ekspor) ke pelabuhan asal negara importir. Pengiriman dibekukan.
                       </p>
                     )}
                     {selectedDoc.status === 'SPPB' && (
-                      <p className="text-teal-400 font-medium">
+                      <p className="text-teal-700 font-medium">
                         🎉 Dokumen Resmi SPPB Rilis! Kontainer diizinkan keluar depo dan dikirim langsung ke gudang logistik importir.
                       </p>
                     )}
@@ -1753,7 +1753,7 @@ export default function MonitoringTab({
                 {/* ACTION MENU TRANSITION STATUS (Untuk Staff / Super User) */}
                 {(userRole === 'STAFF_AML' || isSuperUser) && (
                   <div className="space-y-3">
-                    <h5 className="text-xs font-semibold text-slate-300 uppercase tracking-widest pl-1">
+                    <h5 className="text-xs font-semibold text-slate-700 uppercase tracking-widest pl-1">
                       Ubah Status Berdasarkan Respon DJBC / Bea Cukai
                     </h5>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -1765,7 +1765,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'Billing DJBC' });
                               setSelectedDoc({ ...selectedDoc, status: 'Billing DJBC' });
                             }}
-                            className="flex items-center justify-center gap-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                            className="flex items-center justify-center gap-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                           >
                             <DollarSign className="w-3.5 h-3.5" />
                             Billing DJBC
@@ -1775,7 +1775,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'SPPB' });
                               setSelectedDoc({ ...selectedDoc, status: 'SPPB' });
                             }}
-                            className="flex items-center justify-center gap-1 bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 border border-teal-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                            className="flex items-center justify-center gap-1 bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                           >
                             <ShieldCheck className="w-3.5 h-3.5" />
                             SPPB
@@ -1785,7 +1785,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'SPJM' });
                               setSelectedDoc({ ...selectedDoc, status: 'SPJM' });
                             }}
-                            className="flex items-center justify-center gap-1 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                            className="flex items-center justify-center gap-1 bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                           >
                             <RefreshCw className="w-3.5 h-3.5" />
                             SPJM
@@ -1795,7 +1795,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'NHI' });
                               setSelectedDoc({ ...selectedDoc, status: 'NHI' });
                             }}
-                            className="flex items-center justify-center gap-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                            className="flex items-center justify-center gap-1 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                           >
                             <Layers className="w-3.5 h-3.5" />
                             NHI
@@ -1811,7 +1811,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'Draft PIB' });
                               setSelectedDoc({ ...selectedDoc, status: 'Draft PIB' });
                             }}
-                            className="flex items-center justify-center gap-1 bg-slate-500/10 hover:bg-slate-500/20 text-slate-300 border border-slate-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                            className="flex items-center justify-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                           >
                             <RefreshCw className="w-3.5 h-3.5" />
                             Ubah ke Draft
@@ -1821,7 +1821,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'SPPB' });
                               setSelectedDoc({ ...selectedDoc, status: 'SPPB' });
                             }}
-                            className="flex items-center justify-center gap-1 bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 border border-teal-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                            className="flex items-center justify-center gap-1 bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                           >
                             <ShieldCheck className="w-3.5 h-3.5" />
                             SPPB
@@ -1831,7 +1831,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'SPJM' });
                               setSelectedDoc({ ...selectedDoc, status: 'SPJM' });
                             }}
-                            className="flex items-center justify-center gap-1 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                            className="flex items-center justify-center gap-1 bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                           >
                             <RefreshCw className="w-3.5 h-3.5" />
                             SPJM
@@ -1841,7 +1841,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'NHI' });
                               setSelectedDoc({ ...selectedDoc, status: 'NHI' });
                             }}
-                            className="flex items-center justify-center gap-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                            className="flex items-center justify-center gap-1 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                           >
                             <Layers className="w-3.5 h-3.5" />
                             NHI
@@ -1857,7 +1857,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'Billing DJBC' });
                               setSelectedDoc({ ...selectedDoc, status: 'Billing DJBC' });
                             }}
-                            className="flex items-center justify-center gap-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                            className="flex items-center justify-center gap-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                           >
                             <DollarSign className="w-3.5 h-3.5" />
                             Ubah ke Billing
@@ -1867,7 +1867,7 @@ export default function MonitoringTab({
                               onUpdateDocument(selectedDoc.id, { status: 'Draft PIB' });
                               setSelectedDoc({ ...selectedDoc, status: 'Draft PIB' });
                             }}
-                            className="flex items-center justify-center gap-1 bg-slate-500/10 hover:bg-slate-500/20 text-slate-300 border border-slate-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                            className="flex items-center justify-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                           >
                             <RefreshCw className="w-3.5 h-3.5" />
                             Ubah ke Draft
@@ -1878,7 +1878,7 @@ export default function MonitoringTab({
                                 onUpdateDocument(selectedDoc.id, { status: 'SPPB' });
                                 setSelectedDoc({ ...selectedDoc, status: 'SPPB' });
                               }}
-                              className="flex items-center justify-center gap-1 bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 border border-teal-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                              className="flex items-center justify-center gap-1 bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                             >
                               <ShieldCheck className="w-3.5 h-3.5" />
                               SPPB
@@ -1890,7 +1890,7 @@ export default function MonitoringTab({
                                 onUpdateDocument(selectedDoc.id, { status: 'SPJM' });
                                 setSelectedDoc({ ...selectedDoc, status: 'SPJM' });
                               }}
-                              className="flex items-center justify-center gap-1 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                              className="flex items-center justify-center gap-1 bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                             >
                               <RefreshCw className="w-3.5 h-3.5" />
                               SPJM
@@ -1902,7 +1902,7 @@ export default function MonitoringTab({
                                 onUpdateDocument(selectedDoc.id, { status: 'NHI' });
                                 setSelectedDoc({ ...selectedDoc, status: 'NHI' });
                               }}
-                              className="flex items-center justify-center gap-1 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/20 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors"
+                              className="flex items-center justify-center gap-1 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 py-2 rounded-lg text-xs font-bold font-sans cursor-pointer transition-colors shadow-sm"
                             >
                               <Layers className="w-3.5 h-3.5" />
                               NHI
@@ -1916,113 +1916,113 @@ export default function MonitoringTab({
 
                 {/* DELIVERY PLANNING SECTION */}
                 {selectedDoc.status === 'SPPB' ? (
-                  <div className="border-t border-slate-700/60 pt-4 space-y-4">
+                  <div className="border-t border-slate-200 pt-4 space-y-4">
                     {(userRole === 'STAFF_AML' && !isSuperUser) && (
-                      <div className="bg-rose-500/10 border border-rose-500/20 text-rose-400 p-3 rounded-lg text-xs font-semibold mb-2 flex items-center gap-1.5 font-sans">
-                        <AlertTriangle className="w-4 h-4 text-rose-455 text-rose-400 flex-shrink-0" />
+                      <div className="bg-rose-50 border border-rose-200 text-rose-700 p-3 rounded-lg text-xs font-semibold mb-2 flex items-center gap-1.5 font-sans">
+                        <AlertTriangle className="w-4 h-4 text-rose-600 flex-shrink-0" />
                         <span>Akses Dibatasi: Hanya Staff Delivery / Super Power yang dapat mengisi Rencana & Rute Pengiriman.</span>
                       </div>
                     )}
                     <div className="flex items-center justify-between">
-                      <h5 className="text-xs font-bold text-slate-300 uppercase tracking-widest pl-1 flex items-center gap-1.5">
-                        <Truck className="w-4 h-4 text-teal-400" />
+                      <h5 className="text-xs font-bold text-slate-800 uppercase tracking-widest pl-1 flex items-center gap-1.5">
+                        <Truck className="w-4 h-4 text-teal-600" />
                         Rencana & Rute Pengiriman
                       </h5>
                       {selectedDoc.deliveryPlanned && (
                         <div className="flex items-center gap-1.5 flex-wrap">
                           {selectedDoc.deliveryInfo?.suratJalanDiterima && (
-                            <span className="bg-teal-500/10 border border-teal-500/20 text-teal-400 text-[10px] px-2 py-0.5 rounded uppercase font-bold flex items-center gap-1">
-                              <ShieldCheck className="w-3 h-3 text-teal-400" />
+                            <span className="bg-teal-50 border border-teal-200 text-teal-700 text-[10px] px-2 py-0.5 rounded uppercase font-bold flex items-center gap-1">
+                              <ShieldCheck className="w-3 h-3 text-teal-600" />
                               S.J Diterima Kantor
                             </span>
                           )}
-                          <span className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded uppercase font-bold">
+                          <span className="bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] px-2 py-0.5 rounded uppercase font-bold">
                             {selectedDoc.deliveryInfo?.status || 'Belum Dikirim'}
                           </span>
                         </div>
                       )}
                     </div>
 
-                    <div className="space-y-3.5 bg-slate-900/40 p-4 rounded-xl border border-slate-800">
+                    <div className="space-y-3.5 bg-slate-50 p-4 rounded-xl border border-slate-200">
                       <div>
-                        <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">Nomor Surat Jalan PT AML</label>
+                        <label className="block text-slate-700 text-[10px] font-bold uppercase tracking-wide mb-1">Nomor Surat Jalan PT AML</label>
                         <input
                           type="text"
                           value={deliveryNoteNumber}
                           onChange={(e) => setDeliveryNoteNumber(e.target.value)}
                           disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                          className="w-full bg-slate-905 bg-slate-900 border border-slate-755 border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 disabled:opacity-50 disabled:cursor-not-allowed focus:border-teal-500 outline-none"
                         />
                       </div>
 
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">Nama Supir Armada</label>
+                          <label className="block text-slate-700 text-[10px] font-bold uppercase tracking-wide mb-1">Nama Supir Armada</label>
                           <input
                             type="text"
                             placeholder="Contoh: Ahmad"
                             value={driverName}
                             onChange={(e) => setDriverName(e.target.value)}
                             disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                            className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 disabled:opacity-50 disabled:cursor-not-allowed focus:border-teal-500 outline-none"
                           />
                         </div>
                         <div>
-                          <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">No. HP Supir</label>
+                          <label className="block text-slate-700 text-[10px] font-bold uppercase tracking-wide mb-1">No. HP Supir</label>
                           <input
                             type="text"
                             placeholder="0812-xxxx"
                             value={driverPhone}
                             onChange={(e) => setDriverPhone(e.target.value)}
                             disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                            className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 disabled:opacity-50 disabled:cursor-not-allowed focus:border-teal-500 outline-none"
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">Plat Truk Container</label>
+                          <label className="block text-slate-700 text-[10px] font-bold uppercase tracking-wide mb-1">Plat Truk Container</label>
                           <input
                             type="text"
                             placeholder="B 9801 UTX"
                             value={plateNumber}
                             onChange={(e) => setPlateNumber(e.target.value)}
                             disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                            className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 disabled:opacity-50 disabled:cursor-not-allowed focus:border-teal-500 outline-none"
                           />
                         </div>
                         <div>
-                          <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">Tanggal Pengiriman</label>
+                          <label className="block text-slate-700 text-[10px] font-bold uppercase tracking-wide mb-1">Tanggal Pengiriman</label>
                           <input
                             type="date"
                             value={scheduledDate}
                             onChange={(e) => setScheduledDate(e.target.value)}
                             disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                            className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 disabled:opacity-50 disabled:cursor-not-allowed focus:border-teal-500 outline-none"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">Gudang / Pelabuhan Tujuan Importir</label>
+                        <label className="block text-slate-700 text-[10px] font-bold uppercase tracking-wide mb-1">Gudang / Pelabuhan Tujuan Importir</label>
                         <input
                           type="text"
                           placeholder="Jalan Industri No 12, Cikarang"
                           value={warehouseTarget}
                           onChange={(e) => setWarehouseTarget(e.target.value)}
                           disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 disabled:opacity-50 disabled:cursor-not-allowed focus:border-teal-500 outline-none"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-slate-400 text-[10px] font-bold uppercase tracking-wide mb-1">Nama Vendor Armada</label>
+                        <label className="block text-slate-700 text-[10px] font-bold uppercase tracking-wide mb-1">Nama Vendor Armada</label>
                         <select
                           value={vendorArmada}
                           onChange={(e) => setVendorArmada(e.target.value)}
                           disabled={userRole === 'STAFF_AML' && !isSuperUser}
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:border-pink-500"
+                          className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:border-teal-500 font-sans"
                         >
                           <option value="">-- Pilih Vendor Armada --</option>
                           {VENDOR_OPTIONS.map((opt) => (
@@ -2036,7 +2036,7 @@ export default function MonitoringTab({
                         <button
                           type="button"
                           onClick={handleSaveDeliveryInfo}
-                          className="w-full bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold py-2 rounded-lg text-xs cursor-pointer transition-colors flex items-center justify-center gap-1 font-sans"
+                          className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 rounded-lg text-xs cursor-pointer transition-colors flex items-center justify-center gap-1 font-sans shadow-sm"
                         >
                           <CheckCircle className="w-4 h-4" />
                           Simpan Rencana & Plot Jalan
@@ -2045,11 +2045,11 @@ export default function MonitoringTab({
 
                       {/* Print and Status controls on scheduled state */}
                       {selectedDoc.deliveryPlanned && (
-                        <div className="pt-2.5 border-t border-slate-800 space-y-3">
+                        <div className="pt-2.5 border-t border-slate-200 space-y-3">
                           <button
                             type="button"
                             onClick={() => handlePrintSuratJalan(selectedDoc, selectedDoc.containers[0] || '')}
-                            className="w-full border border-teal-500/30 bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 font-bold py-2 rounded-lg text-xs cursor-pointer transition-colors flex items-center justify-center gap-1.5"
+                            className="w-full border border-teal-200 bg-teal-50 hover:bg-teal-100 text-teal-800 font-bold py-2 rounded-lg text-xs cursor-pointer transition-colors flex items-center justify-center gap-1.5 shadow-sm"
                           >
                             <Printer className="w-4 h-4" />
                             Cetak Surat Jalan PT AML (Print PDF - Cont: {getContainerDisplay(selectedDoc.containers[0] || '')})
@@ -2057,14 +2057,14 @@ export default function MonitoringTab({
 
                           {/* Delivery status update triggers (Used primarily by DELIVERY staff) */}
                           <div className="space-y-1.5">
-                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-0.5">Kontrol Status Pengiriman Armada:</p>
+                            <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest pl-0.5">Kontrol Status Pengiriman Armada:</p>
                             <div className="grid grid-cols-3 gap-1.5">
                               <button
                                 onClick={() => updateDeliveryStatus('Delivery')}
                                 className={`py-1.5 rounded text-[10px] font-bold transition-all ${
                                   selectedDoc.deliveryInfo?.status === 'Delivery'
-                                    ? 'bg-sky-500 text-slate-950 font-extrabold'
-                                    : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                                    ? 'bg-sky-600 text-white font-extrabold'
+                                    : 'bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                                 }`}
                               >
                                 Delivery
@@ -2073,8 +2073,8 @@ export default function MonitoringTab({
                                 onClick={() => updateDeliveryStatus('Selesai')}
                                 className={`py-1.5 rounded text-[10px] font-bold transition-all ${
                                   selectedDoc.deliveryInfo?.status === 'Selesai'
-                                    ? 'bg-emerald-500 text-slate-950 font-extrabold'
-                                    : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                                    ? 'bg-emerald-600 text-white font-extrabold'
+                                    : 'bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                                 }`}
                               >
                                 Selesai
@@ -2083,8 +2083,8 @@ export default function MonitoringTab({
                                 onClick={() => updateDeliveryStatus('Dibatalkan')}
                                 className={`py-1.5 rounded text-[10px] font-bold transition-all ${
                                   selectedDoc.deliveryInfo?.status === 'Dibatalkan'
-                                    ? 'bg-rose-500 text-white font-extrabold'
-                                    : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                                    ? 'bg-rose-600 text-white font-extrabold'
+                                    : 'bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                                 }`}
                               >
                                 Batal
@@ -2092,14 +2092,14 @@ export default function MonitoringTab({
                             </div>
                             
                             {/* Surat Jalan Diterima Toggle Button */}
-                            <div className="pt-2.5 border-t border-slate-800/70 mt-2">
+                            <div className="pt-2.5 border-t border-slate-200 mt-2">
                               <button
                                 type="button"
                                 onClick={() => toggleSuratJalanDiterima()}
                                 className={`w-full py-1.5 rounded-lg text-[10px] font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 border ${
                                   selectedDoc.deliveryInfo?.suratJalanDiterima
-                                    ? 'bg-teal-500/10 border-teal-500/40 text-teal-400 font-extrabold shadow-sm'
-                                    : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-705'
+                                    ? 'bg-teal-50 border-teal-200 text-teal-800 font-extrabold shadow-sm'
+                                    : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                                 }`}
                               >
                                 <ShieldCheck className="w-3.5 h-3.5" />
@@ -2114,20 +2114,20 @@ export default function MonitoringTab({
                     </div>
                   </div>
                 ) : (
-                  <div className="bg-slate-900/40 p-4 border border-slate-800 rounded-xl flex items-center gap-3 text-xs text-rose-355 text-rose-450 border-rose-500/10 text-rose-300">
+                  <div className="bg-rose-50 p-4 border border-rose-200 rounded-xl flex items-center gap-3 text-xs text-rose-700">
                     <AlertTriangle className="w-5 h-5 flex-shrink-0" />
                     <div>
                       <p className="font-bold">Menunggu Release SPPB Bea Cukai</p>
-                      <p className="text-[11px] text-slate-400">Rencana pengiriman kontainer dan pencetakan Surat Jalan hanya dapat dilakukan setelah dokumen memperoleh respon final SPPB.</p>
+                      <p className="text-[11px] text-slate-600">Rencana pengiriman kontainer dan pencetakan Surat Jalan hanya dapat dilakukan setelah dokumen memperoleh respon final SPPB.</p>
                     </div>
                   </div>
                 )}
               </motion.div>
             ) : (
-              <div className="bg-slate-800/10 border border-slate-800/80 rounded-2xl p-8 text-center text-slate-500 min-h-[350px] flex flex-col items-center justify-center space-y-4">
-                <Shield className="w-12 h-12 text-slate-700" />
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8 text-center text-slate-500 min-h-[350px] flex flex-col items-center justify-center space-y-4">
+                <Shield className="w-12 h-12 text-slate-400" />
                 <div>
-                  <h4 className="text-slate-400 font-semibold text-sm">Menunggu Seleksi Dokumen</h4>
+                  <h4 className="text-slate-700 font-semibold text-sm">Menunggu Seleksi Dokumen</h4>
                   <p className="text-xs text-slate-500 max-w-xs mt-1 mx-auto leading-relaxed">
                     Silakan pilih salah satu dokumen di daftar sebelah kiri untuk memproses status Bea Cukai, merencanakan rute truk container, dan memvalidasi Surat Jalan PT AML.
                   </p>

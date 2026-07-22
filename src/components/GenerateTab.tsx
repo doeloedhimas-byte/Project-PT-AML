@@ -1629,30 +1629,30 @@ export default function GenerateTab({
   return (
     <div className="flex flex-col gap-6">
       {/* Top Banner */}
-      <div className="hidden bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xl relative overflow-hidden">
+      <div className="hidden bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-teal-500/5 rounded-full blur-3xl pointer-events-none"></div>
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 bg-emerald-950/40 text-emerald-400 border border-emerald-500/20 rounded-md text-[10px] font-bold tracking-wider uppercase">
+            <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-md text-[10px] font-bold tracking-wider uppercase">
               Google Workspace Engine
             </span>
             <span className="text-slate-500 text-xs font-mono">• Direct Google Sheets Integration</span>
           </div>
-          <h2 className="text-2xl font-bold text-white tracking-tight">
+          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
             Generate Laporan & Spreadsheet Terpadu
           </h2>
-          <p className="text-slate-400 text-sm max-w-xl">
+          <p className="text-slate-600 text-sm max-w-xl">
             Sistem pengumpulan rekap PIB, planning armada logistik, dan laporan supir langsung ke akun Google Sheets secara online.
           </p>
 
           {isGoogleAuthorized && (
-            <div className="flex items-center gap-2 text-xs text-emerald-400 bg-emerald-950/20 border border-emerald-900/30 rounded-xl px-3 py-1.5 font-mono max-w-fit mt-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+            <div className="flex items-center gap-2 text-xs text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-1.5 font-mono max-w-fit mt-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
               <span>Terhubung: <strong>{authorizedUser?.email || 'dhimas.agungmakmur@gmail.com'}</strong></span>
-              <span className="text-slate-700">|</span>
+              <span className="text-slate-300">|</span>
               <button 
                 onClick={handleDisconnectGoogle}
-                className="text-rose-450 text-rose-400 hover:text-rose-300 font-bold hover:underline cursor-pointer"
+                className="text-rose-600 hover:text-rose-700 font-bold hover:underline cursor-pointer"
               >
                 Disconnect
               </button>
@@ -1662,11 +1662,11 @@ export default function GenerateTab({
         <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={handleCopyToClipboard}
-            className="flex items-center gap-2 px-4 py-2.5 bg-slate-800 border border-slate-705 text-slate-300 hover:text-white hover:border-slate-600 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-sm"
+            className="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-sm"
           >
             {copied ? (
               <>
-                <Check className="w-4 h-4 text-emerald-400" />
+                <Check className="w-4 h-4 text-emerald-600" />
                 Copied to Clipboard!
               </>
             ) : (
@@ -1681,7 +1681,7 @@ export default function GenerateTab({
             <button
               onClick={handleExportToGoogleSheets}
               disabled={isExporting}
-              className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 text-white hover:bg-emerald-500 disabled:bg-slate-850 disabled:text-slate-500 font-bold rounded-xl text-xs transition-all cursor-pointer shadow-md shadow-emerald-500/10"
+              className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 text-white hover:bg-emerald-700 disabled:bg-slate-100 disabled:text-slate-400 font-bold rounded-xl text-xs transition-all cursor-pointer shadow-sm"
             >
               {isExporting ? (
                 <>
@@ -1754,33 +1754,33 @@ export default function GenerateTab({
           }}
           className={`p-5 rounded-2xl border transition-all flex flex-col justify-between h-40 group ${
             userRole === 'DELIVERY_AML' && !isSuperUser
-              ? 'opacity-40 cursor-not-allowed bg-slate-950 border-slate-900'
+              ? 'opacity-40 cursor-not-allowed bg-slate-100 border-slate-200'
               : activeReport === 'IMPORT'
-                ? 'bg-slate-800/40 border-teal-500/50 shadow-lg shadow-teal-500/5 cursor-pointer'
-                : 'bg-slate-900 border-slate-800 hover:border-slate-700/60 hover:bg-slate-850/60 cursor-pointer'
+                ? 'bg-teal-50/50 border-teal-500 shadow-sm cursor-pointer'
+                : 'bg-white border-slate-200 hover:border-teal-500/60 hover:bg-slate-50 cursor-pointer shadow-sm'
           }`}
         >
           <div className="space-y-1">
             <div className="flex items-center justify-between">
               <span className={`p-2 rounded-xl transition-all ${
-                activeReport === 'IMPORT' ? 'bg-teal-500/10 text-teal-400' : 'bg-slate-800 text-slate-400'
+                activeReport === 'IMPORT' ? 'bg-teal-500/10 text-teal-600' : 'bg-slate-100 text-slate-500'
               }`}>
                 <Ship className="w-5 h-5" />
               </span>
               {userRole === 'DELIVERY_AML' && !isSuperUser && (
-                <span className="text-[9px] font-bold text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20 flex items-center gap-1 font-sans">
+                <span className="text-[9px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded border border-rose-200 flex items-center gap-1 font-sans">
                   <Lock className="w-2.5 h-2.5" /> Akses Terbatas
                 </span>
               )}
             </div>
-            <h3 className={`font-bold mt-3 text-sm tracking-wide ${activeReport === 'IMPORT' ? 'text-teal-400' : 'text-slate-200'}`}>
+            <h3 className={`font-bold mt-3 text-sm tracking-wide ${activeReport === 'IMPORT' ? 'text-teal-600' : 'text-slate-800'}`}>
               Database Import & Export
             </h3>
             <p className="text-slate-500 text-xs line-clamp-2 leading-relaxed">
               PIB status, depo penitipan sementara, vendor depo, pengiriman final, dan validasi Surat Jalan.
             </p>
           </div>
-          <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 transition-colors uppercase pt-2">
+          <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-500 transition-colors uppercase pt-2">
             {userRole === 'DELIVERY_AML' && !isSuperUser ? 'Hanya Untuk Staff AML' : 'Lihat Grid Preview'}
             {!(userRole === 'DELIVERY_AML' && !isSuperUser) && <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />}
           </div>
@@ -1794,33 +1794,33 @@ export default function GenerateTab({
           }}
           className={`p-5 rounded-2xl border transition-all flex flex-col justify-between h-40 group ${
             userRole === 'DELIVERY_AML' && !isSuperUser
-              ? 'opacity-40 cursor-not-allowed bg-slate-950 border-slate-900'
+              ? 'opacity-40 cursor-not-allowed bg-slate-100 border-slate-200'
               : activeReport === 'DAILY_MEI'
-                ? 'bg-slate-800/40 border-teal-500/50 shadow-lg shadow-teal-500/5 cursor-pointer'
-                : 'bg-slate-900 border-slate-800 hover:border-slate-700/60 hover:bg-slate-850/60 cursor-pointer'
+                ? 'bg-rose-50/50 border-rose-500 shadow-sm cursor-pointer'
+                : 'bg-white border-slate-200 hover:border-rose-500/60 hover:bg-slate-50 cursor-pointer shadow-sm'
           }`}
         >
           <div className="space-y-1">
             <div className="flex items-center justify-between">
               <span className={`p-2 rounded-xl transition-all ${
-                activeReport === 'DAILY_MEI' ? 'bg-rose-500/10 text-rose-400' : 'bg-slate-800 text-slate-400'
+                activeReport === 'DAILY_MEI' ? 'bg-rose-500/10 text-rose-600' : 'bg-slate-100 text-slate-500'
               }`}>
                 <ClipboardList className="w-5 h-5" />
               </span>
               {userRole === 'DELIVERY_AML' && !isSuperUser && (
-                <span className="text-[9px] font-bold text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20 flex items-center gap-1 font-sans">
+                <span className="text-[9px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded border border-rose-200 flex items-center gap-1 font-sans">
                   <Lock className="w-2.5 h-2.5" /> Akses Terbatas
                 </span>
               )}
             </div>
-            <h3 className={`font-bold mt-3 text-sm tracking-wide ${activeReport === 'DAILY_MEI' ? 'text-rose-400' : 'text-slate-200'}`}>
+            <h3 className={`font-bold mt-3 text-sm tracking-wide ${activeReport === 'DAILY_MEI' ? 'text-rose-600' : 'text-slate-800'}`}>
               Database Daily Report PT MEI
             </h3>
             <p className="text-slate-500 text-xs line-clamp-2 leading-relaxed">
               Daily Report import khusus PT Midea Electronic Indonesia yang menampilkan nomor container, supir, plat nomor, dan status.
             </p>
           </div>
-          <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 transition-colors uppercase pt-2">
+          <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-500 transition-colors uppercase pt-2">
             {userRole === 'DELIVERY_AML' && !isSuperUser ? 'Hanya Untuk Staff AML' : 'Lihat Grid Preview'}
             {!(userRole === 'DELIVERY_AML' && !isSuperUser) && <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />}
           </div>
@@ -1831,26 +1831,26 @@ export default function GenerateTab({
           onClick={() => setActiveReport('DELIVERY')}
           className={`p-5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between h-40 group ${
             activeReport === 'DELIVERY'
-              ? 'bg-slate-800/40 border-teal-500/50 shadow-lg shadow-teal-500/5'
-              : 'bg-slate-900 border-slate-800 hover:border-slate-700/60 hover:bg-slate-850/60'
+              ? 'bg-amber-50/50 border-amber-500 shadow-sm'
+              : 'bg-white border-slate-200 hover:border-amber-500/60 hover:bg-slate-50 shadow-sm'
           }`}
         >
           <div className="space-y-1">
             <div className="flex items-center justify-between">
               <span className={`p-2 rounded-xl transition-all ${
-                activeReport === 'DELIVERY' ? 'bg-amber-500/10 text-amber-400' : 'bg-slate-800 text-slate-400'
+                activeReport === 'DELIVERY' ? 'bg-amber-500/10 text-amber-600' : 'bg-slate-100 text-slate-500'
               }`}>
                 <Truck className="w-5 h-5" />
               </span>
             </div>
-            <h3 className={`font-bold mt-3 text-sm tracking-wide ${activeReport === 'DELIVERY' ? 'text-amber-400' : 'text-slate-200'}`}>
+            <h3 className={`font-bold mt-3 text-sm tracking-wide ${activeReport === 'DELIVERY' ? 'text-amber-600' : 'text-slate-800'}`}>
               Database Delivery
             </h3>
             <p className="text-slate-500 text-xs line-clamp-2 leading-relaxed">
               Tanggal dispatch, lokasi penimbunan kontainer (TPS), lokasi bongkar, vendor pengiriman, dan remark supir.
             </p>
           </div>
-          <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 group-hover:text-slate-200 transition-colors uppercase pt-2">
+          <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-500 group-hover:text-slate-800 transition-colors uppercase pt-2">
             Lihat Grid Preview
             <ChevronRight className="w-3 h-3" />
           </div>
@@ -1858,44 +1858,44 @@ export default function GenerateTab({
       </div>
 
       {/* 5. Table Data Portal - Data Upload Dokumen */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl p-6 space-y-4 order-1">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-2 border-b border-slate-800">
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm p-6 space-y-4 order-1">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-2 border-b border-slate-200">
           <div className="space-y-1">
-            <h3 className="text-lg font-extrabold text-white tracking-tight flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-indigo-400" />
+            <h3 className="text-lg font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+              <CheckCircle2 className="w-5 h-5 text-indigo-600" />
               Data Upload Dokumen
             </h3>
-            <p className="text-slate-400 text-xs">
+            <p className="text-slate-500 text-xs">
               Portal data kontainer yang berhasil terpilih dan di-upload dari tab <strong>Preview Data</strong>. Siap ditransfer secara sinkron ke Google Sheets.
             </p>
           </div>
-          <div className="text-xs font-mono text-slate-400 bg-slate-950 px-3.5 py-1.5 rounded-xl border border-slate-800">
-            Total Dokumen Upload: <strong className="text-indigo-400">{uploadedPortalRows.length}</strong>
+          <div className="text-xs font-mono text-slate-600 bg-slate-100 px-3.5 py-1.5 rounded-xl border border-slate-200">
+            Total Dokumen Upload: <strong className="text-indigo-600">{uploadedPortalRows.length}</strong>
           </div>
         </div>        {showSuccessExportMsg && uploadedPortalRows.length === 0 ? (
-          <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-8 flex flex-col items-center justify-center text-center gap-3">
-            <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center shadow-lg">
+          <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-8 flex flex-col items-center justify-center text-center gap-3">
+            <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center shadow-sm">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <div className="space-y-1">
-              <h4 className="text-emerald-400 font-extrabold text-lg tracking-wide">Success export</h4>
-              <p className="text-slate-300 text-sm max-w-md mx-auto">
+              <h4 className="text-emerald-700 font-extrabold text-lg tracking-wide">Success export</h4>
+              <p className="text-slate-600 text-sm max-w-md mx-auto">
                 Seluruh data dokumen berhasil diekspor ke dalam 2 database utama secara sinkron dan real-time.
               </p>
             </div>
             <button
               onClick={() => setShowSuccessExportMsg(false)}
-              className="mt-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-xs rounded-xl shadow transition-all uppercase tracking-wider cursor-pointer"
+              className="mt-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow transition-all uppercase tracking-wider cursor-pointer"
             >
               Mengerti
             </button>
           </div>
         ) : (
           /* The Upload List Table */
-          <div className="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950/40">
+          <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
             <table className="w-full border-collapse text-left text-xs">
               <thead>
-                <tr className="bg-slate-950 text-slate-300 divide-x divide-slate-800 font-bold uppercase tracking-wider text-[10px]">
+                <tr className="bg-slate-100 text-slate-700 divide-x divide-slate-200 font-bold uppercase tracking-wider text-[10px]">
                   <th className="px-3 py-3.5 text-center w-12 font-bold">No</th>
                   <th className="px-4 py-3.5 text-center font-bold">NO AJU</th>
                   <th className="px-4 py-3.5 text-center font-bold">Nama Importir</th>
@@ -1913,33 +1913,33 @@ export default function GenerateTab({
                   <th className="px-4 py-3.5 text-center font-bold">REMARK</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800 bg-slate-900/10">
+              <tbody className="divide-y divide-slate-200 bg-white">
                 {uploadedPortalRows.length > 0 ? (
                   uploadedPortalRows.map((row, index) => (
-                    <tr key={row.key} className="hover:bg-slate-800/20 transition-colors duration-150 divide-x divide-slate-800/40">
-                      <td className="px-3 py-3 text-center text-slate-400 font-mono">{index + 1}</td>
-                      <td className="px-4 py-3 font-mono font-bold text-slate-300 text-center" title={`No Aju Lengkap: ${row.nomorPengajuan}`}>
+                    <tr key={row.key} className="hover:bg-slate-50 transition-colors duration-150 divide-x divide-slate-200">
+                      <td className="px-3 py-3 text-center text-slate-500 font-mono">{index + 1}</td>
+                      <td className="px-4 py-3 font-mono font-bold text-slate-800 text-center" title={`No Aju Lengkap: ${row.nomorPengajuan}`}>
                         {row.nomorPengajuan && row.nomorPengajuan !== '-' 
                           ? (row.nomorPengajuan.length > 5 ? row.nomorPengajuan.slice(-5) : row.nomorPengajuan) 
                           : '-'
                         }
                       </td>
-                      <td className="px-4 py-3 text-slate-300 font-medium">{row.namaImportir}</td>
-                      <td className="px-4 py-3 text-slate-200 font-bold font-mono">{row.nomorContainer}</td>
-                      <td className="px-4 py-3 text-slate-300 font-mono text-center">{row.tanggalBilling}</td>
-                      <td className="px-4 py-3 text-slate-300 font-mono text-center">{row.tanggalSppb}</td>
-                      <td className="px-4 py-3 text-slate-300 font-mono text-center">{row.tanggalPengiriman}</td>
-                      <td className="px-4 py-3 text-slate-300">{row.tempatPenimbunan}</td>
-                      <td className="px-4 py-3 text-slate-300 font-medium">{row.lokasiBongkar}</td>
-                      <td className="px-4 py-3 text-slate-300">{row.vendorArmada}</td>
-                      <td className="px-4 py-3 text-slate-300">{row.namaSupirArmada}</td>
+                      <td className="px-4 py-3 text-slate-700 font-medium">{row.namaImportir}</td>
+                      <td className="px-4 py-3 text-slate-900 font-bold font-mono">{row.nomorContainer}</td>
+                      <td className="px-4 py-3 text-slate-700 font-mono text-center">{row.tanggalBilling}</td>
+                      <td className="px-4 py-3 text-slate-700 font-mono text-center">{row.tanggalSppb}</td>
+                      <td className="px-4 py-3 text-slate-700 font-mono text-center">{row.tanggalPengiriman}</td>
+                      <td className="px-4 py-3 text-slate-700">{row.tempatPenimbunan}</td>
+                      <td className="px-4 py-3 text-slate-700 font-medium">{row.lokasiBongkar}</td>
+                      <td className="px-4 py-3 text-slate-700">{row.vendorArmada}</td>
+                      <td className="px-4 py-3 text-slate-700">{row.namaSupirArmada}</td>
                       <td className="px-4 py-3 text-center">
                         <span className={`px-2 py-1 rounded-full text-[9px] font-bold ${
                           row.statusPengirimanContainer === 'Selesai Bongkar' || row.statusPengirimanContainer === 'Selesai'
-                            ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                             : row.statusPengirimanContainer === 'Delivery'
-                              ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
-                              : 'bg-slate-800 text-slate-450 border border-slate-700/60'
+                              ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                              : 'bg-slate-100 text-slate-600 border border-slate-200'
                         }`}>
                           {row.statusPengirimanContainer}
                         </span>
@@ -1947,16 +1947,16 @@ export default function GenerateTab({
                       <td className="px-4 py-3 text-center">
                         <span className={`px-2.5 py-1 rounded-full text-[9px] font-extrabold uppercase ${
                           row.suratJalan === 'Sudah Diterima'
-                            ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
-                            : 'bg-rose-500/15 text-rose-450 text-rose-450 border border-rose-500/30'
+                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                            : 'bg-rose-50 text-rose-700 border border-rose-200'
                         }`}>
                           {row.suratJalan}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-slate-300 font-sans truncate max-w-[150px]" title={row.detailBarang}>
+                      <td className="px-4 py-3 text-slate-700 font-sans truncate max-w-[150px]" title={row.detailBarang}>
                         {row.detailBarang}
                       </td>
-                      <td className="px-4 py-3 text-slate-400 font-sans italic truncate max-w-[120px]" title={row.remark}>
+                      <td className="px-4 py-3 text-slate-500 font-sans italic truncate max-w-[120px]" title={row.remark}>
                         {row.remark}
                       </td>
                     </tr>
@@ -1965,8 +1965,8 @@ export default function GenerateTab({
                   <tr>
                     <td colSpan={15} className="px-6 py-12 text-center text-slate-500">
                       <div className="flex flex-col items-center justify-center space-y-2">
-                        <AlertCircle className="w-8 h-8 text-slate-600" />
-                        <p className="font-bold text-slate-400 text-sm">Belum ada data dokumen yang berhasil di-upload.</p>
+                        <AlertCircle className="w-8 h-8 text-slate-400" />
+                        <p className="font-bold text-slate-700 text-sm">Belum ada data dokumen yang berhasil di-upload.</p>
                         <p className="text-slate-500 text-xs">Silakan menuju ke tab <strong>Preview Data</strong>, beri checklist pada data, dan tekan tombol <strong>Upload Data</strong>.</p>
                       </div>
                     </td>
@@ -1978,16 +1978,16 @@ export default function GenerateTab({
         )}
 
         {/* 6. Feature to export to google sheet with dhimas.agungmakmur@gmail.com */}
-        <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-5 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1.5 flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <p className="font-bold text-white text-sm">Export Google Sheets</p>
-              <span className="text-[10px] bg-indigo-500/15 text-indigo-400 border border-indigo-500/20 rounded-md px-2.5 py-0.5 font-bold font-mono">
+              <p className="font-bold text-slate-800 text-sm">Export Google Sheets</p>
+              <span className="text-[10px] bg-indigo-50 text-indigo-700 border border-indigo-200 rounded-md px-2.5 py-0.5 font-bold font-mono">
                 dhimas.agungmakmur@gmail.com
               </span>
             </div>
-            <p className="text-slate-450 text-slate-400 text-xs max-w-xl">
+            <p className="text-slate-600 text-xs max-w-xl">
               Tekan tombol export di samping untuk mentransfer dan menyinkronkan seluruh data upload ke dalam 2 templat file Google Spreadsheet di Google Drive Anda secara bersamaan.
             </p>
           </div>
@@ -1996,19 +1996,19 @@ export default function GenerateTab({
             {!isGoogleAuthorized ? (
               <button
                 onClick={handleAuthorizeGoogle}
-                className="flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto bg-teal-500 hover:bg-teal-400 text-slate-950 font-extrabold uppercase tracking-wider text-[11px] rounded-xl transition-all cursor-pointer shadow-lg shadow-teal-500/10 active:scale-98"
+                className="flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto bg-teal-600 hover:bg-teal-700 text-white font-extrabold uppercase tracking-wider text-[11px] rounded-xl transition-all cursor-pointer shadow-sm active:scale-98"
               >
-                <Cloud className="w-4 h-4 text-slate-950" />
+                <Cloud className="w-4 h-4 text-white" />
                 Hubungkan Akun Google
               </button>
             ) : (
               <button
                 onClick={handleExportAllToGoogleSheets}
                 disabled={isExportingAll || uploadedPortalRows.length === 0}
-                className={`flex items-center justify-center gap-2 px-6 py-3 w-full sm:w-auto font-extrabold uppercase tracking-widest text-[11px] rounded-xl transition-all cursor-pointer shadow-lg active:scale-98 ${
+                className={`flex items-center justify-center gap-2 px-6 py-3 w-full sm:w-auto font-extrabold uppercase tracking-widest text-[11px] rounded-xl transition-all cursor-pointer shadow-sm active:scale-98 ${
                   uploadedPortalRows.length > 0
-                    ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-600/20'
-                    : 'bg-slate-900 text-slate-500 border border-slate-800 cursor-not-allowed'
+                    ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/10'
+                    : 'bg-slate-200 text-slate-400 border border-slate-300 cursor-not-allowed'
                 }`}
               >
                 {isExportingAll ? (
@@ -2029,39 +2029,39 @@ export default function GenerateTab({
 
         {/* 7. Export division status checklist */}
         {isGoogleAuthorized && (isExportingAll || Object.keys(batchExportStatus).length > 0) && (
-          <div className="bg-slate-950/40 border border-slate-800/80 rounded-xl p-4.5 space-y-3.5">
-            <h5 className="font-bold text-slate-300 text-xs uppercase tracking-wider">Status Sinkronisasi Google Sheets</h5>
+          <div className="bg-slate-50 border border-slate-200 rounded-xl p-4.5 space-y-3.5">
+            <h5 className="font-bold text-slate-700 text-xs uppercase tracking-wider">Status Sinkronisasi Google Sheets</h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Box 1 */}
-              <div className="bg-slate-900/60 p-3.5 rounded-xl border border-slate-800/60 flex items-center justify-between text-xs font-semibold">
+              <div className="bg-white p-3.5 rounded-xl border border-slate-200 flex items-center justify-between text-xs font-semibold shadow-sm">
                 <div className="space-y-1">
-                  <p className="text-white font-bold">1. Data Import and Export</p>
+                  <p className="text-slate-800 font-bold">1. Data Import and Export</p>
                   <p className="text-[10px] text-slate-500 font-mono">File: Data Import and Export (Data Import)</p>
                   {batchUrls.IMPORT && (
-                    <a href={batchUrls.IMPORT} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 font-bold underline inline-flex items-center gap-1 text-[10px] mt-1">
+                    <a href={batchUrls.IMPORT} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-700 font-bold underline inline-flex items-center gap-1 text-[10px] mt-1">
                       Buka Sheet <ExternalLink className="w-3 h-3" />
                     </a>
                   )}
                 </div>
                 {batchExportStatus.IMPORT === 'pending' && <RefreshCw className="w-4 h-4 text-amber-500 animate-spin" />}
-                {batchExportStatus.IMPORT === 'success' && <div className="bg-emerald-500/15 text-emerald-400 px-2 py-0.5 rounded text-[10px]">Success</div>}
-                {batchExportStatus.IMPORT === 'error' && <div className="bg-rose-500/15 text-rose-450 px-2 py-0.5 rounded text-[10px]">Error</div>}
+                {batchExportStatus.IMPORT === 'success' && <div className="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded text-[10px]">Success</div>}
+                {batchExportStatus.IMPORT === 'error' && <div className="bg-rose-50 text-rose-700 px-2 py-0.5 rounded text-[10px]">Error</div>}
               </div>
 
               {/* Box 2 */}
-              <div className="bg-slate-900/60 p-3.5 rounded-xl border border-slate-800/60 flex items-center justify-between text-xs font-semibold">
+              <div className="bg-white p-3.5 rounded-xl border border-slate-200 flex items-center justify-between text-xs font-semibold shadow-sm">
                 <div className="space-y-1">
-                  <p className="text-white font-bold">2. Data Daily Report PT MEI</p>
+                  <p className="text-slate-800 font-bold">2. Data Daily Report PT MEI</p>
                   <p className="text-[10px] text-slate-500 font-mono">File: Data Daily Report PT MEI (Daily Report MEI)</p>
                   {batchUrls.DAILY_MEI && (
-                    <a href={batchUrls.DAILY_MEI} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 font-bold underline inline-flex items-center gap-1 text-[10px] mt-1">
+                    <a href={batchUrls.DAILY_MEI} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-700 font-bold underline inline-flex items-center gap-1 text-[10px] mt-1">
                       Buka Sheet <ExternalLink className="w-3 h-3" />
                     </a>
                   )}
                 </div>
                 {batchExportStatus.DAILY_MEI === 'pending' && <RefreshCw className="w-4 h-4 text-amber-500 animate-spin" />}
-                {batchExportStatus.DAILY_MEI === 'success' && <div className="bg-emerald-500/15 text-emerald-400 px-2 py-0.5 rounded text-[10px]">Success</div>}
-                {batchExportStatus.DAILY_MEI === 'error' && <div className="bg-rose-500/15 text-rose-450 px-2 py-0.5 rounded text-[10px]">Error</div>}
+                {batchExportStatus.DAILY_MEI === 'success' && <div className="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded text-[10px]">Success</div>}
+                {batchExportStatus.DAILY_MEI === 'error' && <div className="bg-rose-50 text-rose-700 px-2 py-0.5 rounded text-[10px]">Error</div>}
               </div>
             </div>
           </div>
@@ -2069,10 +2069,10 @@ export default function GenerateTab({
       </div>
 
       {/* Spreadsheet Control bar */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg p-5 order-3">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm p-5 order-3">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
           <div className="space-y-1">
-            <h4 className="font-bold text-white text-md flex items-center gap-2">
+            <h4 className="font-bold text-slate-800 text-md flex items-center gap-2">
               <span className={`w-2.5 h-2.5 rounded-full ${
                 activeReport === 'IMPORT' ? 'bg-teal-500' : activeReport === 'DELIVERY' ? 'bg-amber-500' : 'bg-rose-500'
               } ${activeReport === 'DELIVERY' ? 'bg-amber-500' : ''}`}></span>
@@ -2082,10 +2082,10 @@ export default function GenerateTab({
                   ? 'Excel Preview Database : Database Delivery' 
                   : 'Daily Report PT Midea Electronic Indonesia'}
             </h4>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px] text-slate-500">
               *Klik ganda pada sel untuk menyunting nilai secara langsung sebelum diunduh ke format Spreadsheet Excel.
             </p>
-            <p className="text-[10px] text-emerald-400/90 font-mono mt-0.5">
+            <p className="text-[10px] text-teal-700 font-mono mt-0.5">
               • Sinkronisasi aktif dengan Google Spreadsheet "{activeReport === 'IMPORT' ? 'Data Import and Export' : activeReport === 'DELIVERY' ? 'Data Delivery Plan' : 'Data Daily Report PT MEI'}" (dhimas.agungmakmur@gmail.com)
             </p>
           </div>
@@ -2093,7 +2093,7 @@ export default function GenerateTab({
             <button
               onClick={() => handleRefreshFromSpreadsheet(false)}
               disabled={isRefreshing}
-              className="flex items-center gap-2 px-4 py-2 bg-teal-500/10 text-teal-400 border border-teal-500/25 hover:bg-teal-500/20 disabled:opacity-50 font-bold rounded-xl text-xs transition-all cursor-pointer shadow-sm shadow-teal-500/5 whitespace-nowrap"
+              className="flex items-center gap-2 px-4 py-2 bg-teal-50 text-teal-700 border border-teal-200 hover:bg-teal-100 disabled:opacity-50 font-bold rounded-xl text-xs transition-all cursor-pointer shadow-sm whitespace-nowrap"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin' : ''}`} />
               {isRefreshing ? 'Merefresh...' : 'Refresh Data'}
@@ -2102,13 +2102,13 @@ export default function GenerateTab({
         </div>
 
         {/* Calendar and Search Filter Row */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 py-4 border-b border-slate-800/60 font-sans">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 py-4 border-b border-slate-200 font-sans">
           {/* Calendar Picker or Limit Controller */}
           {activeReport === 'DELIVERY' ? (
             <div className="flex flex-col sm:flex-row sm:items-center gap-3">
               <div className="flex items-center gap-2 flex-shrink-0">
-                <Calendar className="w-4 h-4 text-amber-500" />
-                <span className="text-xs font-bold text-slate-300 uppercase tracking-wide">
+                <Calendar className="w-4 h-4 text-amber-600" />
+                <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">
                   Tanggal Pengiriman:
                 </span>
               </div>
@@ -2119,7 +2119,7 @@ export default function GenerateTab({
                   type="date"
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
-                  className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-white outline-none focus:border-amber-500 transition-colors font-mono font-bold"
+                  className="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-amber-500 transition-colors font-mono font-bold"
                 />
 
                 {/* Quick Pills */}
@@ -2129,8 +2129,8 @@ export default function GenerateTab({
                     onClick={() => setSelectedDate('')}
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold tracking-wider uppercase transition-all cursor-pointer ${
                       selectedDate === ''
-                        ? 'bg-amber-500 text-slate-950 shadow'
-                        : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
+                        ? 'bg-amber-500 text-white shadow'
+                        : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200'
                     }`}
                   >
                     Semua
@@ -2140,8 +2140,8 @@ export default function GenerateTab({
                     onClick={() => setSelectedDate(todayStr)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold tracking-wider uppercase transition-all cursor-pointer ${
                       selectedDate === todayStr
-                        ? 'bg-amber-500 text-slate-950 shadow'
-                        : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
+                        ? 'bg-amber-500 text-white shadow'
+                        : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200'
                     }`}
                   >
                     Today
@@ -2151,8 +2151,8 @@ export default function GenerateTab({
                     onClick={() => setSelectedDate(yesterdayStr)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold tracking-wider uppercase transition-all cursor-pointer ${
                       selectedDate === yesterdayStr
-                        ? 'bg-amber-500 text-slate-950 shadow'
-                        : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
+                        ? 'bg-amber-500 text-white shadow'
+                        : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200'
                     }`}
                   >
                     Yesterday
@@ -2161,7 +2161,7 @@ export default function GenerateTab({
                     <button
                       type="button"
                       onClick={() => setSelectedDate('')}
-                      className="p-1.5 hover:bg-slate-800 rounded-lg text-rose-400 hover:text-rose-300 transition-colors flex items-center justify-center"
+                      className="p-1.5 hover:bg-slate-100 rounded-lg text-rose-500 hover:text-rose-600 transition-colors flex items-center justify-center"
                       title="Hapus Filter Tanggal"
                     >
                       <X className="w-3.5 h-3.5" />
@@ -2172,7 +2172,7 @@ export default function GenerateTab({
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold text-slate-400">
+              <span className="text-xs font-semibold text-slate-600">
                 {activeReport === 'IMPORT' ? 'Database Import & Export' : 'Database Daily Report PT Midea Electronic Indonesia'}
               </span>
             </div>
@@ -2181,7 +2181,7 @@ export default function GenerateTab({
           {/* Search bar & reset */}
           <div className="flex items-center gap-3">
             <div className="relative w-64">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 pointer-events-none">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
                 <Search className="w-3.5 h-3.5" />
               </span>
               <input
@@ -2189,7 +2189,7 @@ export default function GenerateTab({
                 placeholder="Cari kata kunci..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl py-1.5 pl-9 pr-3 text-xs font-semibold text-slate-300 placeholder-slate-500 focus:border-teal-500 outline-none transition-colors"
+                className="w-full bg-white border border-slate-200 rounded-xl py-1.5 pl-9 pr-3 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:border-teal-500 outline-none transition-colors"
               />
             </div>
             
@@ -2198,7 +2198,7 @@ export default function GenerateTab({
                 setSearchTerm('');
                 setSelectedDate('');
               }}
-              className="px-3 py-1.5 bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white rounded-xl text-xs font-bold whitespace-nowrap cursor-pointer transition-colors"
+              className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold whitespace-nowrap cursor-pointer transition-colors"
               title="Reset Semua Filter"
             >
               Reset Filter
@@ -2208,14 +2208,14 @@ export default function GenerateTab({
 
         {/* Spreadsheet Data Grid */}
         <div className="overflow-x-auto mt-4 max-h-[480px]">
-          <table className="w-full text-left border-collapse border border-slate-800 font-sans text-xs">
+          <table className="w-full text-left border-collapse border border-slate-200 font-sans text-xs">
             <thead>
-              <tr className="bg-slate-950/80 text-slate-300 font-bold uppercase tracking-wider divide-x divide-slate-800">
+              <tr className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider divide-x divide-slate-200">
                 {activeReport === 'DELIVERY' && (
-                  <th className="px-3 py-3 w-12 text-center border-b border-slate-800 select-none">
+                  <th className="px-3 py-3 w-12 text-center border-b border-slate-200 select-none">
                     <input 
                       type="checkbox"
-                      className="accent-amber-500 cursor-pointer w-4 h-4 rounded border-slate-850"
+                      className="accent-amber-500 cursor-pointer w-4 h-4 rounded border-slate-300"
                       checked={displayRows.length > 0 && displayRows.every(row => selectedDeliveryRowKeys.includes(getRowKey(row)))}
                       onChange={(e) => {
                         if (e.target.checked) {
@@ -2235,10 +2235,10 @@ export default function GenerateTab({
                 {columns[activeReport].map((col) => (
                   <th 
                     key={col.key} 
-                    className={`px-4 py-3 border-b border-slate-800 text-[10px] select-none ${
+                    className={`px-4 py-3 border-b border-slate-200 text-[10px] select-none ${
                       activeReport === 'DELIVERY'
-                        ? 'font-bold text-center text-slate-200'
-                        : 'font-mono text-slate-400'
+                        ? 'font-bold text-center text-slate-800'
+                        : 'font-mono text-slate-600'
                     }`}
                   >
                     {col.label}
@@ -2246,7 +2246,7 @@ export default function GenerateTab({
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800">
+            <tbody className="divide-y divide-slate-200 bg-white">
               {displayRows.length > 0 ? (
                 displayRows.map((row, rIdx) => {
                   const rKey = getRowKey(row);
@@ -2254,8 +2254,8 @@ export default function GenerateTab({
                   return (
                     <tr 
                       key={rIdx} 
-                      className={`hover:bg-slate-800/30 transition-colors group divide-x divide-slate-800 ${
-                        isSelected && activeReport === 'DELIVERY' ? 'bg-amber-500/5' : ''
+                      className={`hover:bg-slate-50 transition-colors group divide-x divide-slate-200 ${
+                        isSelected && activeReport === 'DELIVERY' ? 'bg-amber-500/10' : ''
                       }`}
                     >
                       {activeReport === 'DELIVERY' && (
@@ -2287,8 +2287,8 @@ export default function GenerateTab({
                         <td 
                           key={col.key} 
                           rowSpan={rowSpan}
-                          className={`px-4 py-2.5 text-slate-300 cursor-text transition-all align-middle ${
-                            isEdited ? 'bg-teal-950/40 text-white p-0' : 'hover:bg-teal-500/5'
+                          className={`px-4 py-2.5 text-slate-800 cursor-text transition-all align-middle ${
+                            isEdited ? 'bg-teal-50 text-slate-900 p-0' : 'hover:bg-teal-50/50'
                           }`}
                           onDoubleClick={() => {
                             setEditedCell({ rowRef: row, columnKey: col.key });
@@ -2330,7 +2330,7 @@ export default function GenerateTab({
                                 }}
                                 onBlur={handleCellBlur}
                                 autoFocus
-                                className="w-full bg-slate-900 border border-teal-500 text-teal-400 font-bold px-2 py-1 rounded outline-none font-sans text-xs min-w-[130px]"
+                                className="w-full bg-white border border-teal-500 text-teal-700 font-bold px-2 py-1 rounded outline-none font-sans text-xs min-w-[130px]"
                               >
                                 {!['Depo JARIO', 'Depo SJP', 'Depo Lainnya'].includes(tempValue) && (
                                   <option value={tempValue}>{tempValue || '-- Pilih Depo --'}</option>
@@ -2367,7 +2367,7 @@ export default function GenerateTab({
                                 }}
                                 onBlur={handleCellBlur}
                                 autoFocus
-                                className="w-full bg-slate-900 border border-teal-500 text-teal-400 font-bold px-2 py-1 rounded outline-none font-sans text-xs min-w-[150px]"
+                                className="w-full bg-white border border-teal-500 text-teal-700 font-bold px-2 py-1 rounded outline-none font-sans text-xs min-w-[150px]"
                               >
                                 {![
                                   'T Sutrisno BCHK', 'APL', 'Duta', 'AMA', 'CV. Cahyo', 'DMT', 'DKTM', 'VTI', 
@@ -2427,7 +2427,7 @@ export default function GenerateTab({
                                 }}
                                 onBlur={handleCellBlur}
                                 autoFocus
-                                className="w-full bg-slate-900 border border-teal-500 text-teal-400 font-bold px-2 py-1 rounded outline-none font-sans text-xs min-w-[150px]"
+                                className="w-full bg-white border border-teal-500 text-teal-700 font-bold px-2 py-1 rounded outline-none font-sans text-xs min-w-[150px]"
                               >
                                 {![
                                   'WH Paskem', 'OFWH BPL', 'Direct Kosambi', 'Direct Lainnya', 
@@ -2442,7 +2442,7 @@ export default function GenerateTab({
                                 <option value="WH Cikokol">WH Cikokol</option>
                                 <option value="WH Semarang">WH Semarang</option>
                                 <option value="WH Surabaya">WH Surabaya</option>
-                              </select>
+                                </select>
                             ) : ['tglMasukDepo', 'tglPengirimanFinal', 'tglPengiriman', 'tglKeluarMasuk'].includes(col.key) ? (
                               <input
                                 type="date"
@@ -2451,7 +2451,7 @@ export default function GenerateTab({
                                 onBlur={handleCellBlur}
                                 onKeyDown={handleKeyDown}
                                 autoFocus
-                                className="w-full bg-slate-900 border border-teal-500 text-white px-2 py-1 rounded outline-none font-sans text-xs min-w-[130px]"
+                                className="w-full bg-white border border-teal-500 text-slate-900 px-2 py-1 rounded outline-none font-sans text-xs min-w-[130px]"
                               />
                             ) : (
                               <input
@@ -2461,7 +2461,7 @@ export default function GenerateTab({
                                 onBlur={handleCellBlur}
                                 onKeyDown={handleKeyDown}
                                 autoFocus
-                                className="w-full h-full bg-teal-950/80 text-white px-4 py-2 border-0 outline-none ring-2 ring-teal-500 rounded-sm font-sans text-xs"
+                                className="w-full h-full bg-teal-50 text-slate-900 px-4 py-2 border-0 outline-none ring-2 ring-teal-500 rounded-sm font-sans text-xs"
                               />
                             )
                           ) : (
@@ -2470,30 +2470,30 @@ export default function GenerateTab({
                               {col.key === 'suratJalan' ? (
                                 <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                                   value === 'sudah diterima' || value === 'sudah'
-                                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/15'
-                                    : 'bg-amber-500/10 text-amber-400 border border-amber-500/15'
+                                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                                    : 'bg-amber-50 text-amber-700 border border-amber-200'
                                 }`}>
                                   {value}
                                 </span>
                               ) : col.key === 'statusPib' || col.key === 'statusBc' ? (
                                 <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                                   value === 'SPPB' || value === 'SPPB (Disetujui)'
-                                    ? 'bg-teal-500/15 text-teal-400 border border-teal-500/20'
+                                    ? 'bg-teal-50 text-teal-700 border border-teal-200'
                                     : value === 'SPJM' || value.includes('Jalur Merah')
-                                    ? 'bg-rose-500/15 text-rose-400 border border-rose-500/20'
+                                    ? 'bg-rose-50 text-rose-700 border border-rose-200'
                                     : value === 'NHI'
-                                    ? 'bg-fuchsia-500/15 text-fuchsia-400 border border-fuchsia-500/20'
-                                    : 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/20'
+                                    ? 'bg-fuchsia-50 text-fuchsia-700 border border-fuchsia-200'
+                                    : 'bg-indigo-50 text-indigo-700 border border-indigo-200'
                                 }`}>
                                   {value}
                                 </span>
                               ) : col.key === 'statusPengiriman' ? (
                                 <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                                   value === 'Selesai'
-                                    ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
+                                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                                     : value === 'Delivery'
-                                    ? 'bg-sky-500/15 text-sky-400 border border-sky-500/20'
-                                    : 'bg-amber-500/15 text-amber-400 border border-amber-500/20'
+                                    ? 'bg-sky-50 text-sky-700 border border-sky-200'
+                                    : 'bg-amber-50 text-amber-700 border border-amber-200'
                                 }`}>
                                   {value}
                                 </span>
@@ -2512,8 +2512,8 @@ export default function GenerateTab({
                 <tr>
                   <td colSpan={columns[activeReport].length + (activeReport === 'DELIVERY' ? 1 : 0)} className="px-6 py-12 text-center text-slate-500">
                     <div className="flex flex-col items-center justify-center space-y-2">
-                      <AlertCircle className="w-8 h-8 text-slate-600" />
-                      <p className="font-medium text-slate-400">Tidak ada baris data yang cocok dengan pencarian Anda.</p>
+                      <AlertCircle className="w-8 h-8 text-slate-400" />
+                      <p className="font-medium text-slate-700">Tidak ada baris data yang cocok dengan pencarian Anda.</p>
                       <p className="text-[11px] text-slate-500">Silakan tambahkan dokumen rekap PIB di tab rekap terlebih dahulu atau hapus pencarian.</p>
                     </div>
                   </td>
@@ -2525,8 +2525,8 @@ export default function GenerateTab({
 
         {/* Pagination Row */}
         {((activeReport === 'IMPORT') || (activeReport === 'DELIVERY') || (activeReport === 'DAILY_MEI')) && (
-          <div className="flex items-center justify-between bg-slate-950/40 border border-slate-800 rounded-xl px-4 py-2 mt-3 font-sans">
-            <div className="text-xs text-slate-400">
+          <div className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 mt-3 font-sans">
+            <div className="text-xs text-slate-600">
               Menampilkan {displayRows.length > 0 ? (
                 activeReport === 'IMPORT' ? (importCurrentPage - 1) * 15 + 1 :
                 activeReport === 'DELIVERY' ? (deliveryCurrentPage - 1) * 15 + 1 :
@@ -2550,11 +2550,11 @@ export default function GenerateTab({
                   activeReport === 'DELIVERY' ? deliveryCurrentPage === 1 :
                   dailyMeiCurrentPage === 1
                 }
-                className="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs font-bold text-slate-300 hover:text-white disabled:opacity-45 disabled:cursor-not-allowed transition-all cursor-pointer"
+                className="px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-900 disabled:opacity-45 disabled:cursor-not-allowed transition-all cursor-pointer shadow-sm"
               >
                 Sebelumnya
               </button>
-              <div className="text-xs text-slate-400 font-mono font-bold px-2">
+              <div className="text-xs text-slate-600 font-mono font-bold px-2">
                 Halaman {
                   activeReport === 'IMPORT' ? importCurrentPage :
                   activeReport === 'DELIVERY' ? deliveryCurrentPage :
@@ -2573,7 +2573,7 @@ export default function GenerateTab({
                   activeReport === 'DELIVERY' ? deliveryCurrentPage >= Math.ceil(filteredRows.length / 15) :
                   dailyMeiCurrentPage >= Math.ceil(filteredRows.length / 15)
                 }
-                className="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs font-bold text-slate-300 hover:text-white disabled:opacity-45 disabled:cursor-not-allowed transition-all cursor-pointer"
+                className="px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-900 disabled:opacity-45 disabled:cursor-not-allowed transition-all cursor-pointer shadow-sm"
               >
                 Berikutnya
               </button>
@@ -2582,25 +2582,25 @@ export default function GenerateTab({
         )}
 
         {/* Metadata stats bottom bar */}
-        <div className="mt-4 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 divide-y sm:divide-y-0 sm:divide-x divide-slate-800 gap-2 border-t border-slate-800/60 pt-4">
+        <div className="mt-4 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 divide-y sm:divide-y-0 sm:divide-x divide-slate-200 gap-2 border-t border-slate-200 pt-4">
           <div className="flex items-center gap-1.5 font-mono">
-            <Info className="w-3.5 h-3.5 text-teal-500/80" />
+            <Info className="w-3.5 h-3.5 text-teal-600" />
             <span>Terpajang: <strong>{displayRows.length}</strong> baris data</span>
             <span>•</span>
             <span>Total: <strong>{currentRows.length}</strong> baris</span>
             {activeReport === 'DELIVERY' && (
               <>
                 <span>•</span>
-                <span className="text-amber-400">Terpilih: <strong>{selectedDeliveryRowKeys.length}</strong> container</span>
+                <span className="text-amber-600">Terpilih: <strong>{selectedDeliveryRowKeys.length}</strong> container</span>
               </>
             )}
           </div>
           <div className="flex items-center gap-2 pl-0 sm:pl-4">
             <span className="flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-teal-400"></span> Double-click cell to edit
+              <span className="w-1.5 h-1.5 rounded-full bg-teal-500"></span> Double-click cell to edit
             </span>
-            <span className="text-slate-750 font-mono">|</span>
-            <span className="text-slate-400 flex items-center gap-1">
+            <span className="text-slate-300 font-mono">|</span>
+            <span className="text-slate-500 flex items-center gap-1">
               File type: Google Workspace Live Spreadsheet (Sheets/Drive Online)
             </span>
           </div>
@@ -2608,25 +2608,25 @@ export default function GenerateTab({
       </div>
 
       {/* Guide Card of Spreadsheet integration */}
-      <div className="bg-slate-800/20 border border-slate-700/40 rounded-2xl p-6 order-4">
-        <h4 className="text-xs font-bold text-slate-300 uppercase tracking-widest mb-3">
+      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 order-4 shadow-sm">
+        <h4 className="text-xs font-bold text-slate-700 uppercase tracking-widest mb-3">
           TIPS DAN CARA INTEGRASI KE SPREADSHEETS (GOOGLE SHEETS)
         </h4>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs text-slate-400 leading-relaxed">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs text-slate-600 leading-relaxed">
           <div className="space-y-1.5">
-            <h5 className="font-bold text-slate-200">1. Ekspor Online Google Sheets</h5>
+            <h5 className="font-bold text-slate-800">1. Ekspor Online Google Sheets</h5>
             <p>
               Gunakan tombol <strong>"Export ke Google Sheets"</strong> untuk membuat lembar Spreadsheet secara live di Google Drive akun <code>dhimas.agungmakmur@gmail.com</code> Anda.
             </p>
           </div>
           <div className="space-y-1.5">
-            <h5 className="font-bold text-slate-200">2. Copy & Paste Terpadu</h5>
+            <h5 className="font-bold text-slate-800">2. Copy & Paste Terpadu</h5>
             <p>
               Gunakan tombol <strong>"Copy Data Grid"</strong> untuk langsung menyalin seluruh baris preview sandbox ke papan klip untuk ditempelkan secara manual kapan saja.
             </p>
           </div>
           <div className="space-y-1.5">
-            <h5 className="font-bold text-slate-200">3. Daily Report PT Midea Electronic Indonesia</h5>
+            <h5 className="font-bold text-slate-800">3. Daily Report PT Midea Electronic Indonesia</h5>
             <p>
               Seluruh rekapitulasi container untuk importir <strong>PT Midea Electronic Indonesia</strong> dikumpulkan secara otomatis pada Tab 3 untuk kemudahan filter laporan harian.
             </p>

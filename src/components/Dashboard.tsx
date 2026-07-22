@@ -115,14 +115,14 @@ export default function Dashboard({
         {(userRole === 'STAFF_AML' || isSuperUser) && (
           <div 
             onClick={() => onSelectStatusFilter('Draft PIB')}
-            className="bg-slate-800/50 border border-slate-700/60 p-5 rounded-xl flex items-start justify-between hover:border-teal-500/50 hover:bg-slate-800/80 transition-all cursor-pointer group shadow-sm"
+            className="bg-white border border-slate-200 p-5 rounded-xl flex items-start justify-between hover:border-teal-500 hover:bg-slate-50 transition-all cursor-pointer group shadow-sm"
           >
             <div className="space-y-2">
-              <p className="text-xs font-semibold text-indigo-400 group-hover:text-indigo-300 transition-colors">Draft PIB & PEB</p>
-              <p className="text-3xl font-bold text-indigo-400 font-sans">{draftCount}</p>
+              <p className="text-xs font-semibold text-indigo-600 group-hover:text-indigo-700 transition-colors">Draft PIB & PEB</p>
+              <p className="text-3xl font-bold text-indigo-600 font-sans">{draftCount}</p>
               <p className="text-[11px] text-slate-500">Selesai rekap Gemini</p>
             </div>
-            <div className="p-3 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-xl">
+            <div className="p-3 bg-indigo-50 border border-indigo-200 text-indigo-600 rounded-xl">
               <Clipboard className="w-5 h-5 animate-pulse" />
             </div>
           </div>
@@ -132,16 +132,16 @@ export default function Dashboard({
         {(userRole === 'STAFF_AML' || isSuperUser) && (
           <div 
             onClick={() => onSelectStatusFilter('Billing DJBC')}
-            className="bg-slate-800/50 border border-slate-700/60 p-5 rounded-xl flex items-start justify-between hover:border-teal-500/50 hover:bg-slate-800/80 transition-all cursor-pointer group shadow-sm"
+            className="bg-white border border-slate-200 p-5 rounded-xl flex items-start justify-between hover:border-teal-500 hover:bg-slate-50 transition-all cursor-pointer group shadow-sm"
           >
             <div className="space-y-2">
-              <p className="text-xs font-semibold text-amber-400 group-hover:text-amber-300 transition-colors">Billing DJBC</p>
-              <p className="text-3xl font-bold text-amber-400 font-sans">{billingCount}</p>
-              <p className="text-[11px] text-amber-500 font-medium">
+              <p className="text-xs font-semibold text-amber-600 group-hover:text-amber-700 transition-colors">Billing DJBC</p>
+              <p className="text-3xl font-bold text-amber-600 font-sans">{billingCount}</p>
+              <p className="text-[11px] text-amber-600 font-medium">
                 {unpaidBilling} Belum Lunas
               </p>
             </div>
-            <div className="p-3 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl">
+            <div className="p-3 bg-amber-50 border border-amber-200 text-amber-600 rounded-xl">
               <DollarSign className="w-5 h-5" />
             </div>
           </div>
@@ -150,14 +150,14 @@ export default function Dashboard({
         {/* Surat Persetujuan Pengeluaran barang (SPPB) */}
         <div 
           onClick={() => onSelectStatusFilter('SPPB')}
-          className="bg-slate-800/50 border border-teal-500/30 p-5 rounded-xl shadow-lg shadow-teal-500/5 flex items-start justify-between hover:border-teal-500/55 hover:bg-slate-800/80 transition-all cursor-pointer group"
+          className="bg-white border border-teal-200 p-5 rounded-xl shadow-sm flex items-start justify-between hover:border-teal-500 hover:bg-teal-50/30 transition-all cursor-pointer group"
         >
           <div className="space-y-2">
-            <p className="text-xs font-semibold text-teal-400 group-hover:text-teal-300 transition-colors leading-tight">Surat Persetujuan Pengeluaran barang (SPPB)</p>
-            <p className="text-3xl font-bold text-teal-400 font-sans">{sppbCount}</p>
-            <p className="text-[11px] text-teal-500/80">Release Documents</p>
+            <p className="text-xs font-semibold text-teal-600 group-hover:text-teal-700 transition-colors leading-tight">Surat Persetujuan Pengeluaran barang (SPPB)</p>
+            <p className="text-3xl font-bold text-teal-600 font-sans">{sppbCount}</p>
+            <p className="text-[11px] text-teal-600">Release Documents</p>
           </div>
-          <div className="p-3 bg-teal-500/10 border border-teal-500/20 text-teal-400 rounded-xl">
+          <div className="p-3 bg-teal-50 border border-teal-200 text-teal-600 rounded-xl">
             <SppbIcon className="w-5 h-5" />
           </div>
         </div>
@@ -165,14 +165,14 @@ export default function Dashboard({
         {/* Surat Pemeriksaan Jalur Merah (SPJM) */}
         <div 
           onClick={() => onSelectStatusFilter('SPJM')}
-          className="bg-slate-800/50 border border-slate-700/60 p-5 rounded-xl flex items-start justify-between hover:border-teal-500/55 hover:bg-slate-800/80 transition-all cursor-pointer group shadow-sm"
+          className="bg-white border border-slate-200 p-5 rounded-xl flex items-start justify-between hover:border-teal-500 hover:bg-slate-50 transition-all cursor-pointer group shadow-sm"
         >
           <div className="space-y-2">
-            <p className="text-xs font-semibold text-rose-400 group-hover:text-rose-300 transition-colors leading-tight">Surat Pemeriksaan Jalur Merah (SPJM)</p>
-            <p className="text-3xl font-bold text-rose-400 font-sans">{spjmCount}</p>
+            <p className="text-xs font-semibold text-rose-600 group-hover:text-rose-700 transition-colors leading-tight">Surat Pemeriksaan Jalur Merah (SPJM)</p>
+            <p className="text-3xl font-bold text-rose-600 font-sans">{spjmCount}</p>
             <p className="text-[11px] text-slate-500">Pemeriksaan Fisik Barang</p>
           </div>
-          <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-xl">
+          <div className="p-3 bg-rose-50 border border-rose-200 text-rose-600 rounded-xl">
             <SpjmIcon className="w-5 h-5" />
           </div>
         </div>
@@ -180,14 +180,14 @@ export default function Dashboard({
         {/* NHI */}
         <div 
           onClick={() => onSelectStatusFilter('NHI')}
-          className="bg-slate-800/50 border border-slate-700/60 p-5 rounded-xl flex items-start justify-between hover:border-teal-500/50 hover:bg-slate-800/80 transition-all cursor-pointer group shadow-sm"
+          className="bg-white border border-slate-200 p-5 rounded-xl flex items-start justify-between hover:border-teal-500 hover:bg-slate-50 transition-all cursor-pointer group shadow-sm"
         >
           <div className="space-y-2">
-            <p className="text-xs font-semibold text-fuchsia-400 group-hover:text-fuchsia-300 transition-colors">Nota Hasil Intelijen (NHI)</p>
-            <p className="text-3xl font-bold text-fuchsia-400 font-sans">{nhiCount}</p>
+            <p className="text-xs font-semibold text-purple-600 group-hover:text-purple-700 transition-colors">Nota Hasil Intelijen (NHI)</p>
+            <p className="text-3xl font-bold text-purple-600 font-sans">{nhiCount}</p>
             <p className="text-[11px] text-slate-500">Pemeriksaan Fisik Barang Menyeluruh</p>
           </div>
-          <div className="p-3 bg-fuchsia-500/10 border border-fuchsia-500/20 text-fuchsia-400 rounded-xl">
+          <div className="p-3 bg-purple-50 border border-purple-200 text-purple-600 rounded-xl">
             <NhiIcon className="w-5 h-5" />
           </div>
         </div>
@@ -200,11 +200,11 @@ export default function Dashboard({
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div 
           onClick={() => onSelectDeliveryFilter('All')}
-          className="bg-slate-800/50 border border-slate-700/40 p-4 rounded-xl space-y-1.5 text-center hover:border-teal-500/50 hover:bg-slate-800/80 transition-all cursor-pointer group"
+          className="bg-white border border-slate-200 p-4 rounded-xl space-y-1.5 text-center hover:border-teal-500 hover:bg-slate-50 transition-all cursor-pointer group shadow-sm"
         >
-          <p className="text-xs font-semibold text-slate-400 group-hover:text-teal-400 transition-colors">Total SPPB</p>
-          <div className="flex items-center justify-center gap-2 text-2xl font-bold text-white font-sans">
-            <SppbIcon className="w-5 h-5 text-teal-400" />
+          <p className="text-xs font-semibold text-slate-500 group-hover:text-teal-600 transition-colors">Total SPPB</p>
+          <div className="flex items-center justify-center gap-2 text-2xl font-bold text-slate-800 font-sans">
+            <SppbIcon className="w-5 h-5 text-teal-600" />
             {totalDeliveries}
           </div>
           <p className="text-[11px] text-slate-500">Document Imports/Exports</p>
@@ -212,11 +212,11 @@ export default function Dashboard({
 
         <div 
           onClick={() => onSelectDeliveryFilter('Belum Dijadwalkan')}
-          className="bg-slate-800/50 border border-slate-700/40 p-4 rounded-xl space-y-1.5 text-center hover:border-teal-500/50 hover:bg-slate-800/80 transition-all cursor-pointer group"
+          className="bg-white border border-slate-200 p-4 rounded-xl space-y-1.5 text-center hover:border-teal-500 hover:bg-slate-50 transition-all cursor-pointer group shadow-sm"
         >
-          <p className="text-xs font-semibold text-slate-400 group-hover:text-teal-400 transition-colors">Belum dikirim</p>
-          <div className="flex items-center justify-center gap-2 text-2xl font-bold text-amber-400 font-sans">
-            <Clipboard className="w-5 h-5 text-amber-400" />
+          <p className="text-xs font-semibold text-slate-500 group-hover:text-teal-600 transition-colors">Belum dikirim</p>
+          <div className="flex items-center justify-center gap-2 text-2xl font-bold text-amber-600 font-sans">
+            <Clipboard className="w-5 h-5 text-amber-600" />
             {unsentContainers.length}
           </div>
           <p className="text-[11px] text-slate-500 font-medium font-sans">Kontainer siap kirim</p>
@@ -224,10 +224,10 @@ export default function Dashboard({
 
         <div 
           onClick={() => onSelectDeliveryFilter('Delivery')}
-          className="bg-slate-800/50 border border-slate-700/40 p-4 rounded-xl space-y-1.5 text-center hover:border-teal-500/50 hover:bg-slate-800/80 transition-all cursor-pointer group"
+          className="bg-white border border-slate-200 p-4 rounded-xl space-y-1.5 text-center hover:border-teal-500 hover:bg-slate-50 transition-all cursor-pointer group shadow-sm"
         >
-          <p className="text-xs font-semibold text-slate-400 group-hover:text-teal-400 transition-colors">Sedang Dikirim</p>
-          <div className="flex items-center justify-center gap-2 text-2xl font-bold text-sky-400 font-sans">
+          <p className="text-xs font-semibold text-slate-500 group-hover:text-teal-600 transition-colors">Sedang Dikirim</p>
+          <div className="flex items-center justify-center gap-2 text-2xl font-bold text-sky-600 font-sans">
             <Truck className="w-5 h-5" />
             {activeDeliveries}
           </div>
@@ -236,10 +236,10 @@ export default function Dashboard({
 
         <div 
           onClick={() => onSelectDeliveryFilter('Selesai')}
-          className="bg-slate-800/50 border border-slate-700/40 p-4 rounded-xl space-y-1.5 text-center hover:border-teal-500/50 hover:bg-slate-800/80 transition-all cursor-pointer group"
+          className="bg-white border border-slate-200 p-4 rounded-xl space-y-1.5 text-center hover:border-teal-500 hover:bg-slate-50 transition-all cursor-pointer group shadow-sm"
         >
-          <p className="text-xs font-semibold text-slate-400 group-hover:text-teal-400 transition-colors">Selesai Dikirim</p>
-          <div className="flex items-center justify-center gap-2 text-2xl font-bold text-emerald-400 font-sans">
+          <p className="text-xs font-semibold text-slate-500 group-hover:text-teal-600 transition-colors">Selesai Dikirim</p>
+          <div className="flex items-center justify-center gap-2 text-2xl font-bold text-emerald-600 font-sans">
             <CheckCircle2 className="w-5 h-5 animate-pulse" />
             {completedDeliveries}
           </div>
