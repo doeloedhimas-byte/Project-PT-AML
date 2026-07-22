@@ -313,23 +313,44 @@ app.post("/api/parse-pib", async (req, res) => {
       }
     });
 
-    // Strip out base64 prefixes if present (e.g. "data:application/pdf;base64,")
-    let rawBase64 = fileBytesBase64;
-    if (fileBytesBase64 && fileBytesBase64.includes(";base64,")) {
-      rawBase64 = fileBytesBase64.split(";base64,")[1];
+    // Extract base64 and mimeType dynamically
+    let rawBase64 = fileBytesBase64 || "";
+    let detectedMimeType = "application/pdf";
+
+    if (rawBase64.startsWith("data:")) {
+      const match = rawBase64.match(/^data:([^;]+);base64,(.+)$/);
+      if (match) {
+        detectedMimeType = match[1];
+        rawBase64 = match[2];
+      }
+    } else if (rawBase64.includes(";base64,")) {
+      const parts = rawBase64.split(";base64,");
+      if (parts[0].startsWith("data:")) {
+        detectedMimeType = parts[0].replace("data:", "");
+      }
+      rawBase64 = parts[1];
     }
 
-    const pdfPart = {
+    // Fallback mimeType based on filename extension if needed
+    if (filename) {
+      const lower = filename.toLowerCase();
+      if (lower.endsWith(".png")) detectedMimeType = "image/png";
+      else if (lower.endsWith(".jpg") || lower.endsWith(".jpeg")) detectedMimeType = "image/jpeg";
+      else if (lower.endsWith(".webp")) detectedMimeType = "image/webp";
+      else if (lower.endsWith(".pdf")) detectedMimeType = "application/pdf";
+    }
+
+    const filePart = {
       inlineData: {
-        mimeType: "application/pdf",
+        mimeType: detectedMimeType,
         data: rawBase64
       }
     };
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-3.6-flash",
       contents: [
-        pdfPart,
+        filePart,
         {
           text: "Silakan baca dokumen PIB (Pemberitahuan Impor Barang) ini dan ekstrak data-data penting berikut menjadi response JSON yang rapi." +
                 "Kriteria ekstraksi:\n" +

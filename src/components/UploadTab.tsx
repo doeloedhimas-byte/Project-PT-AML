@@ -97,7 +97,7 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
       }
 
       await new Promise(r => setTimeout(r, 600));
-      log('Gemini model "gemini-3.5-flash" sedang mengekstrak struktur formal PIB...');
+      log('Gemini model "gemini-3.6-flash" sedang mengekstrak struktur formal PIB...');
       
       const response = await fetch('/api/parse-pib', {
         method: 'POST',
@@ -107,7 +107,8 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
 
       if (!response.ok) {
         const errorJson = await response.json().catch(() => ({}));
-        throw new Error(errorJson.error || 'Server gagal memproses PDF. Silakan gunakan opsi simulasi.');
+        const detailMsg = errorJson.details ? `: ${errorJson.details}` : '';
+        throw new Error((errorJson.error || 'Server gagal memproses PDF. Silakan gunakan opsi simulasi.') + detailMsg);
       }
 
       const resData = await response.json();
