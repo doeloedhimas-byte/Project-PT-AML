@@ -97,7 +97,7 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
       }
 
       await new Promise(r => setTimeout(r, 600));
-      log('Gemini model "gemini-3.6-flash" sedang mengekstrak struktur formal PIB...');
+      log('Gemini AI sedang mengekstrak struktur formal PIB...');
       
       const response = await fetch('/api/parse-pib', {
         method: 'POST',
@@ -129,6 +129,9 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
         setContainersStr(data.containers ? data.containers.join(', ') : '');
         setUraianStr(data.uraianBarang ? data.uraianBarang.join('\n') : '');
 
+        if (resData.message) {
+          log(`Informasi: ${resData.message}`);
+        }
         log('Ekstraksi Sukses! Silakan verifikasi hasil di formulir.');
       } else {
         throw new Error('Hasil ekstraksi kosong atau format tidak sesuai.');

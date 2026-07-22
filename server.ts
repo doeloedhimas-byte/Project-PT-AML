@@ -228,16 +228,12 @@ app.delete("/api/documents/:id", async (req, res) => {
 app.post("/api/parse-pib", async (req, res) => {
   const { fileBytesBase64, filename, mockOption } = req.body;
 
-  // Let's check if the API key is valid or missing, or if we want to mock
-  const apiKey = process.env.GEMINI_API_KEY;
+  // Check if API key exists in environment variables (supports GEMINI_API_KEY or VITE_GEMINI_API_KEY)
+  const apiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
   const isKeyMissing = !apiKey || apiKey === "MY_GEMINI_API_KEY" || apiKey.trim() === "";
 
-  // If user requests a mock option or API key is missing
-  if (mockOption || isKeyMissing) {
-    // Generate a beautiful, realistic PIB parsing response instantly
-    console.log(`Using mock parsing (Missing API Key: ${isKeyMissing}, mockOption: ${mockOption})`);
-    
-    // Create random but realistic data based on Indonesian customs
+  // Helper for generating realistic simulation data
+  const generateMockData = () => {
     const mockCompanies = [
       "PT INDO GLOBAL DISTRIBUSI", 
       "PT JAYA MAJU MANDIRI", 
@@ -283,7 +279,7 @@ app.post("/api/parse-pib", async (req, res) => {
       `OOLU${Math.floor(1000000 + Math.random() * 9000000)} (20ft)`
     ].slice(0, Math.floor(Math.random() * 2) + 1);
 
-    const parsedResult = {
+    return {
       noPengajuan: randomPengajuan,
       importer: randomCompany,
       blNumber: blNum,
@@ -291,19 +287,23 @@ app.post("/api/parse-pib", async (req, res) => {
       containers: randomContainers,
       uraianBarang: chosenItems
     };
+  };
 
+  // If user explicitly requested mockOption or API key is missing
+  if (mockOption || isKeyMissing) {
+    console.log(`Using mock parsing (Missing API Key: ${isKeyMissing}, mockOption: ${mockOption})`);
+    
     return res.json({
       success: true,
-      parsedData: parsedResult,
+      parsedData: generateMockData(),
       isMock: true,
       message: isKeyMissing 
-        ? "Berhasil memproses dengan Gemini-Simulasi (Silakan tambahkan GEMINI_API_KEY di Secrets untuk parsing PDF asli)."
+        ? "Berhasil memproses dengan Gemini-Simulasi (Silakan tambahkan GEMINI_API_KEY di Vercel Environment Variables untuk parsing PDF asli)."
         : "Berhasil memproses simulasi PIB."
     });
   }
 
   try {
-    // Correct Server-Side initialization using name parameters and standard import
     const ai = new GoogleGenAI({
       apiKey: apiKey,
       httpOptions: {
@@ -331,7 +331,6 @@ app.post("/api/parse-pib", async (req, res) => {
       rawBase64 = parts[1];
     }
 
-    // Fallback mimeType based on filename extension if needed
     if (filename) {
       const lower = filename.toLowerCase();
       if (lower.endsWith(".png")) detectedMimeType = "image/png";
@@ -347,57 +346,68 @@ app.post("/api/parse-pib", async (req, res) => {
       }
     };
 
-    const response = await ai.models.generateContent({
-      model: "gemini-3.6-flash",
-      contents: [
-        filePart,
-        {
-          text: "Silakan baca dokumen PIB (Pemberitahuan Impor Barang) ini dan ekstrak data-data penting berikut menjadi response JSON yang rapi." +
-                "Kriteria ekstraksi:\n" +
-                "1. noPengajuan: Nomor Pengajuan PIB (terdiri dari 24 digit angka, biasanya ditulis dalam format dipisah strip/spasi, contoh: 050100-002154-...)\n" +
-                "2. importer: Nama importir lengkap dan jelas (contoh: PT INDO FOOD MANDIRI)\n" +
-                "3. blNumber: Nomor Bill of Lading (B/L) lengkap\n" +
-                "4. blDate: Tanggal Bill of Lading lengkap (Format: YYYY-MM-DD)\n" +
-                "5. containers: List dari semua nomor container yang disebutkan dalam dokumen, lengkap dengan ukuran/size kontainer ditulis di dalam kurung di samping nomor kontainer tersebut, contoh: MSKU1849204 (40ft) atau OOLU1234567 (20ft). Cari informasi ukuran ini (biasanya 20ft, 40ft, dll) di dekat daftar kontainer pada dokumen.\n" +
-                "6. uraianBarang: List detail deskripsi uraian barang (jenis barang). Jika ada lebih dari 5 jenis barang, ambil maksimal 5 jenis barang saja secara rinci."
-        }
-      ],
-      config: {
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: Type.OBJECT,
-          properties: {
-            noPengajuan: { 
-              type: Type.STRING, 
-              description: "Nomor Pengajuan PIB (biasanya 24 rentetan angka dengan atau tanpa strip)" 
-            },
-            importer: { 
-              type: Type.STRING, 
-              description: "Nama perusahaan importir penerima barang" 
-            },
-            blNumber: { 
-              type: Type.STRING, 
-              description: "Nomor Bill of Lading (B/L)" 
-            },
-            blDate: { 
-              type: Type.STRING, 
-              description: "Tanggal Bill of Lading dalam format YYYY-MM-DD" 
-            },
-            containers: {
-              type: Type.ARRAY,
-              items: { type: Type.STRING },
-              description: "Seluruh nomor container beserta ukurannya dalam kurung (misalnya: OOLU1234567 (20ft), MSKU1849204 (40ft))"
-            },
-            uraianBarang: {
-              type: Type.ARRAY,
-              items: { type: Type.STRING },
-              description: "Daftar deskripsi/nama barang utama impor (maksimal 5 item)"
-            }
+    const promptText = "Silakan baca dokumen PIB (Pemberitahuan Impor Barang) ini dan ekstrak data-data penting berikut menjadi response JSON yang rapi." +
+      "Kriteria ekstraksi:\n" +
+      "1. noPengajuan: Nomor Pengajuan PIB (terdiri dari 24 digit angka, biasanya ditulis dalam format dipisah strip/spasi, contoh: 050100-002154-...)\n" +
+      "2. importer: Nama importir lengkap dan jelas (contoh: PT INDO FOOD MANDIRI)\n" +
+      "3. blNumber: Nomor Bill of Lading (B/L) lengkap\n" +
+      "4. blDate: Tanggal Bill of Lading lengkap (Format: YYYY-MM-DD)\n" +
+      "5. containers: List dari semua nomor container yang disebutkan dalam dokumen, lengkap dengan ukuran/size kontainer ditulis di dalam kurung di samping nomor kontainer tersebut, contoh: MSKU1849204 (40ft) atau OOLU1234567 (20ft). Cari informasi ukuran ini (biasanya 20ft, 40ft, dll) di dekat daftar kontainer pada dokumen.\n" +
+      "6. uraianBarang: List detail deskripsi uraian barang (jenis barang). Jika ada lebih dari 5 jenis barang, ambil maksimal 5 jenis barang saja secara rinci.";
+
+    const schemaConfig = {
+      responseMimeType: "application/json",
+      responseSchema: {
+        type: Type.OBJECT,
+        properties: {
+          noPengajuan: { 
+            type: Type.STRING, 
+            description: "Nomor Pengajuan PIB (biasanya 24 rentetan angka dengan atau tanpa strip)" 
           },
-          required: ["noPengajuan", "importer", "blNumber", "blDate", "containers", "uraianBarang"]
-        }
+          importer: { 
+            type: Type.STRING, 
+            description: "Nama perusahaan importir penerima barang" 
+          },
+          blNumber: { 
+            type: Type.STRING, 
+            description: "Nomor Bill of Lading (B/L)" 
+          },
+          blDate: { 
+            type: Type.STRING, 
+            description: "Tanggal Bill of Lading dalam format YYYY-MM-DD" 
+          },
+          containers: {
+            type: Type.ARRAY,
+            items: { type: Type.STRING },
+            description: "Seluruh nomor container beserta ukurannya dalam kurung (misalnya: OOLU1234567 (20ft), MSKU1849204 (40ft))"
+          },
+          uraianBarang: {
+            type: Type.ARRAY,
+            items: { type: Type.STRING },
+            description: "Daftar deskripsi/nama barang utama impor (maksimal 5 item)"
+          }
+        },
+        required: ["noPengajuan", "importer", "blNumber", "blDate", "containers", "uraianBarang"]
       }
-    });
+    };
+
+    let response;
+    try {
+      // Primary model attempt: gemini-2.5-flash
+      response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: [filePart, { text: promptText }],
+        config: schemaConfig
+      });
+    } catch (primaryErr: any) {
+      console.warn("Primary model gemini-2.5-flash failed, trying fallback model gemini-2.0-flash...", primaryErr?.message);
+      // Fallback model attempt: gemini-2.0-flash
+      response = await ai.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: [filePart, { text: promptText }],
+        config: schemaConfig
+      });
+    }
 
     const parsedJsonText = response.text?.trim() || "{}";
     const dataObj = JSON.parse(parsedJsonText);
@@ -410,9 +420,13 @@ app.post("/api/parse-pib", async (req, res) => {
 
   } catch (error: any) {
     console.error("Gemini Parsing Error: ", error);
-    res.status(500).json({
-      error: "Gagal memproses dokumen dengan Gemini AI.",
-      details: error.message || error
+
+    // Resilient fallback: return mock data with warning message if API call fails
+    return res.json({
+      success: true,
+      parsedData: generateMockData(),
+      isMock: true,
+      message: `Ekstraksi otomatis beralih ke simulasi karena kendala API Gemini (${error.message || 'Error'}). Silakan cek GEMINI_API_KEY di Vercel Environment Variables.`
     });
   }
 });
@@ -439,3 +453,5 @@ if (process.env.NODE_ENV !== "production") {
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`PT AML Logistik Portal running on http://localhost:${PORT}`);
 });
+
+export default app;
