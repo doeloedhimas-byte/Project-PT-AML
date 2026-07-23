@@ -23,6 +23,7 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
   const [importer, setImporter] = useState('');
   const [blNumber, setBlNumber] = useState('');
   const [blDate, setBlDate] = useState('');
+  const [invPlNo, setInvPlNo] = useState('');
   const [containersStr, setContainersStr] = useState('');
   const [uraianStr, setUraianStr] = useState('');
 
@@ -126,6 +127,7 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
         setImporter(data.importer || '');
         setBlNumber(data.blNumber || '');
         setBlDate(data.blDate || '');
+        setInvPlNo(data.invPlNo || data.invoiceNo || '');
         setContainersStr(data.containers ? data.containers.join(', ') : '');
         setUraianStr(data.uraianBarang ? data.uraianBarang.join('\n') : '');
 
@@ -170,6 +172,7 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
         importer,
         blNumber,
         blDate,
+        invPlNo,
         containers,
         uraianBarang,
         status: 'Draft PIB' as DocumentStatus,
@@ -370,7 +373,7 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
                 <div className="flex items-center gap-2 border-b border-slate-100 pb-3 mb-2">
                   <FileText className="w-5 h-5 text-teal-650" />
                   <div>
-                    <h3 className="text-sm font-semibold text-slate-800">Inspeksi & Simpan Hasil Rekap</h3>
+                    <h3 className="text-sm font-semibold text-slate-800">Preview Extraction Document</h3>
                     <p className="text-slate-500 text-[11px]">Silakan edit data jika ada rincian yang kurang presisi dari pembacaan AI.</p>
                   </div>
                 </div>
@@ -397,14 +400,24 @@ export default function UploadTab({ onDocumentAdded, onNavigateToTab }: UploadTa
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-500 mb-1.5">Nomor Invoice (Inv / PL No)</label>
+                      <input 
+                        type="text" 
+                        value={invPlNo}
+                        onChange={(e) => setInvPlNo(e.target.value)}
+                        placeholder="Contoh: INV/AML/2026/89210"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 text-xs focus:outline-none focus:border-teal-500 font-mono"
+                      />
+                    </div>
                     <div>
                       <label className="block text-xs font-semibold text-slate-500 mb-1.5">Nomor Bill of Lading (B/L)</label>
                       <input 
                         type="text" 
                         value={blNumber}
                         onChange={(e) => setBlNumber(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 text-xs focus:outline-none focus:border-teal-500"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 text-xs focus:outline-none focus:border-teal-500 font-mono"
                       />
                     </div>
                     <div>

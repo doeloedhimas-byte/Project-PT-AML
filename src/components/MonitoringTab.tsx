@@ -4,8 +4,9 @@ import { PIBDocument, DocumentStatus, DeliveryInfo } from '../types';
 import amlLogo from '../assets/images/aml_logo_solid_white_1784613581619.jpg';
 import { 
   Search, Shield, CheckCircle, AlertTriangle, FileText, Printer, 
-  Truck, ArrowRight, ShieldCheck, DollarSign, RefreshCw, Layers, Edit, Eye, Trash2
+  Truck, ArrowRight, ShieldCheck, DollarSign, RefreshCw, Layers, Edit, Eye, Trash2, Edit3
 } from 'lucide-react';
+import EditDocumentModal from './EditDocumentModal';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface MonitoringTabProps {
@@ -86,6 +87,7 @@ export default function MonitoringTab({
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDoc, _setSelectedDoc] = useState<PIBDocument | null>(null);
   const [activeContainer, setActiveContainer] = useState<string>('');
+  const [editingDoc, setEditingDoc] = useState<PIBDocument | null>(null);
 
   const setSelectedDoc = (val: PIBDocument | null | ((prev: PIBDocument | null) => PIBDocument | null)) => {
     if (typeof val === 'function') {
@@ -312,7 +314,8 @@ export default function MonitoringTab({
     const matchesSearch = 
       doc.noPengajuan.toLowerCase().includes(searchTerm.toLowerCase()) ||
       doc.importer.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      doc.blNumber.toLowerCase().includes(searchTerm.toLowerCase());
+      doc.blNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (doc.invPlNo && doc.invPlNo.toLowerCase().includes(searchTerm.toLowerCase()));
     
     let matchesStatus = true;
     if (statusFilter !== 'All') {
@@ -803,7 +806,7 @@ export default function MonitoringTab({
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Cari No Pengajuan, Importir, atau Nomor B/L..."
+            placeholder="Cari No Pengajuan, Importir, No. Invoice, atau B/L..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 pl-10 pr-4 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-colors"
@@ -910,6 +913,18 @@ export default function MonitoringTab({
                           <p className="text-xs font-mono font-bold text-slate-800 tracking-wide truncate max-w-xs">{doc.noPengajuan}</p>
                         </div>
                         <div className="flex items-center gap-2 self-start sm:self-auto">
+                          <button
+                            type="button"
+                            title="Edit / Revisi Dokumen"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setEditingDoc(doc);
+                            }}
+                            className="px-2 py-1 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-lg text-amber-700 text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                          >
+                            <Edit3 className="w-3 h-3 text-amber-600" />
+                            <span>Edit</span>
+                          </button>
                           <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold border ${getStatusBadge(doc.status)}`}>
                             {doc.status === 'Draft PIB' ? 'Draft PIB & PEB' : doc.status}
                           </span>
@@ -922,10 +937,14 @@ export default function MonitoringTab({
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs mb-4">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs mb-4">
                         <div className="space-y-1">
                           <p className="text-slate-400 font-semibold text-[10px] uppercase tracking-wider">Perusahaan Importir</p>
                           <p className="text-slate-700 font-semibold truncate">{doc.importer}</p>
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-slate-400 font-semibold text-[10px] uppercase tracking-wider">No. Invoice (Inv / PL)</p>
+                          <p className="text-slate-700 font-mono font-bold truncate">{doc.invPlNo || '-'}</p>
                         </div>
                         <div className="space-y-1">
                           <p className="text-slate-400 font-semibold text-[10px] uppercase tracking-wider">No. Bill of Lading</p>
@@ -973,6 +992,17 @@ export default function MonitoringTab({
                               <p className="text-slate-500 text-[10px] mt-0.5 font-mono">ID: {doc.id}</p>
                             </div>
                             <div className="flex items-center gap-1.5">
+                              <button
+                                title="Edit / Revisi Dokumen"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setEditingDoc(doc);
+                                }}
+                                className="px-2.5 py-1.5 bg-amber-50 border border-amber-200 hover:bg-amber-100 rounded-xl text-amber-700 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                              >
+                                <Edit3 className="w-3.5 h-3.5 text-amber-600" />
+                                Edit / Revisi
+                              </button>
                               {isSuperUser && (
                                 <button
                                   title="Hapus Dokumen"
@@ -1584,6 +1614,14 @@ export default function MonitoringTab({
                     <p className="text-slate-500 text-[10px] mt-0.5 font-mono">ID: {selectedDoc.id}</p>
                   </div>
                   <div className="flex items-center gap-1.5">
+                    <button
+                      title="Edit / Revisi Dokumen"
+                      onClick={() => setEditingDoc(selectedDoc)}
+                      className="px-2.5 py-1.5 bg-amber-50 border border-amber-200 hover:bg-amber-100 rounded-xl text-amber-700 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                    >
+                      <Edit3 className="w-3.5 h-3.5 text-amber-600" />
+                      Edit / Revisi
+                    </button>
                     {isSuperUser && (
                       <button
                         title="Hapus Dokumen"
@@ -2137,6 +2175,19 @@ export default function MonitoringTab({
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Edit / Revisi Document Modal */}
+      <EditDocumentModal
+        doc={editingDoc}
+        isOpen={!!editingDoc}
+        onClose={() => setEditingDoc(null)}
+        onSave={async (docId, updates) => {
+          await onUpdateDocument(docId, updates);
+          if (selectedDoc && selectedDoc.id === docId) {
+            _setSelectedDoc(prev => prev ? { ...prev, ...updates } : null);
+          }
+        }}
+      />
     </div>
   );
 }

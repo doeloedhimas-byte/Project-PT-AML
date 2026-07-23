@@ -285,7 +285,8 @@ app.post("/api/parse-pib", async (req, res) => {
       blNumber: blNum,
       blDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
       containers: randomContainers,
-      uraianBarang: chosenItems
+      uraianBarang: chosenItems,
+      invPlNo: `INV/AML/2026/${Math.floor(10000 + Math.random() * 90000)}`
     };
   };
 
@@ -346,14 +347,17 @@ app.post("/api/parse-pib", async (req, res) => {
       }
     };
 
-    const promptText = "Silakan baca dokumen PIB (Pemberitahuan Impor Barang) ini dan ekstrak data-data penting berikut menjadi response JSON yang rapi." +
-      "Kriteria ekstraksi:\n" +
-      "1. noPengajuan: Nomor Pengajuan PIB (terdiri dari 24 digit angka, biasanya ditulis dalam format dipisah strip/spasi, contoh: 050100-002154-...)\n" +
-      "2. importer: Nama importir lengkap dan jelas (contoh: PT INDO FOOD MANDIRI)\n" +
-      "3. blNumber: Nomor Bill of Lading (B/L) lengkap\n" +
-      "4. blDate: Tanggal Bill of Lading lengkap (Format: YYYY-MM-DD)\n" +
-      "5. containers: List dari semua nomor container yang disebutkan dalam dokumen, lengkap dengan ukuran/size kontainer ditulis di dalam kurung di samping nomor kontainer tersebut, contoh: MSKU1849204 (40ft) atau OOLU1234567 (20ft). Cari informasi ukuran ini (biasanya 20ft, 40ft, dll) di dekat daftar kontainer pada dokumen.\n" +
-      "6. uraianBarang: List detail deskripsi uraian barang (jenis barang). Jika ada lebih dari 5 jenis barang, ambil maksimal 5 jenis barang saja secara rinci.";
+    const promptText = 
+      "Anda adalah AI ekstraktor dokumen Bea Cukai Pemberitahuan Impor Barang (PIB) Indonesia. " +
+      "Silakan baca dokumen PDF/gambar ini dan ekstrak data secara presisi sesuai dengan pemetaan lokasi kolom formulir PIB berikut:\n\n" +
+      "1. noPengajuan: Diisi dari kolom 'Nomor Pengajuan' pada file PDF (terdiri dari 24 digit angka, biasanya diformat dengan strip/spasi).\n" +
+      "2. importer: Diisi dari kolom 'Pemilik Barang, kolom 3a Nama' pada file PDF (atau jika Pemilik Barang kosong, diisi dari nama Perusahaan Importir / Penerima). Tuliskan nama perusahaan secara lengkap.\n" +
+      "3. invPlNo: Diisi dari kolom 'Invoice No' atau 'No. Invoice / Packing List' pada file PDF.\n" +
+      "4. blNumber: Diisi dari kolom 'House-BL/AWB No' (atau Bill of Lading No jika House-BL kosong) pada file PDF.\n" +
+      "5. blDate: Diisi dari kolom 'House-BL/AWB Tgl' (atau Tanggal B/L jika House-BL Tgl kosong) pada file PDF. Tulis dalam format YYYY-MM-DD.\n" +
+      "6. containers: Diisi dari kolom 'Nomor, Ukuran, dan Tipe Peti' (atau Petikemas) pada file PDF. Tuliskan nomor container beserta ukurannya dalam kurung, contoh: MSKU1849204 (40ft) atau OOLU1234567 (20ft).\n" +
+      "7. uraianBarang: Diisi dari kolom 'Uraian Jenis Barang' / 'Uraian Barang' pada file PDF. Jika jenis barang lebih dari 5, HANYA DITULIS 5 JENIS BARANG PERTAMA SAJA secara rinci.\n\n" +
+      "Hasilkan jawaban dalam format JSON murni sesuai schema.";
 
     const schemaConfig = {
       responseMimeType: "application/json",
@@ -362,29 +366,33 @@ app.post("/api/parse-pib", async (req, res) => {
         properties: {
           noPengajuan: { 
             type: Type.STRING, 
-            description: "Nomor Pengajuan PIB (biasanya 24 rentetan angka dengan atau tanpa strip)" 
+            description: "Diisi dari kolom 'Nomor Pengajuan' pada file PDF (24 digit angka)" 
           },
           importer: { 
             type: Type.STRING, 
-            description: "Nama perusahaan importir penerima barang" 
+            description: "Diisi dari 'Pemilik Barang, kolom 3a Nama' pada file PDF" 
+          },
+          invPlNo: {
+            type: Type.STRING,
+            description: "Diisi dari kolom 'Invoice No' pada file PDF"
           },
           blNumber: { 
             type: Type.STRING, 
-            description: "Nomor Bill of Lading (B/L)" 
+            description: "Diisi dari kolom 'House-BL/AWB No' pada file PDF" 
           },
           blDate: { 
             type: Type.STRING, 
-            description: "Tanggal Bill of Lading dalam format YYYY-MM-DD" 
+            description: "Diisi dari kolom 'House-BL/AWB Tgl' pada file PDF dalam format YYYY-MM-DD" 
           },
           containers: {
             type: Type.ARRAY,
             items: { type: Type.STRING },
-            description: "Seluruh nomor container beserta ukurannya dalam kurung (misalnya: OOLU1234567 (20ft), MSKU1849204 (40ft))"
+            description: "Diisi dari 'Nomor, Ukuran, dan Tipe Peti' pada file PDF (contoh: MSKU1849204 (40ft))"
           },
           uraianBarang: {
             type: Type.ARRAY,
             items: { type: Type.STRING },
-            description: "Daftar deskripsi/nama barang utama impor (maksimal 5 item)"
+            description: "Diisi dari 'Uraian jenis barang' pada file PDF (maksimal 5 jenis barang)"
           }
         },
         required: ["noPengajuan", "importer", "blNumber", "blDate", "containers", "uraianBarang"]

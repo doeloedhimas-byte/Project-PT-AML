@@ -3,8 +3,9 @@ import { PIBDocument, DeliveryInfo } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Search, UploadCloud, CheckSquare, Square, 
-  Settings, AlertCircle, Edit2, Check, X, Calendar 
+  Settings, AlertCircle, Edit2, Check, X, Calendar, Edit3
 } from 'lucide-react';
+import EditDocumentModal from './EditDocumentModal';
 
 interface PreviewTabProps {
   documents: PIBDocument[];
@@ -23,6 +24,7 @@ export default function PreviewTab({
   const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [editingDoc, setEditingDoc] = useState<PIBDocument | null>(null);
   
   // Cell editing states for Tanggal Billing & Tanggal SPPB
   const [editingCell, setEditingCell] = useState<{ docId: string; field: 'billingDate' | 'sppbDate' } | null>(null);
@@ -244,7 +246,9 @@ export default function PreviewTab({
                   />
                 </th>
                 <th className="px-3 py-3.5 text-center font-bold w-12 text-slate-200">No</th>
+                <th className="px-3 py-3.5 text-center font-bold text-slate-200">Aksi</th>
                 <th className="px-4 py-3.5 text-center font-bold text-slate-200">NO AJU</th>
+                <th className="px-4 py-3.5 text-center font-bold text-amber-300">NO INVOICE</th>
                 <th className="px-4 py-3.5 text-center font-bold text-slate-200">Nama Importir</th>
                 <th className="px-4 py-3.5 text-center font-bold text-slate-200">Nomor Container</th>
                 <th className="px-4 py-3.5 text-center font-bold text-slate-200">Tanggal Billing</th>
@@ -290,12 +294,29 @@ export default function PreviewTab({
                         {index + 1}
                       </td>
 
+                      {/* Aksi */}
+                      <td className="px-3 py-3 text-center">
+                        <button
+                          onClick={() => setEditingDoc(row.originalDoc)}
+                          className="px-2 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 rounded text-[10px] font-bold transition-all flex items-center gap-1 mx-auto cursor-pointer"
+                          title="Edit / Revisi Dokumen"
+                        >
+                          <Edit3 className="w-3 h-3" />
+                          Edit
+                        </button>
+                      </td>
+
                       {/* Nomor Pengajuan / NO AJU (last 5 digits) */}
                       <td className="px-4 py-3 font-mono text-slate-300 font-bold text-center" title={`No Aju Lengkap: ${row.nomorPengajuan}`}>
                         {row.nomorPengajuan && row.nomorPengajuan !== '-' 
                           ? (row.nomorPengajuan.length > 5 ? row.nomorPengajuan.slice(-5) : row.nomorPengajuan) 
                           : '-'
                         }
+                      </td>
+
+                      {/* Nomor Invoice */}
+                      <td className="px-4 py-3 font-mono text-amber-300 font-bold text-center">
+                        {row.originalDoc.invPlNo || row.originalDoc.invoiceNo || '-'}
                       </td>
 
                       {/* Nama Importir */}
@@ -439,7 +460,7 @@ export default function PreviewTab({
                 })
               ) : (
                 <tr>
-                  <td colSpan={16} className="px-6 py-16 text-center text-slate-500">
+                  <td colSpan={18} className="px-6 py-16 text-center text-slate-500">
                     <div className="flex flex-col items-center justify-center space-y-3">
                       <AlertCircle className="w-10 h-10 text-slate-600" />
                       <p className="font-bold text-slate-400 text-sm">Tidak ada baris data dalam portal.</p>
@@ -452,6 +473,16 @@ export default function PreviewTab({
           </table>
         </div>
       </div>
+
+      {/* Edit Document Modal */}
+      <EditDocumentModal
+        doc={editingDoc}
+        isOpen={!!editingDoc}
+        onClose={() => setEditingDoc(null)}
+        onSave={async (docId, updates) => {
+          await onUpdateDocument(docId, updates);
+        }}
+      />
     </div>
   );
 }
